@@ -1,13 +1,17 @@
 #!/bin/bash
 
 # Insall pacman dependencies dependencies
-sudo pacman -Syu wget lightdm lightdm-gtk-greeter bspwm sxhkd rxvt-unicode dmenu firefox unzip feh openssh zsh thunar pulseaudio compton rofi xclip kitty
+sudo pacman -Syu wget lightdm lightdm-gtk-greeter bspwm sxhkd rxvt-unicode dmenu firefox unzip feh openssh zsh thunar pulseaudio compton rofi xclip kitty neovim
 
 #Install yay
 git clone https://aur.archlinux.org/yay.get
 cd yay
 makepkg -si
 cd .. && rm -rf yay/
+
+# manual installs
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Install yay dependencies (Lots of manual intervention here. Be careful)
 # First make sure yay is up to date
@@ -22,6 +26,7 @@ for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
   ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
 done
 ln -sf ~/.dotfiles/zpreztorc ~/.zpreztorc
+ln -sf ~/.dotfiles/zshrc ~/.zshrc
 
 # symlink nessecary confs
 # DESTRUCTIVE
@@ -34,3 +39,5 @@ mkdir -p ~/.config/polybar
 ln -sf ~/.dotfiles/config/polybar/config ~/.config/polybar/config
 ln -sf ~/.dotfiles/config/polybar/config ~/.config/polybar/launch.sh
 ln -sf ~/.dotfiles/config/kitty/kitty.conf ~/.config/kitty/kitty.conf
+ln -sf ~/.dotfiles/config/nvim/init.vim ~/.config/nvim/init.vim
+

@@ -1,6 +1,6 @@
 #! /bin/sh
 feh --bg-scale ~/Pictures/wallpapers/anime/kaneki.jpg
-
+compton &
 ~/.config/polybar/launch.sh &
 
 sxhkd &
