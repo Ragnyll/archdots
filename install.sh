@@ -24,6 +24,8 @@ sudo pacman -Syu \
 	powerline-fonts \
 	git \
 	otf-fira-code \
+	gimp \
+	light-locker \
 	w3m
 
 # change shell to zsh (might affect later calls)
@@ -47,7 +49,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 # Install yay dependencies (Lots of manual intervention here. Be careful)
 # First make sure yay is up to date
 yay
-yay -S polybar ttf-font-awesome
+yay -S polybar ttf-font-awesome lightdm-mini-greeter
 
 # Install fzf manually to get zsh keybinds (Manual intervention)
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
