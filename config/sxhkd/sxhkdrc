@@ -8,7 +8,7 @@ super + Return
 
 # program launcher
 super + @space
-	rofi -show run -lines 5
+	rofi -show run
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -21,6 +21,10 @@ super + Escape
 # quit/restart bspwm
 super + alt + {q,r}
 	bspc {quit,wm -r}
+
+# Screen lock
+super +  ctrl + l
+	i3lock-fancy
 
 # close and kill
 super + {_,shift + }w
@@ -88,10 +92,6 @@ super + {_,shift + }{1-9,0}
 # preselect
 #
 
-# preselect the direction
-super + ctrl + {h,j,k,l}
-	bspc node -p {west,south,north,east}
-
 # preselect the ratio
 super + ctrl + {1-9}
 	bspc node -o 0.{1-9}
@@ -119,3 +119,12 @@ super + alt + shift + {h,j,k,l}
 # move a floating window
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+#
+# Brightness and Sound
+#
+super + F11
+	~/bin/decrease_brightness.sh
+
+super + F12
+	~/bin/increase_brightness.sh

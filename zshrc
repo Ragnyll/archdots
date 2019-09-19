@@ -27,6 +27,19 @@ alias copy='xclip'
 alias tarball='tar cvf'
 alias detarball='tar xzf'
 
+# sh functions
+function vpn_connect() { 
+	sudo systemctl start nordvpnd.service
+	nordvpn login
+	nordvpn connect
+}
+
+function vpn_disconnect() {
+	nordvpn disconnect
+	nordvpn logout
+	sudo systemctl stop nordvpn
+}
+
 # colorize less
 export LESS='-R'
 

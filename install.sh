@@ -26,6 +26,8 @@ sudo pacman -Syu \
 	otf-fira-code \
 	gimp \
 	light-locker \
+	wireguard-tools \
+	wireguard-arch \
 	w3m
 
 # change shell to zsh (might affect later calls)
@@ -49,7 +51,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 # Install yay dependencies (Lots of manual intervention here. Be careful)
 # First make sure yay is up to date
 yay
-yay -S polybar ttf-font-awesome lightdm-mini-greeter
+yay -S polybar ttf-font-awesome lightdm-mini-greeter i3lock-fancy
 
 # Install fzf manually to get zsh keybinds (Manual intervention)
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
@@ -79,4 +81,16 @@ ln -sf ~/.dotfiles/config/kitty/kitty.conf ~/.config/kitty/kitty.conf
 ln -sf ~/.dotfiles/config/nvim/init.vim ~/.config/nvim/init.vim
 mkdir -p ~/.config/compton/
 ln -s ~/.dotfiles/config/compton/compton.conf ~/.config/compton/compton.conf  
+ln -s ~/.dotfiles/bin/increase_brightness.sh ~/bin/increase_brightness.sh
+ln -s ~/.dotfiles/bin/decrease_brightness.sh ~/bin/decrease_brightness.sh
 
+
+# not needed for a base install
+#================================
+sudo pacman -Syu metasploit
+
+# nord needs to be configured by hand after install
+yay -S nordvpn-bin
+
+# make nordvpn use wireguard
+nordvpn set technology nordlynx
