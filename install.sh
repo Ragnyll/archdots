@@ -28,6 +28,8 @@ sudo pacman -Syu \
 	light-locker \
 	wireguard-tools \
 	wireguard-arch \
+	vlc \
+	alsa-utils \
 	w3m
 
 # change shell to zsh (might affect later calls)

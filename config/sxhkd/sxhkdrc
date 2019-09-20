@@ -128,3 +128,12 @@ super + F11
 
 super + F12
 	~/bin/increase_brightness.sh
+
+super + F3
+	amixer -D pulse sset Master 2%+
+
+super + F2
+	amixer -D pulse sset Master 2%-
+
+super + F1
+	amixer -q -D pulse sset Master toggle

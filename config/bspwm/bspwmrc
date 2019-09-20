@@ -1,16 +1,12 @@
 #! /bin/sh
 
-# set defaults
-LAPTOP_DISPLAY_NAME="eDP1"
-xrandr --output $LAPTOP_DISPLAY_NAME --brightness 0.70
-
 feh --bg-scale ~/Pictures/wallpapers/anime/kaneki.jpg
 compton &
+~/.config/polybar/launch.sh &
 sxhkd &
 
 CONNECTED_MONITORS=$(xrandr --listmonitors | sed '1 d' | awk 'NF>1{print $NF}')
 
-~/.config/polybar/launch.sh &
 
 monitor1='DP1'
 monitor2='eDP1'
@@ -26,3 +22,7 @@ bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 bspc config click_to_focus       true
+
+# set defaults
+LAPTOP_DISPLAY_NAME="eDP1"
+xrandr --output $LAPTOP_DISPLAY_NAME --brightness 0.70
