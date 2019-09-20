@@ -85,7 +85,11 @@ mkdir -p ~/.config/compton/
 ln -s ~/.dotfiles/config/compton/compton.conf ~/.config/compton/compton.conf  
 ln -s ~/.dotfiles/bin/increase_brightness.sh ~/bin/increase_brightness.sh
 ln -s ~/.dotfiles/bin/decrease_brightness.sh ~/bin/decrease_brightness.sh
+mkdir -p ~/.config/systemd/user/
+ln -sf ~/.dotfiles/config/systemd/user/headphones_hissing.service ~/.config/systemd/user/headphones_hissing.service
 
+# enable services
+systemctl --user enable headphones_hissing.service
 
 # not needed for a base install
 #================================
@@ -96,3 +100,6 @@ yay -S nordvpn-bin
 
 # make nordvpn use wireguard
 nordvpn set technology nordlynx
+
+# Manual post install things
+## XPS 13 - fix headphone hiss https://wiki.archlinux.org/index.php/Dell_XPS_13_(9360)#Continuous_hissing_sound_with_headphones
