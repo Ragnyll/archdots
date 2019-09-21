@@ -18,14 +18,10 @@ alias conflicts='git diff --name-only --deff-filter=U'
 alias gti='git' # i suck at typing
 alias sl='ls'
 
-# searches for a string $1 in all directories recursively $2
-# and outputs those file names along with the line
-alias stringSearch='grep -rnw $1 -e $2'
-
 # other random aliases
-alias copy='xclip'
 alias tarball='tar cvf'
 alias detarball='tar xzf'
+alias brightness='xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d " "'
 
 # sh functions
 function vpn_connect() { 
