@@ -35,6 +35,8 @@ sudo pacman -Syu \
 	alsa-utils \
 	bluez \
 	bluez-utils \
+	ranger \
+	entr \
 	w3m
 
 # change shell to zsh (might affect later calls)
@@ -94,6 +96,9 @@ mkdir -p ~/.config/systemd/user/
 ln -sf ~/.dotfiles/config/systemd/user/headphones_hissing.service ~/.config/systemd/user/headphones_hissing.service
 mkdir -p ~/.config/neofetch/
 ln -sf ~/.dotfiles/config/neofetch/config.conf ~/.config/neofetch/config.conf
+mkdir -p ~/.config/rofi/themes
+ln -sf ~/.dotfiles/config/rofi/themes/dracula_sidebar.rasi ~/.config/rofi/themes/dracula_sidebar.rasi
+ln -sf ~/.dotfiles/config/rofi/config ~/.config/rofi/config
 
 # enable services
 systemctl --user enable headphones_hissing.service
