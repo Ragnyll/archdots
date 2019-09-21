@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# INSTALL NOTES:
+# SD card reader is disabled by bios.
+
 # Install pacman dependencies dependencies
 sudo pacman -Syu \
 	wget \
@@ -30,6 +33,8 @@ sudo pacman -Syu \
 	wireguard-arch \
 	vlc \
 	alsa-utils \
+	bluez \
+	bluez-utils \
 	w3m
 
 # change shell to zsh (might affect later calls)
@@ -87,6 +92,8 @@ ln -s ~/.dotfiles/bin/increase_brightness.sh ~/bin/increase_brightness.sh
 ln -s ~/.dotfiles/bin/decrease_brightness.sh ~/bin/decrease_brightness.sh
 mkdir -p ~/.config/systemd/user/
 ln -sf ~/.dotfiles/config/systemd/user/headphones_hissing.service ~/.config/systemd/user/headphones_hissing.service
+mkdir -p ~/.config/neofetch/
+ln -sf ~/.dotfiles/config/neofetch/config.conf ~/.config/neofetch/config.conf
 
 # enable services
 systemctl --user enable headphones_hissing.service
@@ -100,6 +107,3 @@ yay -S nordvpn-bin
 
 # make nordvpn use wireguard
 nordvpn set technology nordlynx
-
-# Manual post install things
-## XPS 13 - fix headphone hiss https://wiki.archlinux.org/index.php/Dell_XPS_13_(9360)#Continuous_hissing_sound_with_headphones
