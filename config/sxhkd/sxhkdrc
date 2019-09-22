@@ -24,7 +24,7 @@ super + alt + {q,r}
 
 # Screen lock
 super +  ctrl + l
-	i3lock-fancy
+	i3lock
 
 # close and kill
 super + {_,shift + }w

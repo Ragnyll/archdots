@@ -104,8 +104,9 @@ ln -sf ~/.dotfiles/config/rofi/config ~/.config/rofi/config
 systemctl --user enable headphones_hissing.service
 
 # not needed for a base install
-#================================
-sudo pacman -Syu metasploit
+# ================================
+sudo pacman -Syu metasploit \
+	libreoffice-still # note: libre office does not come with a grammar checker by default and i did not install one
 
 # nord needs to be configured by hand after install
 yay -S nordvpn-bin
