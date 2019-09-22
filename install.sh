@@ -99,6 +99,7 @@ ln -sf ~/.dotfiles/config/neofetch/config.conf ~/.config/neofetch/config.conf
 mkdir -p ~/.config/rofi/themes
 ln -sf ~/.dotfiles/config/rofi/themes/dracula_sidebar.rasi ~/.config/rofi/themes/dracula_sidebar.rasi
 ln -sf ~/.dotfiles/config/rofi/config ~/.config/rofi/config
+ln -s ~/.dotfiles/bin/lock.sh ~/bin/lock.sh
 
 # enable services
 systemctl --user enable headphones_hissing.service
