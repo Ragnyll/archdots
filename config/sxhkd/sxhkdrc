@@ -24,7 +24,7 @@ super + alt + {q,r}
 
 # Screen lock
 super +  ctrl + l
-	i3lock
+	~/bin/lock.sh
 
 # close and kill
 super + {_,shift + }w

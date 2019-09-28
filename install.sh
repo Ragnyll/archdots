@@ -4,6 +4,9 @@
 # SD card reader is disabled by bios.
 
 # Install pacman dependencies dependencies
+# notes:
+#     entr is for troubleshooting rofi
+# 	  uninstall lxappeareance after setting arc-dark-theme for nautilis
 sudo pacman -Syu \
 	wget \
 	lightdm \
@@ -37,7 +40,10 @@ sudo pacman -Syu \
 	bluez-utils \
 	ranger \
 	entr \
+	lxappearance-gtk3 \
+	arc-gtk-theme \
 	w3m
+
 
 # change shell to zsh (might affect later calls)
 # (manual intervention)
