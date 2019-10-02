@@ -6,4 +6,4 @@ i3lock -n -i /home/ragnyll/Pictures/wallpapers/anime/lockscreen.png \
     --keyhlcolor=d23c3dff --bshlcolor=d23c3dff --separatorcolor=00000000 \
     --insidevercolor=fecf4dff --insidewrongcolor=d23c3dff \
     --ringvercolor=ffffffff --ringwrongcolor=ffffffff --indpos="x+86:y+1003" \
-    --radius=15 --veriftext="" --wrongtext=""
+    --radius=15 --veriftext="" --wrongtext="" --tiling
