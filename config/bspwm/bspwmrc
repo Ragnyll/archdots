@@ -1,18 +1,22 @@
-#! /bin/sh
+#!/bin/bash
 
 feh --bg-scale ~/Pictures/wallpapers/anime/dump4/staircase.jpg
 compton &
-~/.config/polybar/launch.sh &
 sxhkd &
 
-CONNECTED_MONITORS=$(xrandr --listmonitors | sed '1 d' | awk 'NF>1{print $NF}')
+monitor1="DP1"
+monitor2="eDP1"
 
+# Check if a monitor is conncted through DP1 (the adapter hdmi port)
+if [ $(xrandr -q | grep " connected" | wc -l) -eq "2" ]; then
+	# assume that if two displays are connected then the external is connected through DP1 and is to the right
+	xrandr --output DP1 --auto --right-of eDP1
 
-monitor1='DP1'
-monitor2='eDP1'
+	bspc monitor $monitor1 -d $monitor1/1 $monitor1/2 $monitor1/3 $monitor1/4
+	bspc monitor $monitor2 -d $monitor2/5 $monitor2/6 $monitor2/7 $monitor2/8
+fi
 
-bspc monitor $monitor1 -d $monitor1/1 $monitor1/2 $monitor1/3
-bspc monitor $monitor2 -d $monitor2/4 $monitor2/5 $monitor2/6
+~/.config/polybar/launch.sh &
 
 bspc config border_width         2
 bspc config window_gap          12
