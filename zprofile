@@ -33,6 +33,7 @@ typeset -gU cdpath fpath mailpath path
 # Set the list of directories that Zsh searches for programs.
 path=(
   /usr/local/{bin,sbin}
+  /home/ragnyll/bin/pycharm-community-2019.2.3/bin/
   /home/ragnyll/bin/
   $path
 )
