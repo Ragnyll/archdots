@@ -42,6 +42,7 @@ sudo pacman -Syu \
 	entr \
 	lxappearance-gtk3 \
 	arc-gtk-theme \
+	lastpass-cli \
 	w3m
 
 
@@ -105,7 +106,8 @@ ln -sf ~/.dotfiles/config/neofetch/config.conf ~/.config/neofetch/config.conf
 mkdir -p ~/.config/rofi/themes
 ln -sf ~/.dotfiles/config/rofi/themes/dracula_sidebar.rasi ~/.config/rofi/themes/dracula_sidebar.rasi
 ln -sf ~/.dotfiles/config/rofi/config ~/.config/rofi/config
-ln -s ~/.dotfiles/bin/lock.sh ~/bin/lock.sh
+ln -sf ~/.dotfiles/bin/lock.sh ~/bin/lock.sh
+ln -sf ~/.dotfiles/zprofile ~/.zprofile 
 
 # enable services
 systemctl --user enable headphones_hissing.service
@@ -120,3 +122,6 @@ yay -S nordvpn-bin
 
 # make nordvpn use wireguard
 nordvpn set technology nordlynx
+
+# post insall manual steps
+# install pycharm and put it in ~/bin
