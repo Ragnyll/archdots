@@ -43,6 +43,8 @@ sudo pacman -Syu \
 	lxappearance-gtk3 \
 	arc-gtk-theme \
 	lastpass-cli \
+	nmap \
+	openshot \
 	w3m
 
 
@@ -95,6 +97,7 @@ ln -sf ~/.dotfiles/config/polybar/config ~/.config/polybar/config
 ln -sf ~/.dotfiles/config/polybar/config ~/.config/polybar/launch.sh
 ln -sf ~/.dotfiles/config/kitty/kitty.conf ~/.config/kitty/kitty.conf
 ln -sf ~/.dotfiles/config/nvim/init.vim ~/.config/nvim/init.vim
+ln -sf ~/.dotfiles/config/nvim/init.vim ~/.ideavimrc
 mkdir -p ~/.config/compton/
 ln -s ~/.dotfiles/config/compton/compton.conf ~/.config/compton/compton.conf  
 ln -s ~/.dotfiles/bin/increase_brightness.sh ~/bin/increase_brightness.sh
