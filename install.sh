@@ -45,6 +45,9 @@ sudo pacman -Syu \
 	lastpass-cli \
 	nmap \
 	openshot \
+	clamav \
+	rtorrent \
+	dunst \
 	w3m
 
 
@@ -72,9 +75,7 @@ yay
 yay -S polybar \
 	ttf-font-awesome \
 	lightdm-mini-greeter \
-	i3lock-fancy \
-	tremc \
-	transmission-remote-gtk
+	i3lock-fancy
 
 # Install fzf manually to get zsh keybinds (Manual intervention)
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
