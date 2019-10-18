@@ -69,7 +69,12 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 # Install yay dependencies (Lots of manual intervention here. Be careful)
 # First make sure yay is up to date
 yay
-yay -S polybar ttf-font-awesome lightdm-mini-greeter i3lock-fancy
+yay -S polybar \
+	ttf-font-awesome \
+	lightdm-mini-greeter \
+	i3lock-fancy \
+	tremc \
+	transmission-remote-gtk
 
 # Install fzf manually to get zsh keybinds (Manual intervention)
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
@@ -104,6 +109,7 @@ ln -s ~/.dotfiles/bin/increase_brightness.sh ~/bin/increase_brightness.sh
 ln -s ~/.dotfiles/bin/decrease_brightness.sh ~/bin/decrease_brightness.sh
 mkdir -p ~/.config/systemd/user/
 ln -sf ~/.dotfiles/config/systemd/user/headphones_hissing.service ~/.config/systemd/user/headphones_hissing.service
+ln -sf ~/.dotfiles/etc/systemd/system/powertop.service ~/.config/systemd/user/powertop.service
 mkdir -p ~/.config/neofetch/
 ln -sf ~/.dotfiles/config/neofetch/config.conf ~/.config/neofetch/config.conf
 mkdir -p ~/.config/rofi/themes
@@ -114,6 +120,7 @@ ln -sf ~/.dotfiles/zprofile ~/.zprofile
 
 # enable services
 systemctl --user enable headphones_hissing.service
+systemctl --user enable powertop.service
 
 # not needed for a base install
 # ================================
@@ -128,3 +135,4 @@ nordvpn set technology nordlynx
 
 # post insall manual steps
 # install pycharm and put it in ~/bin
+# install tor browser and put it in ~/bin

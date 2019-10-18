@@ -23,6 +23,14 @@ alias tarball='tar cvf'
 alias detarball='tar xzf'
 alias brightness='xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d " "'
 
+# colorize less
+export LESS='-R'
+
+# enable fuzzyfind
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+neofetch
+
 # sh functions
 function vpn_connect() { 
 	sudo systemctl start nordvpnd.service
@@ -35,11 +43,3 @@ function vpn_disconnect() {
 	nordvpn logout
 	sudo systemctl stop nordvpn
 }
-
-# colorize less
-export LESS='-R'
-
-# enable fuzzyfind
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-neofetch
