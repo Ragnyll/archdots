@@ -118,6 +118,8 @@ ln -sf ~/.dotfiles/config/rofi/themes/dracula_sidebar.rasi ~/.config/rofi/themes
 ln -sf ~/.dotfiles/config/rofi/config ~/.config/rofi/config
 ln -sf ~/.dotfiles/bin/lock.sh ~/bin/lock.sh
 ln -sf ~/.dotfiles/zprofile ~/.zprofile 
+mkdir -p ~/.config/dunst
+ln -sf ~/.dotfiles/config/dunst/dunstrc ~/.config/dunst/dunstrc
 
 # enable services
 systemctl --user enable headphones_hissing.service

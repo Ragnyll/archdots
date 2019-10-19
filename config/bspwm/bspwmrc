@@ -3,6 +3,7 @@
 feh --bg-scale ~/Pictures/wallpapers/anime/dump4/staircase.jpg
 compton &
 sxhkd &
+dunst &
 
 monitor1="DP1"
 monitor2="eDP1"

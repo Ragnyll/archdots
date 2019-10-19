@@ -16,11 +16,12 @@ set -o vi
 export LESS="-R" # fixes colouring on git graph
 alias conflicts='git diff --name-only --deff-filter=U'
 alias gti='git' # i suck at typing
-alias sl='ls'
 
 # other random aliases
+alias sl='ls'
 alias tarball='tar cvf'
 alias detarball='tar xzf'
+alias virus_scan='sudo freshclam && sudo clamscan -r --bell -i /'
 alias brightness='xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d " "'
 
 # colorize less

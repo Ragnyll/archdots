@@ -34,7 +34,6 @@ typeset -gU cdpath fpath mailpath path
 path=(
   /usr/local/{bin,sbin}
   /home/ragnyll/bin/pycharm-community-2019.2.3/bin/
-  /home/ragnyll/bin/tor-browser_en-US/Browser/
   /home/ragnyll/bin/
   $path
 )
