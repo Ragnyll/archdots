@@ -23,6 +23,7 @@ alias tarball='tar cvf'
 alias detarball='tar xzf'
 alias virus_scan='sudo freshclam && sudo clamscan -r --bell -i /'
 alias brightness='xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d " "'
+alias tor='~/bin/tor-browser_en-US/Browser/start-tor-browser' 
 
 # colorize less
 export LESS='-R'

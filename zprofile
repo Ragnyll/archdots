@@ -35,6 +35,7 @@ path=(
   /usr/local/{bin,sbin}
   /home/ragnyll/bin/pycharm-community-2019.2.3/bin/
   /home/ragnyll/bin/
+  /home/ragnyll/dev/move_vid_builder/source/
   $path
 )
 

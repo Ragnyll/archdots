@@ -120,6 +120,8 @@ ln -sf ~/.dotfiles/bin/lock.sh ~/bin/lock.sh
 ln -sf ~/.dotfiles/zprofile ~/.zprofile 
 mkdir -p ~/.config/dunst
 ln -sf ~/.dotfiles/config/dunst/dunstrc ~/.config/dunst/dunstrc
+mkdir -p ~/.config/ranger/
+ln -sf ~/.dotfiles/config/ranger/rc.conf ~/.config/ranger/rc.conf
 
 # enable services
 systemctl --user enable headphones_hissing.service

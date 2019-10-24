@@ -37,7 +37,7 @@
     # Positive y value is measured from the top of the screen
     geometry = "350x15-5+5"
 
-    font = 'Fira Code' 10
+    font = 'Fira Code' 11
     allow_markup = yes
     plain_text = no             # Treat message as plain text
     sort = yes                  # Sort messages by urgency
@@ -65,7 +65,7 @@
     history_length = 20         # Maximum amount of notifications kept in history
 
     icon_folders = /usr/share/icons/Adwaita/
-    startup_notification = true
+    startup_notification = false
     dmenu = /usr/bin/dmenu -p dunst:
     browser = /usr/bin/firefox
 
