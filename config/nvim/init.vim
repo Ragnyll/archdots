@@ -1,18 +1,26 @@
 call plug#begin('~/.vim/plugged')
 
-Plug '~/.fzf'
-Plug 'Konfekt/FastFold'
-Plug 'tmhedberg/SimpylFold'
+" make it pretty
+Plug 'scrooloose/syntastic'
+Plug 'vim-airline/vim-airline'
+Plug 'Ragnyll/vim-colorschemes'
 Plug 'airblade/vim-gitgutter'
+Plug 'rust-lang/rust.vim'
+" file searching / exploring
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'mileszs/ack.vim'
+Plug 'francoiscabrol/ranger.vim'
+Plug 'rbgrouleff/bclose.vim'
+" folding
+" python code folding
+Plug 'tmhedberg/SimpylFold'
+" tags
+Plug 'majutsushi/tagbar'
 Plug 'craigemery/vim-autotag'
 Plug 'ervandew/supertab'
-Plug 'majutsushi/tagbar'
-Plug 'rust-lang/rust.vim'
-Plug 'scrooloose/syntastic'
+" konvenient keybinds
 Plug 'scrooloose/nerdcommenter'
-Plug 'junegunn/fzf.vim'
-Plug 'Ragnyll/vim-colorschemes'
-Plug 'vim-airline/vim-airline'
 
 call plug#end()
 
@@ -22,10 +30,15 @@ let maplocalleader='//'
 nnoremap <leader>ev :vsplit ~/.config/nvim/init.vim <cr>
 
 " FZF
+nnoremap <leader>o :FZF<cr>
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
+
+" Ack
+nnoremap <leader>f :Ag<cr>
+
 " Supertab
 let g:SupertabDefaultCompletionType='<c-n>'
 
@@ -45,8 +58,12 @@ let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_python_flake8_args='--ignore=E501'
 
+" ranger
+let g:ranger_map_keys = 0
+let g:ranger_replace_netrw = 1
+
 " tagbar
-nnoremap <leader>t :TagbarToggle<CR>
+nnoremap <leader>t :TagbarToggle<cr>
 
 syntax on
 set background=dark
@@ -69,14 +86,15 @@ set hlsearch
 set ignorecase
 set smartcase
 
-
 " Normal Mode remaps
 nnoremap <space> viw
 nnoremap U <c-R>
 nnoremap H ^
 nnoremap L $
-nnoremap <leader>1 :Vex<cr>
-nnoremap <leader>r :reg<cr>
+nnoremap <leader>r :Ranger<cr>
+nnoremap <leader>R :vsplit <bar> :Ranger<cr>
+nnoremap <leader>t :RangerNewTab<cr>
+nnoremap <leader>p :reg<cr>
 
 " Visual Mode remaps
 vnoremap H ^
@@ -89,3 +107,12 @@ onoremap p i(
 let g:SimpylFold_docstring_preview = 1
 set nofoldenable
 
+" Enable fzf keybindings in vim
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Enable persistent undo
+set undofile
+set undodir=~/.vim/undo

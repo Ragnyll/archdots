@@ -48,6 +48,7 @@ sudo pacman -Syu \
 	clamav \
 	rtorrent \
 	dunst \
+	the_silver_searcher \
 	w3m
 
 
@@ -138,6 +139,11 @@ yay -S nordvpn-bin
 
 # make nordvpn use wireguard
 nordvpn set technology nordlynx
+
+# Virtual box not set up yet. This needs to be done before uncommenting this
+# # Special sudo setups. sudo needs to be set up first
+# sudo ln -sf ~/.dotfiles/etc/modules-load.d/virtualbox.conf /etc/modules-load.d/virtualbox.conf
+# sudo usermod -aG vboxusers ragnyll
 
 # post insall manual steps
 # install pycharm and put it in ~/bin
