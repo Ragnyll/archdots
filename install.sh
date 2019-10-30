@@ -141,6 +141,11 @@ yay -S nordvpn-bin
 # make nordvpn use wireguard
 nordvpn set technology nordlynx
 
+# install pip
+wget https://bootstrap.pypa.io/get-pip.py
+python get-pip.py --user
+rm get-pip.py
+
 # Virtual box not set up yet. This needs to be done before uncommenting this
 # # Special sudo setups. sudo needs to be set up first
 # sudo ln -sf ~/.dotfiles/etc/modules-load.d/virtualbox.conf /etc/modules-load.d/virtualbox.conf
