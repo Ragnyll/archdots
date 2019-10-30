@@ -137,3 +137,10 @@ super + F2
 
 super + F1
 	amixer -q -D pulse sset Master toggle
+
+#
+# Screenshots
+#
+# capture full screen on all displays
+super + F7
+	scrot -e 'mv $f ~/Pictures/screenshots/'

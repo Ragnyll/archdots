@@ -6,15 +6,13 @@ Plug 'vim-airline/vim-airline'
 Plug 'Ragnyll/vim-colorschemes'
 Plug 'airblade/vim-gitgutter'
 Plug 'rust-lang/rust.vim'
+Plug 'kovetskiy/sxhkd-vim'
 " file searching / exploring
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
-" folding
-" python code folding
-Plug 'tmhedberg/SimpylFold'
 " tags
 Plug 'majutsushi/tagbar'
 Plug 'craigemery/vim-autotag'

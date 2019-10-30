@@ -48,6 +48,7 @@ sudo pacman -Syu \
 	clamav \
 	rtorrent \
 	dunst \
+	scrot \
 	the_silver_searcher \
 	w3m
 
