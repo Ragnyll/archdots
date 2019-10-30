@@ -145,6 +145,7 @@ nordvpn set technology nordlynx
 wget https://bootstrap.pypa.io/get-pip.py
 python get-pip.py --user
 rm get-pip.py
+sudo pip install pipenv
 
 # Virtual box not set up yet. This needs to be done before uncommenting this
 # # Special sudo setups. sudo needs to be set up first
