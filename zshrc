@@ -32,8 +32,6 @@ export LESS='-R'
 # enable fuzzyfind
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-neofetch
-
 # sh functions
 function vpn_connect() { 
 	sudo systemctl start nordvpnd.service
@@ -46,3 +44,17 @@ function vpn_disconnect() {
 	nordvpn logout
 	sudo systemctl stop nordvpn
 }
+
+function kali_up() {
+	systemctl start docker.service
+	sudo docker run -t -i kalilinux/kali-rolling /bin/bash
+}
+
+alias kali_down='systemctl stop docker.service'
+
+# ready to go
+neofetch
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"

@@ -50,8 +50,9 @@ sudo pacman -Syu \
 	dunst \
 	scrot \
 	the_silver_searcher \
+	virtualbox \
+	mtools \
 	w3m
-
 
 # change shell to zsh (might affect later calls)
 # (manual intervention)
@@ -77,6 +78,7 @@ yay
 yay -S polybar \
 	ttf-font-awesome \
 	lightdm-mini-greeter \
+	netdiscover \
 	i3lock-fancy
 
 # Install fzf manually to get zsh keybinds (Manual intervention)
@@ -132,8 +134,7 @@ systemctl --user enable powertop.service
 
 # not needed for a base install
 # ================================
-sudo pacman -Syu metasploit \
-	libreoffice-still # note: libre office does not come with a grammar checker by default and i did not install one
+sudo pacman -Syu libreoffice-still # note: libre office does not come with a grammar checker by default and i did not install one
 
 # nord needs to be configured by hand after install
 yay -S nordvpn-bin
@@ -147,11 +148,8 @@ python get-pip.py --user
 rm get-pip.py
 sudo pip install pipenv
 
-# Virtual box not set up yet. This needs to be done before uncommenting this
-# # Special sudo setups. sudo needs to be set up first
-# sudo ln -sf ~/.dotfiles/etc/modules-load.d/virtualbox.conf /etc/modules-load.d/virtualbox.conf
-# sudo usermod -aG vboxusers ragnyll
-
+curl -L get.rvm.io > rvm-install
+bash < ./rvm-install
 # post insall manual steps
 # install pycharm and put it in ~/bin
 # install tor browser and put it in ~/bin
