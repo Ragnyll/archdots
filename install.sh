@@ -52,6 +52,9 @@ sudo pacman -Syu \
 	the_silver_searcher \
 	virtualbox \
 	mtools \
+	fuse-exfat \
+	exfat-utils \
+	texlive-bin \
 	w3m
 
 # change shell to zsh (might affect later calls)
@@ -153,3 +156,6 @@ bash < ./rvm-install
 # post insall manual steps
 # install pycharm and put it in ~/bin
 # install tor browser and put it in ~/bin
+
+# Hacking tools
+pacman -Syu dnsutils
