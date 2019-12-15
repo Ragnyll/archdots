@@ -119,10 +119,10 @@ super + {Left,Down,Up,Right}
 #
 # Brightness and Sound
 #
-super + F11
+super + F5
 	~/bin/decrease_brightness.sh
 
-super + F12
+super + F6
 	~/bin/increase_brightness.sh
 
 super + F3

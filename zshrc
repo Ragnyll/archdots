@@ -21,6 +21,8 @@ alias gti='git' # i suck at typing
 # other random aliases
 alias sl='ls'
 alias virus_scan='sudo freshclam && sudo clamscan -r --bell -i /'
+
+# currently first displays brightness, this needs to giv eme all displays
 alias brightness='xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d " "'
 alias tor='~/bin/tor-browser_en-US/Browser/start-tor-browser' 
 
@@ -29,6 +31,7 @@ export LESS='-R'
 
 # enable fuzzyfind
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
 # sh functions
 function vpn_connect() { 
