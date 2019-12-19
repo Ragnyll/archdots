@@ -120,10 +120,10 @@ super + {Left,Down,Up,Right}
 # Brightness and Sound
 #
 super + F5
-	~/bin/decrease_brightness.sh
+	brightnessctl set 2%-
 
 super + F6
-	~/bin/increase_brightness.sh
+	brightnessctl set +2%
 
 super + F3
 	amixer -D pulse sset Master 2%+

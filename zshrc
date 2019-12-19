@@ -22,9 +22,7 @@ alias gti='git' # i suck at typing
 alias sl='ls'
 alias virus_scan='sudo freshclam && sudo clamscan -r --bell -i /'
 
-# currently first displays brightness, this needs to giv eme all displays
-alias brightness='xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d " "'
-alias tor='~/bin/tor-browser_en-US/Browser/start-tor-browser' 
+alias tor='~/Applications/tor-browser_en-US/Browser/start-tor-browser' 
 
 # colorize less
 export LESS='-R'
@@ -33,29 +31,9 @@ export LESS='-R'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
-# sh functions
-function vpn_connect() { 
-	sudo systemctl start nordvpnd.service
-	nordvpn login
-	nordvpn connect
-}
-
-function vpn_disconnect() {
-	nordvpn disconnect
-	nordvpn logout
-	sudo systemctl stop nordvpn
-}
-
-function kali_up() {
-	systemctl start docker.service
-	sudo docker run -t -i kalilinux/kali-rolling /bin/bash
-}
-
-alias kali_down='systemctl stop docker.service'
-
-# ready to go
-neofetch
-
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+# ready to go
+neofetch
