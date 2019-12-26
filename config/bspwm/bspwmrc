@@ -13,6 +13,9 @@ LAPTOP_DISPLAY_NAME="eDP-1"
 # when nvidia graphics is on the LAPTOP_DISPLAY NAME changes
 if [ $(optimus-manager --status | grep 'Current GPU mode : nvidia' | wc -l )  -eq '1' ]; then
 	LAPTOP_DISPLAY_NAME="eDP-1-1"
+elif [ $(optimus-manager --status | grep 'Current GPU mode : intel' | wc -l )  -eq '1' ]; then
+	# if the intel card is in use then i should be saving battery. start powertop
+	sudo powertop --auto-tune
 fi
 
 # Check if a monitor is conncted through DP1 (the adapter hdmi port)

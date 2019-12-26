@@ -3,6 +3,8 @@ call plug#begin('~/.vim/plugged')
 " language support
 Plug 'davidhalter/jedi-vim'
 Plug 'heavenshell/vim-pydocstring'
+" markdown
+Plug 'gabrielelana/vim-markdown'
 " make it pretty
 Plug 'scrooloose/syntastic'
 Plug 'vim-airline/vim-airline'
