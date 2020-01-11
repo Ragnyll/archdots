@@ -2,6 +2,7 @@
 # Arch Linux zshrc conf
 ###
 # Source Prezto.
+
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
@@ -22,6 +23,7 @@ alias gti='git' # i suck at typing
 alias sl='ls'
 alias virus_scan='sudo freshclam && sudo clamscan -r --bell -i /'
 alias jekyll_server='bundle exec jekyll serve'
+alias gpgrun='gpg --decrypt $1 | sh'
 
 alias tor='~/Applications/tor-browser_en-US/Browser/start-tor-browser' 
 
