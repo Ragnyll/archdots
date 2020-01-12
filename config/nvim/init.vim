@@ -107,6 +107,9 @@ vnoremap L $
 " Operator remaps
 onoremap p i(
 
+" remove all trailing whitespace on file on :w
+autocmd BufWritePre * %s/\s\+$//e
+
 " Python (SimpylFold) folding
 let g:SimpylFold_docstring_preview = 1
 set nofoldenable
