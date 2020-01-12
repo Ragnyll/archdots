@@ -11,6 +11,16 @@ function conky_main()
                                          conky_window.height)
     cr = cairo_create(cs)
 
+
+	-- draw the cpu_indicator
+	cpu_gaugue(cr, gaugue_props)
+
+    cairo_destroy(cr)
+    cairo_surface_destroy(cs)
+    cr = nil
+end
+
+function cpu_gaugue(cr)
 	gaugue_props = {
 		gaugue_name = "cpu",
 		gaugue_value = conky_parse("${cpu}"),
@@ -48,12 +58,23 @@ function conky_main()
 		}
 	}
 
-	-- draw the cpu_indicator
-	ring_gaugue(cr, gaugue_props)
+	-- write_annotation
+	font = "fira"
+	font_size = 24
+	text = gaugue_props.gaugue_value .. "%"
+	x, y = 280, 150
+	r, g, b, a = 1, 1, 1, 1
+	font_slant = CAIRO_FONT_SLANT_NORMAL
+	font_face = CAIRO_FONT_WEIGHT_NORMAL
 
-    cairo_destroy(cr)
-    cairo_surface_destroy(cs)
-    cr = nil
+	cairo_select_font_face(cr, font, font_slant, font_face)
+	cairo_set_font_size(cr, font_size)
+	cairo_set_source_rgba(cr, r, g, b, a)
+	cairo_move_to(cr, x, y)
+	cairo_show_text(cr, text )
+	cairo_stroke(cr)
+
+	ring_gaugue(cr, gaugue_props)
 end
 
 function ring_gaugue(cr, gaugue_props)
