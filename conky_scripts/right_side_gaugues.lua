@@ -13,11 +13,53 @@ function conky_main()
 
 
 	-- draw the cpu_indicator
-	cpu_gaugue(cr, gaugue_props)
+	battery_gaugue(cr)
+	cpu_gaugue(cr)
 
     cairo_destroy(cr)
     cairo_surface_destroy(cs)
     cr = nil
+end
+
+function battery_gaugue(cr)
+	gaugue_props = {
+		gaugue_name = "bat0",
+		gaugue_value = conky_parse("${battery_percent BAT0}"),
+		gaugue_max = 100,
+		orientation = "right",
+		colors = {
+			free_color = { -- dark_grey
+				r = 35.9,
+				g = 34.9,
+				b = 36.9,
+				a = .1
+			},
+			used_color = { -- light_grey
+				r = 52.9,
+				g = 51.3,
+				b = 54.6,
+				a = .6
+			},
+			rule_color = { -- light_grey less transparency
+				r = 52.9,
+				g = 51.3,
+				b = 54.6,
+				a = .5
+			}
+		},
+		meter = {
+			x = 350, -- the center x offset relative to conf top left
+			y = 300, -- the center y offset relative to conf top left
+			r = 45,  -- the radius of the guage
+			w = 4    -- the width of the stroke
+		},
+		rule = {
+			w = 3,
+			l = 365
+		}
+	}
+
+	ring_gaugue(cr, gaugue_props)
 end
 
 function cpu_gaugue(cr)
@@ -47,9 +89,9 @@ function cpu_gaugue(cr)
 			}
 		},
 		meter = {
-			x = 200, -- the center x offset relative to conf bottom left
-			y = 200, -- the center y offset relative to conf bottom left
-			r = 50,  -- the radius of the guage
+			x = 450, -- the center x offset relative to conf top left
+			y = 425, -- the center y offset relative to conf top left
+			r = 40,  -- the radius of the guage
 			w = 4    -- the width of the stroke
 		},
 		rule = {
@@ -58,12 +100,17 @@ function cpu_gaugue(cr)
 		}
 	}
 
+	-- write_annotation(cr, gaugue_props)
+	ring_gaugue(cr, gaugue_props)
+end
+
+function write_annotation(cr, gaugue_props)
 	-- write_annotation
 	font = "fira"
 	font_size = 24
-	text = gaugue_props.gaugue_value .. "%"
+	text = gaugue_props.gaugue_value .. "% CPU"
 	x, y = 280, 150
-	r, g, b, a = 1, 1, 1, 1
+	r, g, b, a = 1, 1, 1, .5
 	font_slant = CAIRO_FONT_SLANT_NORMAL
 	font_face = CAIRO_FONT_WEIGHT_NORMAL
 
@@ -73,8 +120,6 @@ function cpu_gaugue(cr)
 	cairo_move_to(cr, x, y)
 	cairo_show_text(cr, text )
 	cairo_stroke(cr)
-
-	ring_gaugue(cr, gaugue_props)
 end
 
 function ring_gaugue(cr, gaugue_props)
