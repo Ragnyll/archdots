@@ -9,7 +9,7 @@ dunst &
 EXTERNAL_DISPLAY_NAME="DP-1"
 LAPTOP_DISPLAY_NAME="eDP-1"
 
-# the external display only works when the nvidia graphics card is turned on. 
+# the external display only works when the nvidia graphics card is turned on.
 # when nvidia graphics is on the LAPTOP_DISPLAY NAME changes
 if [ $(optimus-manager --status | grep 'Current GPU mode : nvidia' | wc -l )  -eq '1' ]; then
 	LAPTOP_DISPLAY_NAME="eDP-1-1"
@@ -30,6 +30,7 @@ else
 fi
 
 ~/.config/polybar/launch.sh &
+conky -d
 
 bspc config border_width         2
 bspc config window_gap          12
