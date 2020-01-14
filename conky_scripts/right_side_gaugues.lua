@@ -1,5 +1,26 @@
 require 'cairo'
 
+colors = {
+	dark_grey = {
+		r = 35.9,
+		g = 34.9,
+		b = 36.9,
+		a = .1
+	},
+	light_grey = {
+		r = 52.9,
+		g = 51.3,
+		b = 54.6,
+		a = .6
+	},
+	lighter_grey = { -- less transparency
+		r = 52.9,
+		g = 51.3,
+		b = 54.6,
+		a = .5
+	}
+}
+
 function conky_main()
     if conky_window == nil then
         return
@@ -11,14 +32,92 @@ function conky_main()
                                          conky_window.height)
     cr = cairo_create(cs)
 
-
 	-- draw the cpu_indicator
 	battery_gaugue(cr)
 	cpu_gaugue(cr)
+	filesystem_gaugues(cr)
 
     cairo_destroy(cr)
     cairo_surface_destroy(cs)
     cr = nil
+end
+
+function filesystem_gaugues(cr)
+	-- these are coenctric rings, so the centroid must be the same between all of them.
+	epicenter = {
+		x = 400,
+		y = 700
+	}
+	root_fs_gaugue(cr, epicenter)
+	home_fs_gaugue(cr, epicenter)
+	part_2_gaugue(cr, epicenter) -- partition 2 contains root + home + swap
+end
+
+function root_fs_gaugue(cr, epicenter)
+	gaugue_props = {
+		gaugue_name = "/root",
+		gaugue_value = conky_parse("${fs_used_perc /root}"),
+		gaugue_max = 100,
+		colors = {
+			free_color = colors.dark_grey,
+			used_color = colors.light_grey,
+		},
+		meter = {
+			x = epicenter.x, -- the center x offset relative to conf top left
+			y = epicenter.y, -- the center y offset relative to conf top left
+			r = 35,  -- the radius of the guage
+			w = 4    -- the width of the stroke
+		}
+	}
+
+	ring_gaugue(cr, gaugue_props)
+end
+
+function home_fs_gaugue(cr, epicenter)
+	gaugue_props = {
+		gaugue_name = "/home",
+		gaugue_value = conky_parse("${fs_used_perc /home}"),
+		gaugue_max = 100,
+		colors = {
+			free_color = colors.dark_grey,
+			used_color = colors.light_grey,
+		},
+		meter = {
+			x = epicenter.x, -- the center x offset relative to conf top left
+			y = epicenter.y, -- the center y offset relative to conf top left
+			r = 45,  -- the radius of the guage
+			w = 10    -- the width of the stroke
+		}
+	}
+
+	ring_gaugue(cr, gaugue_props)
+end
+
+function part_2_gaugue(cr, epicenter)
+	partition_2_used_perc = conky_parse("${fs_used_perc /home}") + conky_parse("${fs_used_perc /root}")
+	gaugue_props = {
+		gaugue_name = "/nvme0n1p2",
+		gaugue_value = partition_2_used_perc,
+		gaugue_max = 100,
+		colors = {
+			free_color = colors.dark_grey,
+			used_color = colors.light_grey,
+			rule_color = colors.lighter_grey
+		},
+		meter = {
+			x = epicenter.x, -- the center x offset relative to conf top left
+			y = epicenter.y, -- the center y offset relative to conf top left
+			r = 55,  -- the radius of the guage
+			w = 4    -- the width of the stroke
+		},
+		rule = {
+			w = 3,
+			l = 365
+		}
+	}
+
+	ring_gaugue(cr, gaugue_props)
+	draw_rule(cr, gaugue_props)
 end
 
 function battery_gaugue(cr)
@@ -28,24 +127,9 @@ function battery_gaugue(cr)
 		gaugue_max = 100,
 		orientation = "right",
 		colors = {
-			free_color = { -- dark_grey
-				r = 35.9,
-				g = 34.9,
-				b = 36.9,
-				a = .1
-			},
-			used_color = { -- light_grey
-				r = 52.9,
-				g = 51.3,
-				b = 54.6,
-				a = .6
-			},
-			rule_color = { -- light_grey less transparency
-				r = 52.9,
-				g = 51.3,
-				b = 54.6,
-				a = .5
-			}
+			free_color = colors.dark_grey,
+			used_color = colors.light_grey,
+			rule_color = colors.lighter_grey
 		},
 		meter = {
 			x = 350, -- the center x offset relative to conf top left
@@ -69,24 +153,9 @@ function cpu_gaugue(cr)
 		gaugue_max = 100,
 		orientation = "right",
 		colors = {
-			free_color = { -- dark_grey
-				r = 35.9,
-				g = 34.9,
-				b = 36.9,
-				a = .1
-			},
-			used_color = { -- light_grey
-				r = 52.9,
-				g = 51.3,
-				b = 54.6,
-				a = .6
-			},
-			rule_color = { -- light_grey less transparency
-				r = 52.9,
-				g = 51.3,
-				b = 54.6,
-				a = .5
-			}
+			free_color = colors.dark_grey,
+			used_color = colors.light_grey,
+			rule_color = colors.lighter_grey
 		},
 		meter = {
 			x = 450, -- the center x offset relative to conf top left
@@ -145,8 +214,8 @@ function draw_rule(cr, gaugue_props)
 	end_x, end_y = tangent_x + 25, tangent_y - 25
 	cairo_set_source_rgba(cr, gaugue_props.colors.rule_color.r, gaugue_props.colors.rule_color.g, gaugue_props.colors.rule_color.b, gaugue_props.colors.rule_color.a)
 	cairo_set_line_width(cr, gaugue_props.rule.w)
-	cairo_set_line_cap(cr, CAIRO_LINE_CAP_ROUND)
-	cairo_move_to(cr, tangent_x, tangent_y)
+	cairo_set_line_cap(cr, CAIRO_LINE_CAP_SQUARE)
+	cairo_move_to(cr, tangent_x - 1, tangent_y + 1)
 	cairo_line_to(cr, end_x, end_y)
 	cairo_stroke(cr)
 
@@ -164,6 +233,7 @@ function draw_free_ring(cr, ring_props)
 	start_angle, end_angle = 0, (2 * math.pi)
 	cairo_set_source_rgba(cr, ring_props.colors.free_color.r, ring_props.colors.free_color.g, ring_props.colors.free_color.b, ring_props.colors.free_color.a)
 	cairo_set_line_width(cr, ring_props.meter.w)
+	cairo_set_line_cap(cr, CAIRO_LINE_CAP_BUTT)
 	cairo_arc(cr, ring_props.meter.x, ring_props.meter.y, ring_props.meter.r, start_angle, end_angle)
 	cairo_stroke(cr)
 end
@@ -180,6 +250,7 @@ function draw_used_ring(cr, ring_props)
 	cairo_set_line_width(cr, ring_props.meter.w)
 	-- angles in cairo are drawn from pi (90 deg) they must be offset to start from top
 	cairo_arc(cr, ring_props.meter.x, ring_props.meter.y, ring_props.meter.r, degrees_to_radians(-90), degrees_to_radians(end_angle - 90))
+	cairo_set_line_cap(cr, CAIRO_LINE_CAP_BUTT)
 	cairo_stroke(cr)
 end
 
