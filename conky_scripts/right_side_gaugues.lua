@@ -21,32 +21,180 @@ colors = {
 	}
 }
 
+value_font = "Fira Code"
+default_font = "Consolas"
+
 function conky_main()
     if conky_window == nil then
         return
     end
-    local cs = cairo_xlib_surface_create (conky_window.display,
+    local cs = cairo_xlib_surface_create(conky_window.display,
                                          conky_window.drawable,
                                          conky_window.visual,
                                          conky_window.width,
                                          conky_window.height)
     cr = cairo_create(cs)
 
-	-- draw the cpu_indicator
 	battery_gaugue(cr)
 	cpu_gaugue(cr)
 	filesystem_gaugues(cr)
+	brightness_gaugue(cr)
 
     cairo_destroy(cr)
     cairo_surface_destroy(cs)
     cr = nil
 end
 
+function battery_gaugue(cr)
+	gaugue_props = {
+		gaugue_name = "bat0",
+		gaugue_value = conky_parse("${battery_percent BAT0}"),
+		gaugue_max = 100,
+		orientation = "right",
+		colors = {
+			free_color = colors.dark_grey,
+			used_color = colors.light_grey,
+			rule_color = colors.lighter_grey
+		},
+		meter = {
+			x = 350, -- the center x offset relative to conf top left
+			y = 250, -- the center y offset relative to conf top left
+			r = 45,  -- the radius of the guage
+			w = 4    -- the width of the stroke
+		},
+		rule = {
+			w = 3,
+			l = 365
+		}
+	}
+
+	ring_gaugue(cr, gaugue_props)
+end
+
+function cpu_gaugue(cr)
+	gaugue_props = {
+		gaugue_value = conky_parse("${cpu}"),
+		gaugue_max = 100,
+		colors = {
+			free_color = colors.dark_grey,
+			used_color = colors.light_grey,
+			rule_color = colors.lighter_grey
+		},
+		meter = {
+			x = 450, -- the center x offset relative to conf top left
+			y = 425, -- the center y offset relative to conf top left
+			r = 40,  -- the radius of the guage
+			w = 4    -- the width of the stroke
+		},
+		rule = {
+			w = 3,
+			l = 285
+		},
+		annotation = {
+			gaugue_name = "CPU",
+			unit = "%",
+			value_font = value_font,
+			default_font = default_font,
+			font_size_large = 24,
+			font_size_small = 12,
+			value_loc = {
+				x = 523,
+				y = 388,
+			},
+			desc_loc = {
+				x = 570,
+				y = 388,
+			},
+			text_loc = {
+				hr_start = 392,
+				hr_len = 160,
+				x = 523,
+				y = 391,
+			},
+			add_text = {},
+			accent_color = colors.lighter_grey,
+			muted_color = colors.lighter_grey
+		}
+	}
+
+	write_annotation(cr, gaugue_props)
+	ring_gaugue(cr, gaugue_props)
+end
+
+function write_annotation(cr, gaugue_props)
+	write_annotation_value(cr, gaugue_props)
+	write_annotation_desc(cr, gaugue_props)
+	write_annotation_text(cr, gaugue_props)
+end
+
+function write_annotation_value(cr, gaugue_props)
+	text = gaugue_props.gaugue_value .. gaugue_props.annotation.unit
+	font_slant = CAIRO_FONT_SLANT_NORMAL
+	font_face = CAIRO_FONT_WEIGHT_NORMAL
+
+	cairo_select_font_face(cr, gaugue_props.annotation.value_font, font_slant, font_face)
+	cairo_set_font_size(cr, gaugue_props.annotation.font_size_large)
+	cairo_set_source_rgba(cr, gaugue_props.annotation.accent_color.r, gaugue_props.annotation.accent_color.g, gaugue_props.annotation.accent_color.b, gaugue_props.annotation.accent_color.a)
+	cairo_move_to(cr, gaugue_props.annotation.value_loc.x, gaugue_props.annotation.value_loc.y)
+	cairo_show_text(cr, text)
+	cairo_stroke(cr)
+end
+
+function write_annotation_desc(cr, gaugue_props)
+	text = gaugue_props.annotation.gaugue_name
+	font_slant = CAIRO_FONT_SLANT_NORMAL
+	font_face = CAIRO_FONT_WEIGHT_NORMAL
+
+	cairo_select_font_face(cr, gaugue_props.annotation.default_font, font_slant, font_face)
+	cairo_set_font_size(cr, gaugue_props.annotation.font_size_small)
+	cairo_set_source_rgba(cr, gaugue_props.annotation.muted_color.r, gaugue_props.annotation.muted_color.g, gaugue_props.annotation.muted_color.b, gaugue_props.annotation.muted_color.a)
+	cairo_move_to(cr, gaugue_props.annotation.desc_loc.x, gaugue_props.annotation.desc_loc.y)
+	cairo_show_text(cr, text)
+	cairo_stroke(cr)
+end
+
+function write_annotation_text(cr, gaugue_props)
+	-- draw the rule
+	cairo_set_source_rgba(cr, gaugue_props.annotation.muted_color.r, gaugue_props.annotation.muted_color.g, gaugue_props.annotation.muted_color.b, gaugue_props.annotation.muted_color.a)
+	cairo_set_line_width(cr, 1)
+	cairo_set_line_cap(cr, CAIRO_LINE_CAP_BUTT)
+	cairo_move_to(cr, gaugue_props.annotation.text_loc.x, gaugue_props.annotation.text_loc.y)
+	cairo_line_to(cr, gaugue_props.annotation.text_loc.x + gaugue_props.annotation.text_loc.hr_len, gaugue_props.annotation.text_loc.y)
+	cairo_stroke(cr)
+end
+
+function brightness_gaugue(cr)
+	gaugue_props = {
+		gaugue_name = "brightness",
+		gaugue_value = conky_parse("${cat /sys/class/backlight/intel_backlight/brightness}"),
+		gaugue_max = conky_parse("${cat /sys/class/backlight/intel_backlight/max_brightness}"),
+		orientation = "right",
+		colors = {
+			free_color = colors.dark_grey,
+			used_color = colors.light_grey,
+			rule_color = colors.lighter_grey
+		},
+		meter = {
+			x = 450, -- the center x offset relative to conf top left
+			y = 600, -- the center y offset relative to conf top left
+			r = 40,  -- the radius of the guage
+			w = 4    -- the width of the stroke
+		},
+		rule = {
+			w = 3,
+			l = 285
+		}
+	}
+
+	-- write_annotation(cr, gaugue_props)
+	ring_gaugue(cr, gaugue_props)
+end
+
 function filesystem_gaugues(cr)
 	-- these are coenctric rings, so the centroid must be the same between all of them.
 	epicenter = {
-		x = 400,
-		y = 700
+		x = 350,
+		y = 800
 	}
 	root_fs_gaugue(cr, epicenter)
 	home_fs_gaugue(cr, epicenter)
@@ -120,76 +268,6 @@ function part_2_gaugue(cr, epicenter)
 	draw_rule(cr, gaugue_props)
 end
 
-function battery_gaugue(cr)
-	gaugue_props = {
-		gaugue_name = "bat0",
-		gaugue_value = conky_parse("${battery_percent BAT0}"),
-		gaugue_max = 100,
-		orientation = "right",
-		colors = {
-			free_color = colors.dark_grey,
-			used_color = colors.light_grey,
-			rule_color = colors.lighter_grey
-		},
-		meter = {
-			x = 350, -- the center x offset relative to conf top left
-			y = 300, -- the center y offset relative to conf top left
-			r = 45,  -- the radius of the guage
-			w = 4    -- the width of the stroke
-		},
-		rule = {
-			w = 3,
-			l = 365
-		}
-	}
-
-	ring_gaugue(cr, gaugue_props)
-end
-
-function cpu_gaugue(cr)
-	gaugue_props = {
-		gaugue_name = "cpu",
-		gaugue_value = conky_parse("${cpu}"),
-		gaugue_max = 100,
-		orientation = "right",
-		colors = {
-			free_color = colors.dark_grey,
-			used_color = colors.light_grey,
-			rule_color = colors.lighter_grey
-		},
-		meter = {
-			x = 450, -- the center x offset relative to conf top left
-			y = 425, -- the center y offset relative to conf top left
-			r = 40,  -- the radius of the guage
-			w = 4    -- the width of the stroke
-		},
-		rule = {
-			w = 3,
-			l = 285
-		}
-	}
-
-	-- write_annotation(cr, gaugue_props)
-	ring_gaugue(cr, gaugue_props)
-end
-
-function write_annotation(cr, gaugue_props)
-	-- write_annotation
-	font = "fira"
-	font_size = 24
-	text = gaugue_props.gaugue_value .. "% CPU"
-	x, y = 280, 150
-	r, g, b, a = 1, 1, 1, .5
-	font_slant = CAIRO_FONT_SLANT_NORMAL
-	font_face = CAIRO_FONT_WEIGHT_NORMAL
-
-	cairo_select_font_face(cr, font, font_slant, font_face)
-	cairo_set_font_size(cr, font_size)
-	cairo_set_source_rgba(cr, r, g, b, a)
-	cairo_move_to(cr, x, y)
-	cairo_show_text(cr, text )
-	cairo_stroke(cr)
-end
 
 function ring_gaugue(cr, gaugue_props)
 	-- draws a ring gaugue
@@ -257,3 +335,4 @@ end
 function degrees_to_radians(degrees)
 	return degrees * (math.pi / 180)
 end
+
