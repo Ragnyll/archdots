@@ -58,7 +58,7 @@ function battery_gaugue(cr)
 		},
 		meter = {
 			x = 350, -- the center x offset relative to conf top left
-			y = 250, -- the center y offset relative to conf top left
+			y = 400, -- the center y offset relative to conf top left
 			r = 45,  -- the radius of the guage
 			w = 4    -- the width of the stroke
 		},
@@ -75,16 +75,16 @@ function battery_gaugue(cr)
 			font_size_small = 12,
 			value_loc = {
 				x = 425,
-				y = 203,
+				y = 353,
 			},
 			desc_loc = {
 				x = 482,
-				y = 203,
+				y = 353,
 			},
 			text_loc = {
 				hr_len = 255,
 				x = 425,
-				y = 206,
+				y = 356,
 			},
 			add_text = {},
 			accent_color = colors.lighter_grey,
@@ -107,7 +107,7 @@ function cpu_gaugue(cr)
 		},
 		meter = {
 			x = 450, -- the center x offset relative to conf top left
-			y = 425, -- the center y offset relative to conf top left
+			y = 575, -- the center y offset relative to conf top left
 			r = 40,  -- the radius of the guage
 			w = 4    -- the width of the stroke
 		},
@@ -124,16 +124,16 @@ function cpu_gaugue(cr)
 			font_size_small = 12,
 			value_loc = {
 				x = 523,
-				y = 388,
+				y = 538,
 			},
 			desc_loc = {
 				x = 570,
-				y = 388,
+				y = 538,
 			},
 			text_loc = {
 				hr_len = 160,
 				x = 523,
-				y = 391,
+				y = 541,
 			},
 			add_text = {},
 			accent_color = colors.lighter_grey,
@@ -158,7 +158,7 @@ function brightness_gaugue(cr)
 		},
 		meter = {
 			x = 450, -- the center x offset relative to conf top left
-			y = 600, -- the center y offset relative to conf top left
+			y = 750, -- the center y offset relative to conf top left
 			r = 40,  -- the radius of the guage
 			w = 4    -- the width of the stroke
 		},
@@ -175,16 +175,16 @@ function brightness_gaugue(cr)
 			font_size_small = 12,
 			value_loc = {
 				x = 523,
-				y = 562,
+				y = 712,
 			},
 			desc_loc = {
 				x = 570,
-				y = 562,
+				y = 712,
 			},
 			text_loc = {
 				hr_len = 160,
 				x = 523,
-				y = 565,
+				y = 715,
 			},
 			add_text = {},
 			accent_color = colors.lighter_grey,
@@ -200,7 +200,7 @@ function filesystem_gaugues(cr)
 	-- these are coenctric rings, so the centroid must be the same between all of them.
 	epicenter = {
 		x = 350,
-		y = 800
+		y = 950
 	}
 	root_fs_gaugue(cr, epicenter)
 	home_fs_gaugue(cr, epicenter)
@@ -277,16 +277,16 @@ function part_2_gaugue(cr, epicenter)
 			font_size_small = 12,
 			value_loc = {
 				x = 425,
-				y = 745,
+				y = 895,
 			},
 			desc_loc = {
 				x = 482,
-				y = 745,
+				y = 895,
 			},
 			text_loc = {
 				hr_len = 255,
 				x = 425,
-				y = 748,
+				y = 898,
 			},
 			add_text = {},
 			accent_color = colors.lighter_grey,
