@@ -35,17 +35,28 @@ function conky_main()
                                          conky_window.height)
     cr = cairo_create(cs)
 
-	battery_gaugue(cr)
+	battery_and_brightness(cr)
+	-- battery_gaugue(cr)
 	cpu_gaugue(cr)
 	filesystem_gaugues(cr)
-	brightness_gaugue(cr)
+	-- brightness_gaugue(cr)
 
     cairo_destroy(cr)
     cairo_surface_destroy(cs)
     cr = nil
 end
 
-function battery_gaugue(cr)
+function battery_and_brightness(cr)
+	-- these are coenctric rings, so the centroid must be the same between all of them.
+	epicenter = {
+		x = 350,
+		y = 400
+	}
+	battery_gaugue(cr, epicenter)
+	brightness_gaugue(cr, epicenter)
+end
+
+function battery_gaugue(cr, epicenter)
 	gaugue_props = {
 		gaugue_name = "bat0",
 		gaugue_value = conky_parse("${battery_percent BAT0}"),
@@ -57,8 +68,8 @@ function battery_gaugue(cr)
 			rule_color = colors.lighter_grey
 		},
 		meter = {
-			x = 350, -- the center x offset relative to conf top left
-			y = 400, -- the center y offset relative to conf top left
+			x = epicenter.x, -- the center x offset relative to conf top left
+			y = epicenter.y, -- the center y offset relative to conf top left
 			r = 45,  -- the radius of the guage
 			w = 4    -- the width of the stroke
 		},
@@ -93,6 +104,27 @@ function battery_gaugue(cr)
 	}
 
 	write_annotation(cr, gaugue_props)
+	ring_gaugue(cr, gaugue_props)
+end
+
+function brightness_gaugue(cr, epicenter)
+	gaugue_props = {
+		gaugue_name = "brightness",
+		gaugue_value = math.floor((conky_parse("${cat /sys/class/backlight/intel_backlight/brightness}") / conky_parse("${cat /sys/class/backlight/intel_backlight/max_brightness}")) * 100),
+		gaugue_max = 100,
+		colors = {
+			free_color = colors.dark_grey,
+			used_color = colors.light_grey,
+			rule_color = colors.lighter_grey
+		},
+		meter = {
+			x = epicenter.x, -- the center x offset relative to conf top left
+			y = epicenter.y, -- the center y offset relative to conf top left
+			r = 36,  -- the radius of the guage
+			w = 10    -- the width of the stroke
+		}
+	}
+
 	ring_gaugue(cr, gaugue_props)
 end
 
@@ -146,55 +178,6 @@ function cpu_gaugue(cr)
 end
 
 
-function brightness_gaugue(cr)
-	gaugue_props = {
-		gaugue_name = "brightness",
-		gaugue_value = math.floor((conky_parse("${cat /sys/class/backlight/intel_backlight/brightness}") / conky_parse("${cat /sys/class/backlight/intel_backlight/max_brightness}")) * 100),
-		gaugue_max = 100,
-		colors = {
-			free_color = colors.dark_grey,
-			used_color = colors.light_grey,
-			rule_color = colors.lighter_grey
-		},
-		meter = {
-			x = 450, -- the center x offset relative to conf top left
-			y = 750, -- the center y offset relative to conf top left
-			r = 40,  -- the radius of the guage
-			w = 4    -- the width of the stroke
-		},
-		rule = {
-			w = 3,
-			l = 285
-		},
-		annotation = {
-			gaugue_name = "Bright",
-			unit = "%",
-			value_font = value_font,
-			default_font = default_font,
-			font_size_large = 24,
-			font_size_small = 12,
-			value_loc = {
-				x = 523,
-				y = 712,
-			},
-			desc_loc = {
-				x = 570,
-				y = 712,
-			},
-			text_loc = {
-				hr_len = 160,
-				x = 523,
-				y = 715,
-			},
-			add_text = {},
-			accent_color = colors.lighter_grey,
-			muted_color = colors.lighter_grey
-		}
-	}
-
-	write_annotation(cr, gaugue_props)
-	ring_gaugue(cr, gaugue_props)
-end
 
 function filesystem_gaugues(cr)
 	-- these are coenctric rings, so the centroid must be the same between all of them.
