@@ -36,10 +36,8 @@ function conky_main()
     cr = cairo_create(cs)
 
 	battery_and_brightness(cr)
-	-- battery_gaugue(cr)
-	cpu_gaugue(cr)
+	cpu_and_memory(cr)
 	filesystem_gaugues(cr)
-	-- brightness_gaugue(cr)
 
     cairo_destroy(cr)
     cairo_surface_destroy(cs)
@@ -54,6 +52,25 @@ function battery_and_brightness(cr)
 	}
 	battery_gaugue(cr, epicenter)
 	brightness_gaugue(cr, epicenter)
+
+	-- write the small text beneath the the horizantal rule
+	font_slant = CAIRO_FONT_SLANT_NORMAL
+	font_face = CAIRO_FONT_WEIGHT_NORMAL
+	cairo_select_font_face(cr, default_font, font_slant, font_face)
+	cairo_set_font_size(cr, 12)
+	cairo_set_source_rgba(cr, colors.dark_grey.r, colors.dark_grey.g, colors.dark_grey.b, colors.dark_grey.a)
+
+	text = conky_parse("${uptime_short}") .. " UpTime"
+	cairo_move_to(cr, 425, 373)
+	cairo_show_text(cr, text)
+	cairo_stroke(cr, text)
+
+
+	brightness_val = math.floor((conky_parse("${cat /sys/class/backlight/intel_backlight/brightness}") / conky_parse("${cat /sys/class/backlight/intel_backlight/max_brightness}")) * 100)
+	text = brightness_val .. "% Bright"
+	cairo_move_to(cr, 425, 386)
+	cairo_show_text(cr, text)
+	cairo_stroke(cr)
 end
 
 function battery_gaugue(cr, epicenter)
@@ -89,7 +106,7 @@ function battery_gaugue(cr, epicenter)
 				y = 353,
 			},
 			desc_loc = {
-				x = 482,
+				x = 488,
 				y = 353,
 			},
 			text_loc = {
@@ -97,7 +114,6 @@ function battery_gaugue(cr, epicenter)
 				x = 425,
 				y = 356,
 			},
-			add_text = {},
 			accent_color = colors.lighter_grey,
 			muted_color = colors.lighter_grey
 		}
@@ -122,10 +138,36 @@ function brightness_gaugue(cr, epicenter)
 			y = epicenter.y, -- the center y offset relative to conf top left
 			r = 36,  -- the radius of the guage
 			w = 10    -- the width of the stroke
+		},
+		annotation = {
+			gaugue_name = "BRIGHT",
+			unit = "%",
+			value_font = value_font,
+			default_font = default_font,
+			font_size_large = 24,
+			font_size_small = 12,
+			text_loc = {
+				hr_len = 0,
+				x = 425,
+				y = 356,
+			},
+			accent_color = colors.lighter_grey,
+			muted_color = colors.lighter_grey
 		}
 	}
-
+	write_annotation_text(cr, gaugue_props)
 	ring_gaugue(cr, gaugue_props)
+end
+
+function cpu_and_memory(cr)
+	epicenter = {
+		x = 450,
+		y = 575
+	}
+	cpu_gaugue(cr, epicenter)
+	memory_gaugue(cr, epicenter)
+
+	top_table(cr)
 end
 
 function cpu_gaugue(cr)
@@ -138,8 +180,8 @@ function cpu_gaugue(cr)
 			rule_color = colors.lighter_grey
 		},
 		meter = {
-			x = 450, -- the center x offset relative to conf top left
-			y = 575, -- the center y offset relative to conf top left
+			x = epicenter.x, -- the center x offset relative to conf top left
+			y = epicenter.y, -- the center y offset relative to conf top left
 			r = 40,  -- the radius of the guage
 			w = 4    -- the width of the stroke
 		},
@@ -167,7 +209,6 @@ function cpu_gaugue(cr)
 				x = 523,
 				y = 541,
 			},
-			add_text = {},
 			accent_color = colors.lighter_grey,
 			muted_color = colors.lighter_grey
 		}
@@ -177,7 +218,90 @@ function cpu_gaugue(cr)
 	ring_gaugue(cr, gaugue_props)
 end
 
+function memory_gaugue(cr)
+	gaugue_props = {
+		gaugue_value = conky_parse("${memperc}"),
+		gaugue_max = 100,
+		colors = {
+			free_color = colors.dark_grey,
+			used_color = colors.light_grey,
+			rule_color = colors.lighter_grey
+		},
+		meter = {
+			x = epicenter.x, -- the center x offset relative to conf top left
+			y = epicenter.y, -- the center y offset relative to conf top left
+			r = 32,  -- the radius of the guage
+			w = 8    -- the width of the stroke
+		}
+	}
 
+	ring_gaugue(cr, gaugue_props)
+end
+
+function top_table(cr)
+	font_slant = CAIRO_FONT_SLANT_NORMAL
+	font_face = CAIRO_FONT_WEIGHT_NORMAL
+	cairo_select_font_face(cr, default_font, font_slant, font_face)
+	cairo_set_font_size(cr, 12)
+	cairo_set_source_rgba(cr, colors.dark_grey.r, colors.dark_grey.g, colors.dark_grey.b, colors.dark_grey.a)
+
+	table_headers = "Name       CPU%  MEM%"
+	cairo_move_to(cr, 523, 556)
+	cairo_show_text(cr, table_headers)
+	cairo_stroke(cr)
+
+	process_name = conky_parse("${top name 1}")
+	cairo_move_to(cr, 523, 568)
+	cairo_show_text(cr, process_name)
+	cairo_stroke(cr)
+	process_cpu_perc = conky_parse("${top cpu 1}") .. "%"
+	cairo_move_to(cr, 587, 568)
+	cairo_show_text(cr, process_cpu_perc)
+	cairo_stroke(cr)
+	process_mem_perc = conky_parse("${top mem 1}") .. "%"
+	cairo_move_to(cr, 630, 568)
+	cairo_show_text(cr, process_mem_perc)
+	cairo_stroke(cr)
+
+	process_name = conky_parse("${top name 2}")
+	cairo_move_to(cr, 523, 580)
+	cairo_show_text(cr, process_name)
+	cairo_stroke(cr)
+	process_cpu_perc = conky_parse("${top cpu 2}") .. "%"
+	cairo_move_to(cr, 587, 580)
+	cairo_show_text(cr, process_cpu_perc)
+	cairo_stroke(cr)
+	process_mem_perc = conky_parse("${top mem 2}") .. "%"
+	cairo_move_to(cr, 630, 580)
+	cairo_show_text(cr, process_mem_perc)
+	cairo_stroke(cr)
+
+	process_name = conky_parse("${top name 3}")
+	cairo_move_to(cr, 523, 592)
+	cairo_show_text(cr, process_name)
+	cairo_stroke(cr)
+	process_cpu_perc = conky_parse("${top cpu 3}") .. "%"
+	cairo_move_to(cr, 587, 592)
+	cairo_show_text(cr, process_cpu_perc)
+	cairo_stroke(cr)
+	process_mem_perc = conky_parse("${top mem 3}") .. "%"
+	cairo_move_to(cr, 630, 592)
+	cairo_show_text(cr, process_mem_perc)
+	cairo_stroke(cr)
+
+	process_name = conky_parse("${top name 4}")
+	cairo_move_to(cr, 523, 604)
+	cairo_show_text(cr, process_name)
+	cairo_stroke(cr)
+	process_cpu_perc = conky_parse("${top cpu 4}") .. "%"
+	cairo_move_to(cr, 587, 604)
+	cairo_show_text(cr, process_cpu_perc)
+	cairo_stroke(cr)
+	process_mem_perc = conky_parse("${top mem 4}") .. "%"
+	cairo_move_to(cr, 630, 604)
+	cairo_show_text(cr, process_mem_perc)
+	cairo_stroke(cr)
+end
 
 function filesystem_gaugues(cr)
 	-- these are coenctric rings, so the centroid must be the same between all of them.
@@ -271,7 +395,6 @@ function part_2_gaugue(cr, epicenter)
 				x = 425,
 				y = 898,
 			},
-			add_text = {},
 			accent_color = colors.lighter_grey,
 			muted_color = colors.lighter_grey
 		}
