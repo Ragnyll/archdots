@@ -65,9 +65,34 @@ function battery_gaugue(cr)
 		rule = {
 			w = 3,
 			l = 365
+		},
+		annotation = {
+			gaugue_name = "BAT0",
+			unit = "%",
+			value_font = value_font,
+			default_font = default_font,
+			font_size_large = 24,
+			font_size_small = 12,
+			value_loc = {
+				x = 425,
+				y = 203,
+			},
+			desc_loc = {
+				x = 482,
+				y = 203,
+			},
+			text_loc = {
+				hr_len = 255,
+				x = 425,
+				y = 206,
+			},
+			add_text = {},
+			accent_color = colors.lighter_grey,
+			muted_color = colors.lighter_grey
 		}
 	}
 
+	write_annotation(cr, gaugue_props)
 	ring_gaugue(cr, gaugue_props)
 end
 
@@ -106,7 +131,6 @@ function cpu_gaugue(cr)
 				y = 388,
 			},
 			text_loc = {
-				hr_start = 392,
 				hr_len = 160,
 				x = 523,
 				y = 391,
@@ -121,54 +145,12 @@ function cpu_gaugue(cr)
 	ring_gaugue(cr, gaugue_props)
 end
 
-function write_annotation(cr, gaugue_props)
-	write_annotation_value(cr, gaugue_props)
-	write_annotation_desc(cr, gaugue_props)
-	write_annotation_text(cr, gaugue_props)
-end
-
-function write_annotation_value(cr, gaugue_props)
-	text = gaugue_props.gaugue_value .. gaugue_props.annotation.unit
-	font_slant = CAIRO_FONT_SLANT_NORMAL
-	font_face = CAIRO_FONT_WEIGHT_NORMAL
-
-	cairo_select_font_face(cr, gaugue_props.annotation.value_font, font_slant, font_face)
-	cairo_set_font_size(cr, gaugue_props.annotation.font_size_large)
-	cairo_set_source_rgba(cr, gaugue_props.annotation.accent_color.r, gaugue_props.annotation.accent_color.g, gaugue_props.annotation.accent_color.b, gaugue_props.annotation.accent_color.a)
-	cairo_move_to(cr, gaugue_props.annotation.value_loc.x, gaugue_props.annotation.value_loc.y)
-	cairo_show_text(cr, text)
-	cairo_stroke(cr)
-end
-
-function write_annotation_desc(cr, gaugue_props)
-	text = gaugue_props.annotation.gaugue_name
-	font_slant = CAIRO_FONT_SLANT_NORMAL
-	font_face = CAIRO_FONT_WEIGHT_NORMAL
-
-	cairo_select_font_face(cr, gaugue_props.annotation.default_font, font_slant, font_face)
-	cairo_set_font_size(cr, gaugue_props.annotation.font_size_small)
-	cairo_set_source_rgba(cr, gaugue_props.annotation.muted_color.r, gaugue_props.annotation.muted_color.g, gaugue_props.annotation.muted_color.b, gaugue_props.annotation.muted_color.a)
-	cairo_move_to(cr, gaugue_props.annotation.desc_loc.x, gaugue_props.annotation.desc_loc.y)
-	cairo_show_text(cr, text)
-	cairo_stroke(cr)
-end
-
-function write_annotation_text(cr, gaugue_props)
-	-- draw the rule
-	cairo_set_source_rgba(cr, gaugue_props.annotation.muted_color.r, gaugue_props.annotation.muted_color.g, gaugue_props.annotation.muted_color.b, gaugue_props.annotation.muted_color.a)
-	cairo_set_line_width(cr, 1)
-	cairo_set_line_cap(cr, CAIRO_LINE_CAP_BUTT)
-	cairo_move_to(cr, gaugue_props.annotation.text_loc.x, gaugue_props.annotation.text_loc.y)
-	cairo_line_to(cr, gaugue_props.annotation.text_loc.x + gaugue_props.annotation.text_loc.hr_len, gaugue_props.annotation.text_loc.y)
-	cairo_stroke(cr)
-end
 
 function brightness_gaugue(cr)
 	gaugue_props = {
 		gaugue_name = "brightness",
-		gaugue_value = conky_parse("${cat /sys/class/backlight/intel_backlight/brightness}"),
-		gaugue_max = conky_parse("${cat /sys/class/backlight/intel_backlight/max_brightness}"),
-		orientation = "right",
+		gaugue_value = math.floor((conky_parse("${cat /sys/class/backlight/intel_backlight/brightness}") / conky_parse("${cat /sys/class/backlight/intel_backlight/max_brightness}")) * 100),
+		gaugue_max = 100,
 		colors = {
 			free_color = colors.dark_grey,
 			used_color = colors.light_grey,
@@ -183,10 +165,34 @@ function brightness_gaugue(cr)
 		rule = {
 			w = 3,
 			l = 285
+		},
+		annotation = {
+			gaugue_name = "Bright",
+			unit = "%",
+			value_font = value_font,
+			default_font = default_font,
+			font_size_large = 24,
+			font_size_small = 12,
+			value_loc = {
+				x = 523,
+				y = 562,
+			},
+			desc_loc = {
+				x = 570,
+				y = 562,
+			},
+			text_loc = {
+				hr_len = 160,
+				x = 523,
+				y = 565,
+			},
+			add_text = {},
+			accent_color = colors.lighter_grey,
+			muted_color = colors.lighter_grey
 		}
 	}
 
-	-- write_annotation(cr, gaugue_props)
+	write_annotation(cr, gaugue_props)
 	ring_gaugue(cr, gaugue_props)
 end
 
@@ -242,7 +248,7 @@ function home_fs_gaugue(cr, epicenter)
 end
 
 function part_2_gaugue(cr, epicenter)
-	partition_2_used_perc = conky_parse("${fs_used_perc /home}") + conky_parse("${fs_used_perc /root}")
+	partition_2_used_perc = math.floor(conky_parse("${fs_used_perc /home}") + conky_parse("${fs_used_perc /root}"))
 	gaugue_props = {
 		gaugue_name = "/nvme0n1p2",
 		gaugue_value = partition_2_used_perc,
@@ -261,11 +267,36 @@ function part_2_gaugue(cr, epicenter)
 		rule = {
 			w = 3,
 			l = 365
+		},
+		annotation = {
+			gaugue_name = "disk",
+			unit = "%",
+			value_font = value_font,
+			default_font = default_font,
+			font_size_large = 24,
+			font_size_small = 12,
+			value_loc = {
+				x = 425,
+				y = 745,
+			},
+			desc_loc = {
+				x = 482,
+				y = 745,
+			},
+			text_loc = {
+				hr_len = 255,
+				x = 425,
+				y = 748,
+			},
+			add_text = {},
+			accent_color = colors.lighter_grey,
+			muted_color = colors.lighter_grey
 		}
 	}
 
 	ring_gaugue(cr, gaugue_props)
 	draw_rule(cr, gaugue_props)
+	write_annotation(cr, gaugue_props)
 end
 
 
@@ -332,7 +363,48 @@ function draw_used_ring(cr, ring_props)
 	cairo_stroke(cr)
 end
 
+function write_annotation(cr, gaugue_props)
+	write_annotation_value(cr, gaugue_props)
+	write_annotation_desc(cr, gaugue_props)
+	write_annotation_text(cr, gaugue_props)
+end
+
+function write_annotation_value(cr, gaugue_props)
+	text = gaugue_props.gaugue_value .. gaugue_props.annotation.unit
+	font_slant = CAIRO_FONT_SLANT_NORMAL
+	font_face = CAIRO_FONT_WEIGHT_NORMAL
+
+	cairo_select_font_face(cr, gaugue_props.annotation.value_font, font_slant, font_face)
+	cairo_set_font_size(cr, gaugue_props.annotation.font_size_large)
+	cairo_set_source_rgba(cr, gaugue_props.annotation.accent_color.r, gaugue_props.annotation.accent_color.g, gaugue_props.annotation.accent_color.b, gaugue_props.annotation.accent_color.a)
+	cairo_move_to(cr, gaugue_props.annotation.value_loc.x, gaugue_props.annotation.value_loc.y)
+	cairo_show_text(cr, text)
+	cairo_stroke(cr)
+end
+
+function write_annotation_desc(cr, gaugue_props)
+	text = gaugue_props.annotation.gaugue_name
+	font_slant = CAIRO_FONT_SLANT_NORMAL
+	font_face = CAIRO_FONT_WEIGHT_NORMAL
+
+	cairo_select_font_face(cr, gaugue_props.annotation.default_font, font_slant, font_face)
+	cairo_set_font_size(cr, gaugue_props.annotation.font_size_small)
+	cairo_set_source_rgba(cr, gaugue_props.annotation.muted_color.r, gaugue_props.annotation.muted_color.g, gaugue_props.annotation.muted_color.b, gaugue_props.annotation.muted_color.a)
+	cairo_move_to(cr, gaugue_props.annotation.desc_loc.x, gaugue_props.annotation.desc_loc.y)
+	cairo_show_text(cr, text)
+	cairo_stroke(cr)
+end
+
+function write_annotation_text(cr, gaugue_props)
+	-- draw the rule
+	cairo_set_source_rgba(cr, gaugue_props.annotation.muted_color.r, gaugue_props.annotation.muted_color.g, gaugue_props.annotation.muted_color.b, gaugue_props.annotation.muted_color.a)
+	cairo_set_line_width(cr, 1)
+	cairo_set_line_cap(cr, CAIRO_LINE_CAP_BUTT)
+	cairo_move_to(cr, gaugue_props.annotation.text_loc.x, gaugue_props.annotation.text_loc.y)
+	cairo_line_to(cr, gaugue_props.annotation.text_loc.x + gaugue_props.annotation.text_loc.hr_len, gaugue_props.annotation.text_loc.y)
+	cairo_stroke(cr)
+end
+
 function degrees_to_radians(degrees)
 	return degrees * (math.pi / 180)
 end
-
