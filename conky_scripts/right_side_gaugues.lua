@@ -311,7 +311,8 @@ function filesystem_gaugues(cr)
 	}
 	root_fs_gaugue(cr, epicenter)
 	home_fs_gaugue(cr, epicenter)
-	part_2_gaugue(cr, epicenter) -- partition 2 contains root + home + swap
+	part_2_gaugue(cr, epicenter) -- partition 2 contains root + home
+	disk_table(cr)
 end
 
 function root_fs_gaugue(cr, epicenter)
@@ -405,6 +406,23 @@ function part_2_gaugue(cr, epicenter)
 	write_annotation(cr, gaugue_props)
 end
 
+function disk_table(cr)
+	font_slant = CAIRO_FONT_SLANT_NORMAL
+	font_face = CAIRO_FONT_WEIGHT_NORMAL
+	cairo_select_font_face(cr, default_font, font_slant, font_face)
+	cairo_set_font_size(cr, 12)
+	cairo_set_source_rgba(cr, colors.dark_grey.r, colors.dark_grey.g, colors.dark_grey.b, colors.dark_grey.a)
+
+	home_usage = "/root       " .. conky_parse("${fs_used /root}") .. " / " .. conky_parse("${fs_size /root}")
+	cairo_move_to(cr, 425, 915)
+	cairo_show_text(cr, home_usage)
+	cairo_stroke(cr)
+
+	home_usage = "/home       " .. conky_parse("${fs_used /home}") .. " / " .. conky_parse("${fs_size /home}")
+	cairo_move_to(cr, 425, 927)
+	cairo_show_text(cr, home_usage)
+	cairo_stroke(cr)
+end
 
 function ring_gaugue(cr, gaugue_props)
 	-- draws a ring gaugue
