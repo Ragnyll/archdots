@@ -92,6 +92,7 @@ set smartcase
 
 " Normal Mode remaps
 nnoremap <space> viw
+nnoremap <leader><space> viW
 nnoremap U <c-R>
 nnoremap H ^
 nnoremap L $

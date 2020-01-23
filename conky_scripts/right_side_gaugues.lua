@@ -38,6 +38,7 @@ function conky_main()
 	battery_and_brightness(cr)
 	cpu_and_memory(cr)
 	filesystem_gaugues(cr)
+	up_and_down_speed(cr)
 
     cairo_destroy(cr)
     cairo_surface_destroy(cs)
@@ -155,7 +156,7 @@ function brightness_gaugue(cr, epicenter)
 			muted_color = colors.lighter_grey
 		}
 	}
-	write_annotation_text(cr, gaugue_props)
+	draw_annotation_rule(cr, gaugue_props)
 	ring_gaugue(cr, gaugue_props)
 end
 
@@ -301,6 +302,108 @@ function top_table(cr)
 	cairo_move_to(cr, 630, 604)
 	cairo_show_text(cr, process_mem_perc)
 	cairo_stroke(cr)
+end
+
+
+function up_and_down_speed(cr)
+	epicenter = {
+		x = 450,
+		y = 750
+	}
+
+	gaugue_props = {
+		gaugue_value = "wlp82s0",
+		annotation = {
+			unit = "",
+			value_font = value_font,
+			font_size_large = 24,
+			text_loc = {
+				hr_len = 160,
+				x = 523,
+				y = 718,
+			},
+			value_loc = {
+				x = 523,
+				y = 712,
+			},
+			accent_color = colors.lighter_grey,
+			muted_color = colors.lighter_grey
+		}
+	}
+
+	-- write out the up and down
+	write_annotation_value(cr, gaugue_props)
+	draw_annotation_rule(cr, gaugue_props)
+	upspeed_gaugue(cr, epicenter)
+	downspeed_gaugue(cr, epicenter)
+
+	-- write out the values
+	font_slant = CAIRO_FONT_SLANT_NORMAL
+	font_face = CAIRO_FONT_WEIGHT_NORMAL
+	cairo_select_font_face(cr, default_font, font_slant, font_face)
+	cairo_set_font_size(cr, 12)
+	cairo_set_source_rgba(cr, colors.dark_grey.r, colors.dark_grey.g, colors.dark_grey.b, colors.dark_grey.a)
+
+
+	wireless_essid = conky_parse("${wireless_essid wlp82s0}")
+	cairo_move_to(cr, 523, 732)
+	cairo_show_text(cr, wireless_essid)
+	cairo_stroke(cr)
+
+	upspeed = conky_parse("${upspeed wlp82s0}") .. " Up"
+	cairo_move_to(cr, 523, 744)
+	cairo_show_text(cr, upspeed)
+	cairo_stroke(cr)
+
+	downspeed = conky_parse("${downspeed wlp82s0}") .. " Down"
+	cairo_move_to(cr, 523, 756)
+	cairo_show_text(cr, downspeed)
+	cairo_stroke(cr)
+end
+
+function upspeed_gaugue(cr, epicenter)
+	gaugue_props = {
+		gaugue_value = conky_parse("${upspeedf wlp82s0}"),
+		gaugue_max = 51200, -- this is 50MiB. Use this on wifi
+		colors = {
+			free_color = colors.dark_grey,
+			used_color = colors.light_grey,
+			rule_color = colors.lighter_grey
+		},
+		meter = {
+			x = epicenter.x, -- the center x offset relative to conf top left
+			y = epicenter.y, -- the center y offset relative to conf top left
+			r = 40,  -- the radius of the guage
+			w = 4    -- the width of the stroke
+		},
+		rule = {
+			w = 3,
+			l = 285
+		}
+	}
+
+	ring_gaugue(cr, gaugue_props)
+end
+
+function downspeed_gaugue(cr, epicenter)
+	gaugue_props = {
+		gaugue_value = conky_parse("${downspeedf wlp82s0}"),
+		-- gaugue_max = 512000, -- this is 500MiB in KiB use this if im on ethernet
+		gaugue_max = 51200, -- this is 50MiB. Use this on wifi
+		colors = {
+			free_color = colors.dark_grey,
+			used_color = colors.light_grey,
+			rule_color = colors.lighter_grey
+		},
+		meter = {
+			x = epicenter.x, -- the center x offset relative to conf top left
+			y = epicenter.y, -- the center y offset relative to conf top left
+			r = 32,  -- the radius of the guage
+			w = 8    -- the width of the stroke
+		}
+	}
+
+	ring_gaugue(cr, gaugue_props)
 end
 
 function filesystem_gaugues(cr)
@@ -490,7 +593,7 @@ end
 function write_annotation(cr, gaugue_props)
 	write_annotation_value(cr, gaugue_props)
 	write_annotation_desc(cr, gaugue_props)
-	write_annotation_text(cr, gaugue_props)
+	draw_annotation_rule(cr, gaugue_props)
 end
 
 function write_annotation_value(cr, gaugue_props)
@@ -519,7 +622,7 @@ function write_annotation_desc(cr, gaugue_props)
 	cairo_stroke(cr)
 end
 
-function write_annotation_text(cr, gaugue_props)
+function draw_annotation_rule(cr, gaugue_props)
 	-- draw the rule
 	cairo_set_source_rgba(cr, gaugue_props.annotation.muted_color.r, gaugue_props.annotation.muted_color.g, gaugue_props.annotation.muted_color.b, gaugue_props.annotation.muted_color.a)
 	cairo_set_line_width(cr, 1)
