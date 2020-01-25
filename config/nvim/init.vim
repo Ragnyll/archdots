@@ -4,6 +4,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'davidhalter/jedi-vim'
 Plug 'heavenshell/vim-pydocstring'
 Plug 'wsdjeg/vim-lua'
+Plug 'tmux-plugins/vim-tmux'
 " markdown
 Plug 'gabrielelana/vim-markdown'
 " make it pretty

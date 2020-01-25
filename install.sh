@@ -159,5 +159,7 @@ bash < ./rvm-install
 # install pycharm and put it in ~/bin
 # install tor browser and put it in ~/bin
 
+# install tmux plugin manager
+
 # Hacking tools
 pacman -Syu dnsutils
