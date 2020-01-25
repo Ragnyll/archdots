@@ -25,7 +25,6 @@ sudo pacman -Syu \
 	compton \
 	rofi \
 	xclip \
-	kitty \
 	neovim \
 	powerline-fonts \
 	git \
@@ -38,7 +37,6 @@ sudo pacman -Syu \
 	alsa-utils \
 	bluez \
 	bluez-utils \
-	ranger \
 	entr \
 	lxappearance-gtk3 \
 	arc-gtk-theme \
@@ -56,6 +54,8 @@ sudo pacman -Syu \
 	exfat-utils \
 	texlive-bin \
 	w3m
+
+# clone my fork of st
 
 # change shell to zsh (might affect later calls)
 # (manual intervention)
@@ -82,6 +82,7 @@ yay -S polybar \
 	ttf-font-awesome \
 	lightdm-mini-greeter \
 	netdiscover \
+	ranger-git \
 	i3lock-fancy
 
 # Install fzf manually to get zsh keybinds (Manual intervention)
@@ -112,7 +113,7 @@ ln -sf ~/.dotfiles/config/kitty/kitty.conf ~/.config/kitty/kitty.conf
 ln -sf ~/.dotfiles/config/nvim/init.vim ~/.config/nvim/init.vim
 ln -sf ~/.dotfiles/config/nvim/init.vim ~/.ideavimrc
 mkdir -p ~/.config/compton/
-ln -s ~/.dotfiles/config/compton/compton.conf ~/.config/compton/compton.conf  
+ln -s ~/.dotfiles/config/compton/compton.conf ~/.config/compton/compton.conf
 ln -s ~/.dotfiles/bin/increase_brightness.sh ~/bin/increase_brightness.sh
 ln -s ~/.dotfiles/bin/decrease_brightness.sh ~/bin/decrease_brightness.sh
 mkdir -p ~/.config/systemd/user/
@@ -124,7 +125,7 @@ mkdir -p ~/.config/rofi/themes
 ln -sf ~/.dotfiles/config/rofi/themes/dracula_sidebar.rasi ~/.config/rofi/themes/dracula_sidebar.rasi
 ln -sf ~/.dotfiles/config/rofi/config ~/.config/rofi/config
 ln -sf ~/.dotfiles/bin/lock.sh ~/bin/lock.sh
-ln -sf ~/.dotfiles/zprofile ~/.zprofile 
+ln -sf ~/.dotfiles/zprofile ~/.zprofile
 mkdir -p ~/.config/dunst
 ln -sf ~/.dotfiles/config/dunst/dunstrc ~/.config/dunst/dunstrc
 mkdir -p ~/.config/ranger/

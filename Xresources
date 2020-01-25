@@ -1,0 +1,57 @@
+! NOTE: not currently in use. just have it here cuz hwy not at this point
+!! To refresh URxvt run `xrdb ~/.Xresources`
+
+! COLORS
+! Dracula Xresources palette
+URxvt.depth: 32
+URxvt.background: [92]#1e1f28
+URxvt.foreground: #F8F8F2
+URxvt.color0:     #000000
+URxvt.color8:     #ff5555
+URxvt.color1:     #FF5555
+URxvt.color9:     #ff5454
+URxvt.color2:     #50fa7b
+URxvt.color10:    #50fa7b
+URxvt.color3:     #f0fa8b
+URxvt.color11:    #f0fa8b
+URxvt.color4:     #bd92f8
+URxvt.color12:    #bd92f8
+URxvt.color5:     #ff78c5
+URxvt.color13:    #ff78c5
+URxvt.color6:     #8ae9fc
+URxvt.color14:    #8ae9fc
+URxvt.color7:     #bbbbbb
+URxvt.color15:    #ffffff
+
+!! URxvt Appearance
+! To get the Fira font wget https://github.com/tonsky/FiraCode/files/3463762/FiraCode-Glyphs-export.zip
+! and follow https://forum.manjaro.org/t/failing-to-change-font-for-urxvt/104672/6
+URxvt.font: xft:Fira Code:style=Regular:pixelsize=12
+URxvt.boldFont: xft:Fira Code:style=Bold:pixelsize=12
+URxvt.italicFont: xft:Fira Code:style=Italic:pixelsize=12
+URxvt.boldItalicfont: xft:Fira Code:style=Medium:pixelsize=12
+URxvt.letterSpace: 0
+URxvt.lineSpace: 0
+URxvt.geometry: 92x24
+URxvt.internalBorder: 1
+URxvt.cursorBlink: true
+URxvt.cursorUnderline: false
+URxvt.saveline: 2048
+URxvt.scrollBar: false
+URxvt.scrollBar_right: false
+URxvt.urgentOnBell: false
+URxvt.iso14755: false
+
+!! Copy Paste & Other Extensions
+URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select
+URxvt.copyCommand: xclip -i -selection clipboard
+URxvt.pasteCommand: xclip -o -selection clipboard
+URxvt.keysym.M-c: perl:clipboard:copy
+URxvt.keysym.M-v: perl:clipboard:paste
+URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-s: perl:keyboard-select:search
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.urlLauncher: firefox
+URxvt.underlineURLs: true
+URxvt.urlButton: 1

@@ -1,0 +1,5 @@
+[user]
+	email = ragnyll@protonmail.com
+	name = ragnyll
+[diff]
+	tool = vimdiff
