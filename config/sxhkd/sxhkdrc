@@ -8,7 +8,7 @@ super + Return
 
 # program launcher
 super + @space
-	~/bin/dmenu_path | dmenu
+	~/bin/dmenu_run_history
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -19,8 +19,15 @@ super + Escape
 #
 
 # quit/restart bspwm
-super + alt + {q,r}
-	bspc {quit,wm -r}
+super + alt + r
+	bspc wm -r
+
+# quit/restart bspwm
+super + alt + q
+	~/bin/prompt.sh "Really logout?" "bspc quit"
+
+super + shift + x
+	~/bin/prompt.sh "Really shutdown?" "sudo shutdown now"
 
 # Screen lock
 super +  ctrl + l
