@@ -8,7 +8,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 export EDITOR=nvim
-alias vim='nvim'
+alias vim='nvim -O'
 alias vranger='nvim .'
 
 # use vim bindings in prompmt
@@ -16,7 +16,7 @@ set -o vi
 
 # git configurations
 export LESS="-R" # fixes colouring on git graph
-alias conflicts='git diff --name-only --deff-filter=U'
+alias conflicts='git diff --name-only --diff-filter=U'
 alias gti='git' # i suck at typing
 
 # other random aliases

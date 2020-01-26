@@ -55,7 +55,11 @@ sudo pacman -Syu \
 	texlive-bin \
 	w3m
 
-# clone my fork of st
+# install my fork of st
+# https://gitlab.com/Ragnyll/rag-st
+
+# install my fork of dmenu
+# https://gitlab.com/Ragnyll/rag-dmenu
 
 # change shell to zsh (might affect later calls)
 # (manual intervention)
