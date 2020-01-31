@@ -10,6 +10,10 @@ super + Return
 super + @space
 	~/bin/dmenu_run_history
 
+# run a script on dmenu and put its output on dmenu
+super + shift + @space
+	ls ~/bin | dmenu | sh
+
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
