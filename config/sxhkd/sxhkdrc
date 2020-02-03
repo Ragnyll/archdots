@@ -12,7 +12,7 @@ super + @space
 
 # run a script on dmenu. NOTE: output is silent
 super + shift + @space
-	cut -d, -f1 ~/bin/dmenu_commands | dmenu -sb "#9900cc" | ~/bin/execute_script.py cmd_to_run --file_name ~/bin/dmenu_commands | dmenu -sb "#9900cc"
+	cut -d, -f1 ~/bin/dmenu_commands | dmenu -sb "#9900cc" | ~/bin/parse_dmenu_options.py cmd_to_run --file_name ~/bin/dmenu_commands | dmenu -sb "#9900cc" | bash
 
 # make sxhkd reload its configuration files:
 super + Escape

@@ -1,4 +1,2 @@
-~/bin/lock.sh
-ls,-l,-al
-sudo optimus_manager --no-confirm --switch,intel,nvidia
-~/bin/cmd.sh
+switch display,sudo optimus_manager --no-confirm --switch,intel,nvidia
+switch background,feh --bg-scale,~/Pictures/wallpapers/anime/your_lie_in_april.jpg,~/Pictures/wallpapers/anime/hacker_girl.jpg,~/Pictures/wallpapers/anime/mountains.jpg
