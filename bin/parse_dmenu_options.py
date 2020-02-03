@@ -13,7 +13,10 @@ def build_cmd_with_option(file_name):
     # there should only ever be one match based on how dmenu will return file names
     # this will break on commands where there are no options
     cmd = cmd_and_options[0].split(',')[1]
-    options = cmd_and_options[0].split(',')[1:]
+    options = cmd_and_options[0].split(',')[2:]
+    if len(options) == 0:
+        print(cmd)
+        return
     for option in options:
         print(cmd + ' ' + option)
 
