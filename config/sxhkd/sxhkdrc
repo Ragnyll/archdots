@@ -10,9 +10,9 @@ super + Return
 super + @space
 	~/bin/dmenu_run_history
 
-# run a script on dmenu and put its output on dmenu
+# run a script on dmenu. NOTE: output is silent
 super + shift + @space
-	ls ~/bin | dmenu | sh
+	cut -d, -f1 ~/bin/dmenu_commands | dmenu -sb "#9900cc" | ~/bin/execute_script.py cmd_to_run --file_name ~/bin/dmenu_commands | dmenu -sb "#9900cc"
 
 # make sxhkd reload its configuration files:
 super + Escape

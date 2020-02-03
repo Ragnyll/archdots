@@ -1,0 +1,4 @@
+~/bin/lock.sh
+ls,-l,-al
+sudo optimus_manager --no-confirm --switch,intel,nvidia
+~/bin/cmd.sh
