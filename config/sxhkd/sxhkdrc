@@ -14,6 +14,10 @@ super + @space
 super + shift + @space
 	cut -d, -f1 ~/bin/dmenu_commands | dmenu -sb "#9900cc" | ~/bin/parse_dmenu_options.py cmd_to_run --file_name ~/bin/dmenu_commands | dmenu -sb "#9900cc" | bash
 
+# start ranger in a shell
+super + r
+	st -e ranger
+
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
