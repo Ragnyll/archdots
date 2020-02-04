@@ -7,6 +7,8 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+neofetch
+
 export EDITOR=nvim
 alias vim='nvim -O'
 alias vranger='nvim .'
