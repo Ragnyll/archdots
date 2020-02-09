@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/bash -e
 
 if tmux ls | grep -qv attached ; then
 exec /usr/local/bin/st -e tmux attach

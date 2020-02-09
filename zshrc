@@ -24,10 +24,10 @@ alias gti='git' # i suck at typing
 # other random aliases
 alias sl='ls'
 alias virus_scan='sudo freshclam && sudo clamscan -r --bell -i /'
-alias jekyll_server='bundle exec jekyll serve'
 alias gpgrun='gpg --decrypt $1 | sh'
 alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0'
 alias tor='~/Applications/tor-browser_en-US/Browser/start-tor-browser'
+alias mutt='neomutt'
 
 # colorize less
 export LESS='-R'

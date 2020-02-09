@@ -58,3 +58,5 @@ fi
 # Stop java gui applications from being screwy
 #
 export _JAVA_AWT_WM_NONREPARENTING=1
+
+export PATH="$HOME/.cargo/bin:$PATH"

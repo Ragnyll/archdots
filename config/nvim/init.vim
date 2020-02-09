@@ -5,6 +5,8 @@ Plug 'davidhalter/jedi-vim'
 Plug 'heavenshell/vim-pydocstring'
 Plug 'wsdjeg/vim-lua'
 Plug 'tmux-plugins/vim-tmux'
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
 " markdown
 Plug 'gabrielelana/vim-markdown'
 " make it pretty
@@ -12,7 +14,6 @@ Plug 'scrooloose/syntastic'
 Plug 'vim-airline/vim-airline'
 Plug 'Ragnyll/vim-colorschemes'
 Plug 'airblade/vim-gitgutter'
-Plug 'rust-lang/rust.vim'
 Plug 'kovetskiy/sxhkd-vim'
 " file searching / exploring
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -67,6 +68,10 @@ let g:syntastic_python_flake8_args='--ignore=E501'
 let g:ranger_map_keys = 0
 let g:ranger_replace_netrw = 1
 
+" racer
+set hidden
+let g:racer_cmd = "/home/ragnyll/.cargo/bin/racer"
+
 " tagbar
 nnoremap <leader>t :TagbarToggle<cr>
 
@@ -100,7 +105,6 @@ nnoremap L $
 nnoremap <leader>r :Ranger<cr>
 nnoremap <leader>R :vsplit <bar> :Ranger<cr>
 nnoremap <leader>t :RangerNewTab<cr>
-nnoremap <leader>p :reg<cr>
 
 " Visual Mode remaps
 vnoremap H ^
