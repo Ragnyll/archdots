@@ -27,7 +27,8 @@ alias virus_scan='sudo freshclam && sudo clamscan -r --bell -i /'
 alias gpgrun='gpg --decrypt $1 | sh'
 alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0'
 alias tor='~/Applications/tor-browser_en-US/Browser/start-tor-browser'
-alias mutt='neomutt'
+alias stegosuite='/usr/lib/jvm/java-8-openjdk/bin/java -jar ~/Applications/stegosuite-0.7-linux_amd64.jar'
+alias pbcopy='xclip -selection clipboard'
 
 # colorize less
 export LESS='-R'
