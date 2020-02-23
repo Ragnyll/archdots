@@ -140,6 +140,9 @@ super + F5
 super + F6
 	brightnessctl set +2%
 
+super + F11
+	~/bin/keyboard_backlight.sh
+
 super + F3
 	amixer -D pulse sset Master 2%+
 
