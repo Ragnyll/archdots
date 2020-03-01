@@ -28,6 +28,8 @@ alias gpgrun='gpg --decrypt $1 | sh'
 alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0'
 alias tor='~/Applications/tor-browser_en-US/Browser/start-tor-browser'
 alias stegosuite='/usr/lib/jvm/java-8-openjdk/bin/java -jar ~/Applications/stegosuite-0.7-linux_amd64.jar'
+alias gifshuffle='~/dev/hacking_tools/gifshuffle/gifshuffle'
+alias decodeHexToTxt='echo $1 | xxd -r -p'
 alias pbcopy='xclip -selection clipboard'
 
 # colorize less
