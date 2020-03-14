@@ -6,8 +6,9 @@ compton &
 sxhkd &
 dunst &
 
-EXTERNAL_DISPLAY_NAME="DP-1"
 LAPTOP_DISPLAY_NAME="eDP-1"
+CENTER_DISPLAY="DP-1"
+RIGHT_DISPLAY="HDMI-0"
 
 # the external display only works when the nvidia graphics card is turned on.
 # when nvidia graphics is on the LAPTOP_DISPLAY NAME changes
@@ -18,13 +19,22 @@ elif [ $(optimus-manager --status | grep 'Current GPU mode : intel' | wc -l )  -
 	sudo powertop --auto-tune
 fi
 
-# Check if a monitor is conncted through DP1 (the adapter hdmi port)
+# laptop display left - horizantal monitor center
 if [ $(xrandr -q | grep " connected" | wc -l) -eq "2" ]; then
 	# assume that if two displays are connected then the external is connected through DP1 and is to the right
-	xrandr --output $EXTERNAL_DISPLAY_NAME --auto --right-of $LAPTOP_DISPLAY_NAME
+	xrandr --output $CENTER_DISPLAY --auto --right-of $LAPTOP_DISPLAY_NAME
 
-	bspc monitor $EXTERNAL_DISPLAY_NAME -d $EXTERNAL_DISPLAY_NAME/1 $EXTERNAL_DISPLAY_NAME/2 $EXTERNAL_DISPLAY_NAME/3 $EXTERNAL_DISPLAY_NAME/4 $EXTERNAL_DISPLAY_NAME/5
-	bspc monitor $LAPTOP_DISPLAY_NAME -d $LAPTOP_DISPLAY_NAME/6 $LAPTOP_DISPLAY_NAME/7 $LAPTOP_DISPLAY_NAME/8 $LAPTOP_DISPLAY_NAME/9 $EXTERNAL_DISPLAY_NAME/10
+	bspc monitor $CENTER_DISPLAY -d $CENTER_DISPLAY/1 $CENTER_DISPLAY/2 $CENTER_DISPLAY/3 $CENTER_DISPLAY/4 $CENTER_DISPLAY/5
+	bspc monitor $LAPTOP_DISPLAY_NAME -d $LAPTOP_DISPLAY_NAME/6 $LAPTOP_DISPLAY_NAME/7 $LAPTOP_DISPLAY_NAME/8 $LAPTOP_DISPLAY_NAME/9 $CENTER_DISPLAY/10
+# laptop display left - horizantal monitor center - vertial monitor right
+elif [ $(xrandr -q | grep " connected" | wc -l) -eq "3" ]; then
+	xrandr --output $CENTER_DISPLAY --auto --right-of $LAPTOP_DISPLAY_NAME
+	xrandr --output $RIGHT_DISPLAY --auto --right-of $CENTER_DISPLAY --rotate right
+
+	bspc monitor $CENTER_DISPLAY -d $CENTER_DISPLAY/1 $CENTER_DISPLAY/2 $CENTER_DISPLAY/3 $CENTER_DISPLAY/4
+	bspc monitor $LAPTOP_DISPLAY_NAME -d $LAPTOP_DISPLAY_NAME/5 $LAPTOP_DISPLAY_NAME/6 $LAPTOP_DISPLAY_NAME/7 $LAPTOP_DISPLAY_NAME/8
+	bspc monitor $RIGHT_DISPLAY -d $RIGHT_DISPLAY/9 $RIGHT_DISPLAY/10
+# default to a single display
 else
 	bspc monitor $LAPTOP_DISPLAY_NAME -d $LAPTOP_DISPLAY_NAME/1 $LAPTOP_DISPLAY_NAME/2 $LAPTOP_DISPLAY_NAME/3 $LAPTOP_DISPLAY_NAME/4 $LAPTOP_DISPLAY_NAME/5
 fi
