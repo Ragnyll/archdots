@@ -8,6 +8,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # neofetch
+neofetch
 
 export EDITOR=nvim
 alias vim='nvim -O'
