@@ -1,6 +1,6 @@
 #!/bin/bash
 
-feh --bg-scale ~/Pictures/wallpapers/anime/hacker_girl.jpg
+feh --bg-scale ~/Pictures/wallpapers/anime/nezuko.jpg
 
 compton &
 sxhkd &

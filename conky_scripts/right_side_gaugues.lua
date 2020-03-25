@@ -1,25 +1,49 @@
 require 'cairo'
 
-colors = {
-	dark_grey = {
-		r = 35.9,
-		g = 34.9,
-		b = 36.9,
-		a = .1
-	},
-	light_grey = {
-		r = 52.9,
-		g = 51.3,
-		b = 54.6,
-		a = .6
-	},
-	lighter_grey = { -- less transparency
-		r = 52.9,
-		g = 51.3,
-		b = 54.6,
-		a = .5
+
+if  theme == "dark" then
+	colors = {
+		dark_grey = {
+			r = 35.9,
+			g = 34.9,
+			b = 36.9,
+			a = .1
+		},
+		light_grey = {
+			r = 52.9,
+			g = 51.3,
+			b = 54.6,
+			a = .6
+		},
+		lighter_grey = { -- less transparency
+			r = 52.9,
+			g = 51.3,
+			b = 54.6,
+			a = .5
+		}
 	}
-}
+else
+	colors = {
+		dark_grey = {
+			r = 35.9,
+			g = 34.9,
+			b = 36.9,
+			a = .4
+		},
+		light_grey = {
+			r = 1,
+			g = 1,
+			b = 1,
+			a = 1
+		},
+		lighter_grey = { -- less transparency
+			r = 52.9,
+			g = 51.3,
+			b = 54.6,
+			a = .5
+		}
+	}
+end
 
 value_font = "Fira Code"
 default_font = "Consolas"
