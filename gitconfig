@@ -3,3 +3,5 @@
 	name = ragnyll
 [diff]
 	tool = vimdiff
+[core]
+	excludesfile = /home/ragnyll/.gitignore_global

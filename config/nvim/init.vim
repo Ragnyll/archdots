@@ -1,7 +1,8 @@
 call plug#begin('~/.vim/plugged')
 
 " language support
-Plug 'davidhalter/jedi-vim'
+" Plug 'davidhalter/jedi-vim' im seeing how deoplete compares
+Plug 'Shougo/deoplete.nvim'
 Plug 'heavenshell/vim-pydocstring'
 Plug 'wsdjeg/vim-lua'
 Plug 'tmux-plugins/vim-tmux'
@@ -20,15 +21,14 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 Plug 'francoiscabrol/ranger.vim'
-Plug 'rbgrouleff/bclose.vim'
-" tags
-Plug 'majutsushi/tagbar'
-Plug 'craigemery/vim-autotag'
-Plug 'ervandew/supertab'
+Plug 'rbgrouleff/bclose.vim' " bclose is a dependency of ranger.vim
 " konvenient keybinds
 Plug 'scrooloose/nerdcommenter'
 
 call plug#end()
+
+" Startup commands
+let g:deoplete#enable_at_startup = 1
 
 " Standard remaps
 let mapleader=','
@@ -68,12 +68,29 @@ let g:syntastic_python_flake8_args='--ignore=E501'
 let g:ranger_map_keys = 0
 let g:ranger_replace_netrw = 1
 
-" racer
+" Rust racer
 set hidden
 let g:racer_cmd = "/home/ragnyll/.cargo/bin/racer"
+let g:racer_experimental_completer = 1
+augroup Racer
+    autocmd!
+    autocmd FileType rust nmap <buffer> gd         <Plug>(rust-def-tab)
+    autocmd FileType rust nmap <buffer> <leader>gd <Plug>(rust-doc)
+augroup END
 
-" tagbar
-nnoremap <leader>t :TagbarToggle<cr>
+" ctags
+" basic commands
+" ctrl + ] go to def
+" ctrl + T go back
+" ctrl + W ctrl + ] open in horizantal split
+" leader + ] to open def in new tag
+" leader + \ to open def in new vertial split
+map <leader>] :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+map <leader>\ :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+
+" rusty-ctags
+autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
+autocmd BufWritePost *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" | redraw!
 
 syntax on
 set background=dark
@@ -129,3 +146,6 @@ let g:fzf_action = {
 " Enable persistent undo
 set undofile
 set undodir=~/.vim/undo
+
+" Enable mouse mode
+set mouse=a
