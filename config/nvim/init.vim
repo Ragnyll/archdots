@@ -89,6 +89,7 @@ map <leader>] :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 map <leader>\ :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
 " rusty-ctags
+" to tag everything up for the first time call `rusty-tags vi` in a project root dir
 autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
 autocmd BufWritePost *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" | redraw!
 
