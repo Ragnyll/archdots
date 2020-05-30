@@ -131,6 +131,9 @@ vnoremap L $
 " Operator remaps
 onoremap p i(
 
+" abbreviations
+ab &nbsp4; &nbsp;&nbsp;&nbsp;&nbsp;
+
 " remove all trailing whitespace on file on :w
 autocmd BufWritePre * %s/\s\+$//e
 
@@ -150,3 +153,5 @@ set undodir=~/.vim/undo
 
 " Enable mouse mode
 set mouse=a
+
+set relativenumber
