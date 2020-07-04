@@ -1,20 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 
-if [ $(ps aux | grep nordvpnd | wc -l) -gt 1 ]; then
-	nordvpn d
-	sudo systemctl stop nordvpnd.service
-else
-	sudo systemctl start nordvpnd.service
-	if [ $(echo $1 | grep default | wc -l) -eq 1 ]; then
-		nordvpn c
-	if [ $(echo $1 | grep Chicago | wc -l) -eq 1 ]; then
-		nordvpn c Chicago
-	elif [ $(echo $1 | grep Toronto | wc -l) -eq 1 ]; then
-		nordvpn c Toronto
-	elif [ $(echo $1 | grep London | wc -l) -eq 1 ]; then
-		nordvpn c London
-	elif [ $(echo $1 | grep disconnect | wc -l) -eq 1 ]; then
-		nordpvn d
-		sudo systemctl stop nordvpnd.service
-	fi
-fi
+sudo systemctl start nordvpnd.service
+
+case $1 in
+	"default") nordvpn c;;
+	"Chicago") nordvpn c Chicago;;
+	"Toronto") nordvpn c Toronto;;
+	"London") nordvpn c London;;
+	"quit") nordvpn d && sudo systemctl stop nordvpnd.service;;
+	*) ;;
+esac

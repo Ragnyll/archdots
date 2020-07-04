@@ -8,7 +8,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # neofetch
-neofetch
+optimus-manager --print-mode | grep 'nvidia' > /dev/null && neofetch
 
 export EDITOR=nvim
 alias vim='nvim -O'
@@ -25,7 +25,6 @@ alias gti='git' # i suck at typing
 # other random aliases
 alias sl='ls'
 alias virus_scan='sudo freshclam && sudo clamscan -r --bell -i /'
-alias gpgrun='gpg --decrypt $1 | sh'
 alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0'
 alias tor='~/Applications/tor-browser_en-US/Browser/start-tor-browser'
 alias mutt='neomutt'
