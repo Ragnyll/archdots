@@ -1,7 +1,7 @@
 #!/bin/bash
 
 sudo systemctl start nordvpnd.service
-
+sleep 4
 case $1 in
 	"default") nordvpn c;;
 	"Chicago") nordvpn c Chicago;;

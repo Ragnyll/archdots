@@ -1,6 +1,6 @@
 #!/bin/bash
 
-feh --bg-scale ~/Pictures/wallpapers/anime/lou2wallpaper1.jpg
+feh --bg-scale ~/Pictures/wallpapers/anime/arch-linux-hd.png
 
 compton &
 sxhkd &
