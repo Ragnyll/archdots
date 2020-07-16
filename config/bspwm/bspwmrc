@@ -8,7 +8,7 @@ dunst &
 
 LAPTOP_DISPLAY_NAME="eDP-1"
 CENTER_DISPLAY="DP-1"
-RIGHT_DISPLAY="HDMI-0"
+RIGHT_DISPLAY="DP-0"
 
 # the external display only works when the nvidia graphics card is turned on.
 # when nvidia graphics is on the LAPTOP_DISPLAY NAME changes

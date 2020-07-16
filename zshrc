@@ -7,7 +7,6 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# neofetch
 optimus-manager --print-mode | grep 'nvidia' > /dev/null && neofetch
 
 export EDITOR=nvim
