@@ -102,6 +102,7 @@ set autoindent
 set complete-=i
 set backspace=indent,eol,start
 set smarttab
+set expandtab
 set tabstop=4
 set shiftwidth=4
 set encoding=utf-8
@@ -131,8 +132,8 @@ vnoremap L $
 " Operator remaps
 onoremap p i(
 
-" abbreviations
-ab &nbsp4; &nbsp;&nbsp;&nbsp;&nbsp;
+" markdown utility
+autocmd FileType markdown nnoremap <leader><tab> i&nbsp;&nbsp;&nbsp;&nbsp;<Esc>
 
 " remove all trailing whitespace on file on :w
 autocmd BufWritePre * %s/\s\+$//e
