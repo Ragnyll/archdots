@@ -14,6 +14,7 @@ Plug 'gabrielelana/vim-markdown'
 Plug 'scrooloose/syntastic'
 Plug 'vim-airline/vim-airline'
 Plug 'Ragnyll/vim-colorschemes'
+Plug 'dylanaraps/wal.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'kovetskiy/sxhkd-vim'
 " file searching / exploring
@@ -95,7 +96,8 @@ autocmd BufWritePost *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . 
 
 syntax on
 set background=dark
-colorscheme monokai-phoenix
+" colorscheme monokai-phoenix
+colorscheme wal
 hi Normal ctermbg=none
 filetype plugin indent on
 set autoindent
@@ -106,7 +108,7 @@ set expandtab
 set tabstop=4
 set shiftwidth=4
 set encoding=utf-8
-set number
+set relativenumber
 set clipboard=unnamed
 
 " searching
@@ -154,5 +156,3 @@ set undodir=~/.vim/undo
 
 " Enable mouse mode
 set mouse=a
-
-set relativenumber

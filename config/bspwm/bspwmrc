@@ -1,6 +1,6 @@
 #!/bin/bash
 
-feh --bg-scale ~/Pictures/wallpapers/anime/arch-linux-hd.png
+~/bin/wal_setter.sh $(head -n 1 ~/.config/wallpaper)
 
 compton &
 sxhkd &

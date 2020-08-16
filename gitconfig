@@ -5,3 +5,5 @@
 	tool = vimdiff
 [core]
 	excludesfile = /home/ragnyll/.gitignore_global
+[merge]
+	tool = vimdiff

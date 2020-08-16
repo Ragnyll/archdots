@@ -21,14 +21,6 @@ super + shift + @space
 super + shift + p
 	~/bin/passmenu2
 
-# start ranger in a shell
-super + r
-	st -e ranger
-
-# start calcurse in a shell
-super + c
-	st -e calcurse
-
 #
 # bspwm hotkeys
 #
