@@ -133,10 +133,9 @@ ln -sf ~/.dotfiles/zprofile ~/.zprofile
 mkdir -p ~/.config/dunst
 ln -sf ~/.dotfiles/config/dunst/dunstrc ~/.config/dunst/dunstrc
 mkdir -p ~/.config/ranger/
-ln -sf ~/.dotfiles/config/ranger/rc.conf ~/.config/ranger/rc.conf
-ln -sf ~/.dotfiles/config/ranger/rifle.conf ~/.config/ranger/rifle.conf
+ln -sf ~/.dotfiles/config/ranger/ ~/.config/ranger/
 ln -sf ~/.dotfiles/config/conky/conky.conf ~/.config/conky/conky.conf
-ln -s ~/.dotfiles/aliases ~/.aliases
+ln -sf ~/.dotfiles/aliases ~/.aliases
 
 # enable services
 systemctl --user enable headphones_hissing.service

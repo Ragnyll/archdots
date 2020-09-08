@@ -1,7 +1,5 @@
 #!/bin/bash
 
-~/bin/wal_setter.sh $(head -n 1 ~/.config/wallpaper)
-
 compton &
 sxhkd &
 dunst &
@@ -49,3 +47,5 @@ bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 bspc config click_to_focus       true
+
+~/bin/wal_setter.sh $(head -n 1 ~/.config/wallpaper)
