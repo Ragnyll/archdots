@@ -157,6 +157,11 @@ python get-pip.py --user
 rm get-pip.py
 sudo pip install pipenv
 
+# install system pip requirements
+# filetype is required for mpg123 utils in ranger
+pip3 install filetype
+pip install filetype
+
 curl -L get.rvm.io > rvm-install
 bash < ./rvm-install
 # post insall manual steps

@@ -152,6 +152,18 @@ super + F1
 	amixer -q -D pulse sset Master toggle
 
 #
+# Music
+#
+super + alt + p
+	mocp --toggle-pause
+
+super + alt + o
+	mocp --next
+
+super + alt + Left
+	mocp --previous
+
+#
 # Screenshots
 #
 # capture full screen on all displays

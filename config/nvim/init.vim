@@ -96,7 +96,6 @@ autocmd BufWritePost *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . 
 
 syntax on
 set background=dark
-" colorscheme monokai-phoenix
 colorscheme wal
 hi Normal ctermbg=none
 filetype plugin indent on
