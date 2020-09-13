@@ -3,28 +3,28 @@
 
 # num displays includes laptop display
 NUM_DISPLAYS="$(xrandr -q | grep " connected" | wc -l)"
-LAPTOP_DISPLAY_NAME="eDP-1"
+LAPTOP_DISPLAY="eDP-1"
 CENTER_DISPLAY="DP-1"
 RIGHT_DISPLAY="DP-0"
 
 function one_display() {
-	bspc monitor $LAPTOP_DISPLAY_NAME -d $LAPTOP_DISPLAY_NAME/1 $LAPTOP_DISPLAY_NAME/2 $LAPTOP_DISPLAY_NAME/3 $LAPTOP_DISPLAY_NAME/4 $LAPTOP_DISPLAY_NAME/5
+	bspc monitor $LAPTOP_DISPLAY -d $LAPTOP_DISPLAY/1 $LAPTOP_DISPLAY/2 $LAPTOP_DISPLAY/3 $LAPTOP_DISPLAY/4 $LAPTOP_DISPLAY/5
 }
 
 function two_displays() {
 	# assume that if two displays are connected then the external is connected through DP1 and is to the right
-	xrandr --output $CENTER_DISPLAY --auto --right-of $LAPTOP_DISPLAY_NAME
+	xrandr --output $CENTER_DISPLAY --auto --right-of $LAPTOP_DISPLAY
 
 	bspc monitor $CENTER_DISPLAY -d $CENTER_DISPLAY/1 $CENTER_DISPLAY/2 $CENTER_DISPLAY/3 $CENTER_DISPLAY/4 $CENTER_DISPLAY/5
-	bspc monitor $LAPTOP_DISPLAY_NAME -d $LAPTOP_DISPLAY_NAME/6 $LAPTOP_DISPLAY_NAME/7 $LAPTOP_DISPLAY_NAME/8 $LAPTOP_DISPLAY_NAME/9 $CENTER_DISPLAY/10
+	bspc monitor $LAPTOP_DISPLAY -d $LAPTOP_DISPLAY/6 $LAPTOP_DISPLAY/7 $LAPTOP_DISPLAY/8 $LAPTOP_DISPLAY/9 $CENTER_DISPLAY/10
 }
 
 function three_displays() {
-	xrandr --output $CENTER_DISPLAY --auto --right-of $LAPTOP_DISPLAY_NAME
+	xrandr --output $CENTER_DISPLAY --auto --right-of $LAPTOP_DISPLAY
 	xrandr --output $RIGHT_DISPLAY --auto --right-of $CENTER_DISPLAY --rotate right
 
 	bspc monitor $CENTER_DISPLAY -d $CENTER_DISPLAY/1 $CENTER_DISPLAY/2 $CENTER_DISPLAY/3 $CENTER_DISPLAY/4
-	bspc monitor $LAPTOP_DISPLAY_NAME -d $LAPTOP_DISPLAY_NAME/5 $LAPTOP_DISPLAY_NAME/6 $LAPTOP_DISPLAY_NAME/7 $LAPTOP_DISPLAY_NAME/8
+	bspc monitor $LAPTOP_DISPLAY -d $LAPTOP_DISPLAY/5 $LAPTOP_DISPLAY/6 $LAPTOP_DISPLAY/7 $LAPTOP_DISPLAY/8
 	bspc monitor $RIGHT_DISPLAY -d $RIGHT_DISPLAY/9 $RIGHT_DISPLAY/10
 }
 
@@ -32,7 +32,7 @@ function three_displays() {
 # when nvidia graphics is on the LAPTOP_DISPLAY NAME changes
 # if the intel card is in use then i should be saving battery. start powertop
 [ $(optimus-manager --status | grep 'Current GPU mode : nvidia' | wc -l )  -eq '1' ] \
-    && LAPTOP_DISPLAY_NAME="eDP-1-1" \
+    && LAPTOP_DISPLAY="eDP-1-1" \
     || sudo powertop --auto-tune
 
 case $NUM_DISPLAYS in
