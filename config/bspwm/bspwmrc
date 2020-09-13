@@ -1,51 +1,65 @@
 #!/bin/bash
 
-compton &
-sxhkd &
-dunst &
 
+# num displays includes laptop display
+NUM_DISPLAYS="$(xrandr -q | grep " connected" | wc -l)"
 LAPTOP_DISPLAY_NAME="eDP-1"
 CENTER_DISPLAY="DP-1"
 RIGHT_DISPLAY="DP-0"
 
-# the external display only works when the nvidia graphics card is turned on.
-# when nvidia graphics is on the LAPTOP_DISPLAY NAME changes
-if [ $(optimus-manager --status | grep 'Current GPU mode : nvidia' | wc -l )  -eq '1' ]; then
-	LAPTOP_DISPLAY_NAME="eDP-1-1"
-elif [ $(optimus-manager --status | grep 'Current GPU mode : intel' | wc -l )  -eq '1' ]; then
-	# if the intel card is in use then i should be saving battery. start powertop
-	sudo powertop --auto-tune
-fi
+function one_display() {
+	bspc monitor $LAPTOP_DISPLAY_NAME -d $LAPTOP_DISPLAY_NAME/1 $LAPTOP_DISPLAY_NAME/2 $LAPTOP_DISPLAY_NAME/3 $LAPTOP_DISPLAY_NAME/4 $LAPTOP_DISPLAY_NAME/5
+}
 
-# laptop display left - horizantal monitor center
-if [ $(xrandr -q | grep " connected" | wc -l) -eq "2" ]; then
+function two_displays() {
 	# assume that if two displays are connected then the external is connected through DP1 and is to the right
 	xrandr --output $CENTER_DISPLAY --auto --right-of $LAPTOP_DISPLAY_NAME
 
 	bspc monitor $CENTER_DISPLAY -d $CENTER_DISPLAY/1 $CENTER_DISPLAY/2 $CENTER_DISPLAY/3 $CENTER_DISPLAY/4 $CENTER_DISPLAY/5
 	bspc monitor $LAPTOP_DISPLAY_NAME -d $LAPTOP_DISPLAY_NAME/6 $LAPTOP_DISPLAY_NAME/7 $LAPTOP_DISPLAY_NAME/8 $LAPTOP_DISPLAY_NAME/9 $CENTER_DISPLAY/10
-# laptop display left - horizantal monitor center - vertial monitor right
-elif [ $(xrandr -q | grep " connected" | wc -l) -eq "3" ]; then
+}
+
+function three_displays() {
 	xrandr --output $CENTER_DISPLAY --auto --right-of $LAPTOP_DISPLAY_NAME
 	xrandr --output $RIGHT_DISPLAY --auto --right-of $CENTER_DISPLAY --rotate right
 
 	bspc monitor $CENTER_DISPLAY -d $CENTER_DISPLAY/1 $CENTER_DISPLAY/2 $CENTER_DISPLAY/3 $CENTER_DISPLAY/4
 	bspc monitor $LAPTOP_DISPLAY_NAME -d $LAPTOP_DISPLAY_NAME/5 $LAPTOP_DISPLAY_NAME/6 $LAPTOP_DISPLAY_NAME/7 $LAPTOP_DISPLAY_NAME/8
 	bspc monitor $RIGHT_DISPLAY -d $RIGHT_DISPLAY/9 $RIGHT_DISPLAY/10
-# default to a single display
-else
-	bspc monitor $LAPTOP_DISPLAY_NAME -d $LAPTOP_DISPLAY_NAME/1 $LAPTOP_DISPLAY_NAME/2 $LAPTOP_DISPLAY_NAME/3 $LAPTOP_DISPLAY_NAME/4 $LAPTOP_DISPLAY_NAME/5
-fi
+}
 
+# the external display only works when the nvidia graphics card is turned on.
+# when nvidia graphics is on the LAPTOP_DISPLAY NAME changes
+# if the intel card is in use then i should be saving battery. start powertop
+[ $(optimus-manager --status | grep 'Current GPU mode : nvidia' | wc -l )  -eq '1' ] \
+    && LAPTOP_DISPLAY_NAME="eDP-1-1" \
+    || sudo powertop --auto-tune
+
+case $NUM_DISPLAYS in
+# laptop display left - horizantal monitor center
+    "2")
+        two_displays
+        ;;
+# laptop display left - horizantal monitor center - vertial monitor right
+    "3")
+        three_displays
+        ;;
+    *)
+        # if the NUM_DISPLAYS is undetermined default to 1
+        one_display
+        ;;
+esac
+
+sxhkd &
+~/bin/wal_setter.sh $(head -n 1 ~/.config/wallpaper)
+dunst &
+compton &
 ~/.config/polybar/launch.sh &
 conky -d
 
 bspc config border_width         2
 bspc config window_gap          12
-
 bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 bspc config click_to_focus       true
-
-~/bin/wal_setter.sh $(head -n 1 ~/.config/wallpaper)
