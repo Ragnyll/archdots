@@ -87,6 +87,8 @@ yay -S polybar \
 	lightdm-mini-greeter \
 	netdiscover \
 	ranger-git \
+    pandoc \
+    lynx \
 	i3lock-fancy
 
 # Install fzf manually to get zsh keybinds (Manual intervention)

@@ -59,6 +59,7 @@ function conky_main()
                                          conky_window.height)
     cr = cairo_create(cs)
 
+    active_sound(cr)
 	battery_and_brightness(cr)
 	cpu_and_memory(cr)
 	filesystem_gaugues(cr)
@@ -67,6 +68,85 @@ function conky_main()
     cairo_destroy(cr)
     cairo_surface_destroy(cs)
     cr = nil
+end
+
+function active_sound(cr)
+    -- this is meant to be animated with glava. This will eventually need to be seperated out into its own file
+	-- these are coenctric rings, so the centroid must be the same between all of them.
+	epicenter = {
+		x = 250,
+		y = 230
+	}
+	audio_gauge(cr, epicenter)
+
+	-- write the small text beneath the the horizantal rule
+	font_slant = CAIRO_FONT_SLANT_NORMAL
+	font_face = CAIRO_FONT_WEIGHT_NORMAL
+	cairo_select_font_face(cr, default_font, font_slant, font_face)
+	cairo_set_font_size(cr, 12)
+	cairo_set_source_rgba(cr, colors.dark_grey.r, colors.dark_grey.g, colors.dark_grey.b, colors.dark_grey.a)
+
+	text = conky_parse("${uptime_short}") .. " UpTime"
+	cairo_move_to(cr, 425, 373)
+	cairo_show_text(cr, text)
+	cairo_stroke(cr, text)
+
+
+	brightness_val = math.floor((conky_parse("${cat /sys/class/backlight/intel_backlight/brightness}") / conky_parse("${cat /sys/class/backlight/intel_backlight/max_brightness}")) * 100)
+	text = brightness_val .. "% Bright"
+	cairo_move_to(cr, 425, 386)
+	cairo_show_text(cr, text)
+	cairo_stroke(cr)
+end
+
+function audio_gauge(cr, epicenter)
+	gaugue_props = {
+		gaugue_name = "bat0",
+		gaugue_value = conky_parse("${battery_percent BAT0}"),
+		gaugue_max = 100,
+		orientation = "right",
+		colors = {
+			free_color = colors.dark_grey,
+			used_color = colors.light_grey,
+			rule_color = colors.lighter_grey
+		},
+		meter = {
+			x = epicenter.x, -- the center x offset relative to conf top left
+			y = epicenter.y, -- the center y offset relative to conf top left
+			r = 55,  -- the radius of the guage
+			w = 4    -- the width of the stroke
+		},
+		rule = {
+			w = 3,
+			l = 440
+		},
+		annotation = {
+			gaugue_name = "BAT0",
+			unit = "%",
+			value_font = value_font,
+			default_font = default_font,
+			font_size_large = 24,
+			font_size_small = 12,
+			value_loc = {
+				x = 425,
+				y = 353,
+			},
+			desc_loc = {
+				x = 488,
+				y = 353,
+			},
+			text_loc = {
+				hr_len = 255,
+				x = 425,
+				y = 356,
+			},
+			accent_color = colors.lighter_grey,
+			muted_color = colors.lighter_grey
+		}
+	}
+
+	write_annotation(cr, gaugue_props)
+	ring_gaugue(cr, gaugue_props)
 end
 
 function battery_and_brightness(cr)

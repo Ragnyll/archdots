@@ -1,11 +1,11 @@
 /* center radius (pixels) */
-#define C_RADIUS 128
+#define C_RADIUS 55
 /* center line thickness (pixels) */
 #define C_LINE 1.5
 /* outline color */
-#define OUTLINE #333333
+#define OUTLINE #ffffff
 /* Amplify magnitude of the results each bar displays */
-#define AMPLIFY 150
+#define AMPLIFY 90
 /* Angle (in radians) for how much to rotate the visualizer */
 #define ROTATE (PI / 2)
 /* Whether to switch left/right audio buffers */

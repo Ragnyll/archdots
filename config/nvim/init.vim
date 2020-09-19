@@ -10,6 +10,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
 " markdown
 Plug 'gabrielelana/vim-markdown'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 " make it pretty
 Plug 'scrooloose/syntastic'
 Plug 'vim-airline/vim-airline'
@@ -68,6 +69,7 @@ let g:syntastic_python_flake8_args='--ignore=E501'
 " ranger
 let g:ranger_map_keys = 0
 let g:ranger_replace_netrw = 1
+
 
 " Rust racer
 set hidden
@@ -134,6 +136,8 @@ vnoremap L $
 onoremap p i(
 
 " markdown utility
+let g:mkdp_auto_close = 0
+nnoremap <leader>m :MarkdownPreview<cr>
 autocmd FileType markdown nnoremap <leader><tab> i&nbsp;&nbsp;&nbsp;&nbsp;<Esc>
 
 " remove all trailing whitespace on file on :w
