@@ -25,7 +25,7 @@
 
 #request setframerate 0
 
-#request setfullscreencheck false
+#request setfullscreencheck true
 
 #request setprintframes true
 
