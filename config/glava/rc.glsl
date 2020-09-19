@@ -29,11 +29,11 @@
 
 #request setprintframes true
 
-#request setsamplesize 1024
+#request setsamplesize 512
 
-#request setbufsize 4096
+#request setbufsize 1024
 
-#request setsamplerate 22050
+#request setsamplerate 11025
 
 /* OpenGL context and GLSL shader versions, do not change unless
    you *absolutely* know what you are doing. */
