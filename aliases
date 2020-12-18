@@ -1,3 +1,4 @@
+alias pacman='sudo pacman'
 alias vim='nvim -O'
 alias vranger='nvim .'
 alias conflicts='git diff --name-only --diff-filter=U'
@@ -13,3 +14,8 @@ alias decodeHexToTxt='echo $1 | xxd -r -p'
 alias pbcopy='xclip -selection clipboard'
 alias dvwa='sudo docker run --rm -it -p 80:80 vulnerables/web-dvwa'
 alias scim='sc-im'
+alias g++='g++ -std=c++20'
+alias mkdir='mkdir -p'
+
+# I cant find this stupid fucking alias. Its somewhere in a zsh conf
+unalias rm

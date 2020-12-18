@@ -7,6 +7,60 @@ import os
 from ranger.api.commands import Command
 
 
+class bookmark_bg(Command):
+    """:bookmark_bg
+
+    Adds a symlink from the target to the dir ~/Pictures/wallpapers/bookmarked/
+
+    usage: bookmark_bg
+    """
+    def execute(self):
+        from os import symlink
+        from os import path
+
+        user_home = path.expanduser('~')
+        bookmark_dir = path.join(user_home, 'Pictures/wallpapers/bookmarked/')
+        filenames = [f.path for f in self.fm.thistab.get_selection()]
+        if not len(filenames):
+            self.fm.notify("Please select file[s] to bookmark")
+            return
+
+        for f in filenames:
+            self.fm.notify('symlinking {} to {}'.format(f, path.join(bookmark_dir, path.basename(f))))
+            symlink(f, path.join(bookmark_dir, path.basename(f)))
+
+
+class fzf_select(Command):
+    """
+    :fzf_select
+
+    Find a file using fzf.
+
+    With a prefix argument select only directories.
+
+    See: https://github.com/junegunn/fzf
+    """
+    def execute(self):
+        import subprocess
+        import os.path
+        if self.quantifier:
+            # match only directories
+            command = "find -L . \( -path '*/\.*' -o -fstype 'dev' -o -fstype 'proc' \) -prune \
+            -o -type d -print 2> /dev/null | sed 1d | cut -b3- | fzf +m"
+        else:
+            # match files and directories
+            command = "find -L . \( -path '*/\.*' -o -fstype 'dev' -o -fstype 'proc' \) -prune \
+            -o -print 2> /dev/null | sed 1d | cut -b3- | fzf +m"
+        fzf = self.fm.execute_command(command, universal_newlines=True, stdout=subprocess.PIPE)
+        stdout, stderr = fzf.communicate()
+        if fzf.returncode == 0:
+            fzf_file = os.path.abspath(stdout.rstrip('\n'))
+            if os.path.isdir(fzf_file):
+                self.fm.cd(fzf_file)
+            else:
+                self.fm.select_file(fzf_file)
+
+
 class mocp_playlist_add(Command):
     """:mocp_playlist_add
 
@@ -52,5 +106,5 @@ class mocp_playlist_add(Command):
 
         NOTE: requires https://github.com/h2non/filetype.py be installed at the system level
         """
-        import filetype
+        #  import filetype
         pass

@@ -56,7 +56,6 @@ dunst &
 compton &
 ~/.config/polybar/launch.sh &
 conky -d
-
 bspc config border_width         2
 bspc config window_gap          12
 bspc config split_ratio          0.52

@@ -1,13 +1,13 @@
 call plug#begin('~/.vim/plugged')
 
 " language support
-" Plug 'davidhalter/jedi-vim' im seeing how deoplete compares
-Plug 'Shougo/deoplete.nvim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'heavenshell/vim-pydocstring'
 Plug 'wsdjeg/vim-lua'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
+Plug 'rhysd/vim-clang-format'
 " markdown
 Plug 'gabrielelana/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
@@ -27,10 +27,10 @@ Plug 'rbgrouleff/bclose.vim' " bclose is a dependency of ranger.vim
 " konvenient keybinds
 Plug 'scrooloose/nerdcommenter'
 
+Plug 'glacambre/firenvim',  { 'do': { _ -> firenvim#install(0) } }
+
 call plug#end()
 
-" Startup commands
-let g:deoplete#enable_at_startup = 1
 
 " Standard remaps
 let mapleader=','
@@ -110,6 +110,7 @@ set tabstop=4
 set shiftwidth=4
 set encoding=utf-8
 set relativenumber
+set number
 set clipboard=unnamed
 
 " searching
