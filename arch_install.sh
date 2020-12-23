@@ -53,6 +53,7 @@ sudo pacman -Syu \
 	fuse-exfat \
 	exfat-utils \
 	texlive-bin \
+    newsboat \
 	w3m
 
 # install my fork of st
@@ -138,6 +139,7 @@ mkdir -p ~/.config/ranger/
 ln -sf ~/.dotfiles/config/ranger/ ~/.config/ranger/
 ln -sf ~/.dotfiles/config/conky/conky.conf ~/.config/conky/conky.conf
 ln -sf ~/.dotfiles/aliases ~/.aliases
+ln -sf ~/.dotfiles/config/newsboat/ ~/.config/newsboat/
 
 # enable services
 systemctl --user enable headphones_hissing.service
