@@ -54,6 +54,7 @@ sudo pacman -Syu \
 	exfat-utils \
 	texlive-bin \
     newsboat \
+    ffmpegthumbnailer \
 	w3m
 
 # install my fork of st
@@ -137,6 +138,7 @@ mkdir -p ~/.config/dunst
 ln -sf ~/.dotfiles/config/dunst/dunstrc ~/.config/dunst/dunstrc
 mkdir -p ~/.config/ranger/
 ln -sf ~/.dotfiles/config/ranger/ ~/.config/ranger/
+ln -sf ~/.dotfiles/config/ranger/scope.sh ~/.config/ranger/scope.sh
 ln -sf ~/.dotfiles/config/conky/conky.conf ~/.config/conky/conky.conf
 ln -sf ~/.dotfiles/aliases ~/.aliases
 ln -sf ~/.dotfiles/config/newsboat/ ~/.config/newsboat/
