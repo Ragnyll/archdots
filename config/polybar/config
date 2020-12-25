@@ -35,6 +35,7 @@ font-2 = siji:pixelsize=10;1
 font-3 = FontAwesome 5 Free:size=11:style=Solid;2
 
 modules-left = bspwm
+modules-center = xwindow
 modules-right = vpn network pulseaudio battery date
 
 tray-position = right
@@ -46,6 +47,13 @@ cursor-scroll = ns-resize
 [global/wm]
 margin-top = 5
 margin-bottom = 5
+
+[module/xwindow]
+type = internal/xwindow
+format = <label>
+format-padding = 4
+label = %title%
+label-maxlen = 50
 
 [module/bspwm]
 type = internal/bspwm

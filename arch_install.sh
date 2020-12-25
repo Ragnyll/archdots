@@ -106,6 +106,9 @@ for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
 done
 ln -sf ~/.dotfiles/zpreztorc ~/.zpreztorc
 ln -sf ~/.dotfiles/zshrc ~/.zshrc
+mkdir ~/dev
+git clone https://github.com/urbainvaes/fzf-marks.git ~/dev/fzf-marks
+
 
 # symlink nessecary confs
 # DESTRUCTIVE

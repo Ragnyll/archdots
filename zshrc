@@ -20,7 +20,6 @@ set -o vi
 # git configurations
 export LESS="-R" # fixes colouring on git graph
 
-
 # colorize less
 export LESS='-R'
 
