@@ -1,5 +1,0 @@
-select vpn,~/bin/nordvpn_select.sh,default,Chicago,Toronto,London,diconnect
-select display setup,~/bin/display_control.sh,extend,mirror,laptop,external
-toggle conky,~/bin/conky_toggle.sh,
-change graphics,~/bin/change_graphics.sh,intel,nvidia
-stegosuite,/usr/lib/jvm/java-8-openjdk/bin/java -jar ~/stegosuite-0.7-linux_amd64.jar
