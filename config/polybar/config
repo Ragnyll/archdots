@@ -35,7 +35,7 @@ font-2 = siji:pixelsize=10;1
 font-3 = FontAwesome 5 Free:size=11:style=Solid;2
 
 modules-left = bspwm
-modules-right = network pulseaudio battery date
+modules-right = vpn network pulseaudio battery date
 
 tray-position = right
 tray-padding = 2
@@ -94,6 +94,13 @@ bar-volume-fill-font = 2
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
 
+[module/vpn]
+type = custom/script
+exec = ~/bin/dmenu-nordvpn -s 
+interval = 10
+click-left = ~/bin/dmenu-nordvpn
+
+
 [module/network]
 type = internal/network
 interface = wlp82s0
@@ -135,6 +142,7 @@ ramp-capacity-foreground = ${colors.foreground}
 type = internal/date
 interval = 5
 
+date = %m-%d
 date-alt = " %Y-%m-%d"
 
 time = %H:%M
@@ -143,6 +151,6 @@ time-alt = %H:%M:%S
 format-prefix = 
 format-prefix-foreground = ${colors.foreground}
 
-label = %date% %time%
+label = %time% %date%
 
 ; vim:ft=dosini
