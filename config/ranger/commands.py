@@ -7,6 +7,30 @@ import os
 from ranger.api.commands import Command
 
 
+class add_tag(Command):
+    """:add_tag
+
+    Appends a tag to the exif metadata 'user.tags' attribute
+    """
+    def execute(self):
+        from os import getxattr, setxattr
+
+        if not self.arg(1):
+            self.fm.notify("Provide the tag to add to the selected files.")
+            return
+        filenames = [f.path for f in self.fm.thistab.get_selection()]
+
+        for f in filenames:
+            # get the existing xattributes as a list of strings
+            xattrs = getxattr(f, 'user.tags').decode('utf-8').split(',')
+            # add the new tag to the list and cast it to a set
+            xattrs.append(str(self.arg(1)))
+            # cast the list to a comma seperated string and cast to bytes and overwrite tags
+            setxattr(f, 'user.tags', bytes(','.join(set(xattrs)), 'utf-8'))
+
+        self.fm.notify('{} user.tags added to file[s]'.format(self.arg(1)))
+
+
 class bookmark_bg(Command):
     """:bookmark_bg
 
