@@ -3,55 +3,116 @@
 from __future__ import (absolute_import, division, print_function)
 
 import os
+from os import getxattr, setxattr, listxattr, removexattr
 
 from ranger.api.commands import Command
+
+
+def append_xattr_to_file(fname, xattr_val, xattr_key='user.tags'):
+    """:append_xattr_to_file
+    Appends an arbritary exif metadata tag to the specified attribute
+
+    :fname (str): the file to append the exif metadata to
+    :xattr_val (str): the value to append to the xattr_key
+    :xattr_key (str): the
+    """
+    if xattr_key in listxattr(fname):
+        xattrs = getxattr(fname, xattr_key).decode('utf-8').split(',')
+        xattrs.append(xattr_val)
+        setxattr(fname, xattr_key, bytes(','.join(set(xattrs)), 'utf-8'))
+        return
+
+    setxattr(fname, xattr_key, bytes(xattr_val, 'utf-8'))
+
+
+def remove_xattr_from_file(fname, xattr):
+    """:remove_file
+    removes arbritary exif metadata xattr
+
+    :fname (str): the file to append the exif metadata to
+    :xattr_key (str): the xattr to remove
+    """
+    if xattr in listxattr(fname):
+        removexattr(fname, xattr)
+
+
+def remove_xattr_value_from_file(fname, xattr_val, xattr_key='user.tags'):
+    """:append_tag_to_file
+    Appends an arbritary exif metadata xattr to the specified attribute
+
+    :fname (str): the file to append the exif metadata to
+    :xattr_val (str): the value to append to the xattr_key
+    :xattr_key (str): the
+    """
+    if xattr_key in listxattr(fname):
+        xattrs = getxattr(fname, xattr_key).decode('utf-8').split(',')
+        try:
+            xattrs.remove(xattr_val)
+        except ValueError:
+            # if the tag doesnt exist just move on with it
+            pass
+
+        setxattr(fname, xattr_key, bytes(','.join(set(xattrs)), 'utf-8'))
+
+        if not getxattr(fname, xattr_key).decode('utf-8'):
+            try:
+                removexattr(fname, xattr_key)
+            except OSError:
+                pass
+
+        return
 
 
 class add_tag(Command):
     """:add_tag
 
-    Appends a tag to the exif metadata 'user.tags' attribute
+    Appends an arbitrary tag to the exif metadata 'user.tags' attribute
     """
     def execute(self):
-        from os import getxattr, setxattr
-
         if not self.arg(1):
             self.fm.notify("Provide the tag to add to the selected files.")
             return
         filenames = [f.path for f in self.fm.thistab.get_selection()]
 
         for f in filenames:
-            # get the existing xattributes as a list of strings
-            xattrs = getxattr(f, 'user.tags').decode('utf-8').split(',')
-            # add the new tag to the list and cast it to a set
-            xattrs.append(str(self.arg(1)))
-            # cast the list to a comma seperated string and cast to bytes and overwrite tags
-            setxattr(f, 'user.tags', bytes(','.join(set(xattrs)), 'utf-8'))
-
-        self.fm.notify('{} user.tags added to file[s]'.format(self.arg(1)))
+            append_xattr_to_file(f, str(self.arg(1)), 'user.tags')
 
 
-class bookmark_bg(Command):
-    """:bookmark_bg
+class remove_tag(Command):
+    """:add_tag
 
-    Adds a symlink from the target to the dir ~/Pictures/wallpapers/bookmarked/
-
-    usage: bookmark_bg
+    Removes an arbitrary tag from the exif metadata 'user.tags' attribute
     """
     def execute(self):
-        from os import symlink
-        from os import path
-
-        user_home = path.expanduser('~')
-        bookmark_dir = path.join(user_home, 'Pictures/wallpapers/bookmarked/')
-        filenames = [f.path for f in self.fm.thistab.get_selection()]
-        if not len(filenames):
-            self.fm.notify("Please select file[s] to bookmark")
+        if not self.arg(1):
+            self.fm.notify("Provide the tag to remove from the selected files.")
             return
+        filenames = [f.path for f in self.fm.thistab.get_selection()]
 
         for f in filenames:
-            self.fm.notify('symlinking {} to {}'.format(f, path.join(bookmark_dir, path.basename(f))))
-            symlink(f, path.join(bookmark_dir, path.basename(f)))
+            remove_xattr_value_from_file(f, str(self.arg(1)), 'user.tags')
+
+        self.fm.notify('{} user.tags removed from file[s]'.format(self.arg(1)))
+
+
+class remove_xattr(Command):
+    """:add_tag
+
+    Removes an arbitrary tag from the exif metadata 'user.tags' attribute
+    """
+    def execute(self):
+        if not self.arg(1):
+            self.fm.notify("Provide the xattr to remove from the selected files.")
+            return
+        filenames = [f.path for f in self.fm.thistab.get_selection()]
+
+        for f in filenames:
+            try:
+                removexattr(f, str(self.arg(1)))
+            except OSError:
+                pass
+
+        self.fm.notify('{} user.tags removed from file[s]'.format(self.arg(1)))
 
 
 class fzf_select(Command):
