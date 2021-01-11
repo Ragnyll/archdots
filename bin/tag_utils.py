@@ -27,7 +27,28 @@ def get_files_with_metadata_tag(start_dir, xattr_value, xattr_key='user.tags'):
     """
     pattern = path.join(start_dir, '**', '*')
     fnames = [fname for fname in glob(pattern, recursive=True) if path.isfile(fname) and xattr_value in get_xattr_value_as_list(fname, xattr_key)]
-    print(fnames)
+    return fnames
+
+
+def remove_files_to_omit(filepaths, xattr_values_to_exclude, xattr_key_to_exclude='user.tags'):
+    """returns a subset of filepaths that do not include the xattr_{key,_value}
+
+
+    :filepaths (list): a list of file paths
+    xattr_values_to_exclude(list(str)): the attribute to find contained in xattrkey
+    xattr_key(str): the key to search for the supplied xattr_value in. defaults to user.tags
+    """
+    cleaned_files = []
+    for f in filepaths:
+        if set(get_xattr_value_as_list(f, xattr_key_to_exclude)).intersection(set(xattr_values_to_exclude)):
+            cleaned_files.append(f)
+
+    return cleaned_files
+
+
+def query_files(start_dir, xattr_value, xattr_values_to_exclude=[], xattr_key='user.tags'):
+    files = get_files_with_metadata_tag(start_dir, xattr_value, xattr_key)
+    return remove_files_to_omit(files, xattr_values_to_exclude, xattr_key)
 
 
 if __name__ == '__main__':
@@ -35,4 +56,5 @@ if __name__ == '__main__':
 
     fire.Fire({
         'list': get_files_with_metadata_tag,
+        'query': query_files,
     })

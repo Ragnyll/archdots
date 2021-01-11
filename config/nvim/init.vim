@@ -3,6 +3,7 @@ call plug#begin('~/.vim/plugged')
 " language support
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'heavenshell/vim-pydocstring'
+Plug 'tell-k/vim-autopep8'
 Plug 'wsdjeg/vim-lua'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'rust-lang/rust.vim'

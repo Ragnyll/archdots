@@ -116,7 +116,7 @@ case "$(init_menu)" in
     "connect")
         case $(connect) in
             "default")
-                nordvpn connect
+                nordvpn connect "Chicago"
                 ;;
             "countries")
                 country="$(countries)"

@@ -3,14 +3,16 @@
 from os import listdir, path
 from random import choice
 from subprocess import run
-
+import sys
 user_home = path.expanduser('~')
-bookmarked_bg_dir = 'Pictures/wallpapers/bookmarked/'
-bg_fname = choice(listdir(path.join(user_home, bookmarked_bg_dir)))
-full_fpath = path.join(user_home, bookmarked_bg_dir, bg_fname)
+sys.path.append(path.join(user_home, 'bin'))
+import tag_utils
+
+image_root_path = path.join(user_home, 'Pictures/wallpapers')
+bg_path = choice(tag_utils.get_files_with_metadata_tag(image_root_path, 'favorite'))
 wal_setter_path = path.join(user_home, 'bin/wal_setter.sh')
-run([wal_setter_path, full_fpath])
+run([wal_setter_path, bg_path])
 
 # write current bg to ~/.config/wallpaper
 with open(path.join(user_home, '.config/wallpaper'), 'w') as wallpaper_conf:
-    wallpaper_conf.write(path.join(full_fpath))
+    wallpaper_conf.write(path.join(bg_path))
