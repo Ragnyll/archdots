@@ -111,13 +111,13 @@ netctl
 netdiscover
 networkmanager
 nmap
+nodejs
 nordvpn-bin
-npm
 nvidia
 nvidia-settings
 obs-studio
 openvpn
-optimus-manager
+optimus-manager-git
 orca
 otf-fira-code
 otf-font-awesome-5-free

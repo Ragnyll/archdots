@@ -22,15 +22,7 @@ cd .. && rm -rf yay/
 yay -S $(awk '{print $1}' install.txt)
 
 # install pip
-wget https://bootstrap.pypa.io/get-pip.py
-python get-pip.py --user
-rm get-pip.py
-sudo pip install pipenv
-
-# install system pip requirements
-# filetype is required for mpg123 utils in ranger
-pip3 install filetype
-pip install filetype
+~/.dotfiles/python_installs.sh
 
 mkdir ~/dev
 
