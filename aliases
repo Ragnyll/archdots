@@ -17,6 +17,7 @@ alias scim='sc-im'
 alias g++='g++ -std=c++20'
 alias mkdir='mkdir -p'
 alias yay_installed='comm -23 <(yay -Qqett | sort) <(yay -Qqg -g base-devel | sort | uniq)'
+alias pacman_installed='comm -23 <(pacman -Qqett | sort) <(pacman -Qqg -g base-devel | sort | uniq)'
 
 # I cant find this stupid fucking alias. Its somewhere in a zsh conf
 unalias rm

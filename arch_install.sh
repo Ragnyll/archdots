@@ -10,7 +10,6 @@ cd ~/.dotfiles
 # Install pacman dependencies
 # You probably have git if you pulled this repo, but install it to be safe
 # notes:
-#     entr is for troubleshooting rofi
 # 	  uninstall lxappeareance after setting arc-dark-theme for nautilis
 sudo pacman -Syu git lxappeareance
 

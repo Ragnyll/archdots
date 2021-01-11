@@ -33,6 +33,9 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 source $HOME/.aliases
 
+# keep installed packages in sync
+yay_installed >! ~/.dotfiles/install.txt
+
 # zoptions
 setopt rmstarsilent
 setopt histignoredups
