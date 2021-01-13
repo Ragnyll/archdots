@@ -20,5 +20,7 @@ termcolor \
 ueberzug \
 virtualenv \
 virtualenv-clone \
+pynvim \
+python-gnupg \
 wheel
 

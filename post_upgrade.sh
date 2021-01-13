@@ -11,3 +11,6 @@ yay -R nvidia-settings && yay -S nvidia-settings
 yay -R ranger-git && yay -S ranger-git
 yay -R optimus-manager && yay -S optimus-manager
 yay -R npm node-gyp nodejs semver && yay -S npm node-gyp nodejs semver
+
+printf '========== Post Upgrade Step Complete! ==========
+========== Inspect logs and restart ==========\n'

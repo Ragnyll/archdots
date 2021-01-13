@@ -23,15 +23,11 @@ Plug 'kovetskiy/sxhkd-vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
-Plug 'francoiscabrol/ranger.vim'
-Plug 'rbgrouleff/bclose.vim' " bclose is a dependency of ranger.vim
+Plug 'kevinhwang91/rnvimr'
 " konvenient keybinds
 Plug 'scrooloose/nerdcommenter'
 
-Plug 'glacambre/firenvim',  { 'do': { _ -> firenvim#install(0) } }
-
 call plug#end()
-
 
 " Standard remaps
 let mapleader=','
@@ -67,10 +63,17 @@ let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_python_flake8_args='--ignore=E501'
 
-" ranger
-let g:ranger_map_keys = 0
-let g:ranger_replace_netrw = 1
-
+" ranger (rnvimr)
+let g:rnvimr_enable_ex = 1
+let g:rnvimr_hide_gitignore = 1
+nnoremap <leader>r :RnvimrToggle<cr>
+let g:rnvimr_action = {
+    \ '<A-t>': 'NvimEdit tabedit',
+    \ '<A-x>': 'NvimEdit split',
+    \ '<A-v>': 'NvimEdit vsplit',
+    \ 'gw': 'JumpNvimCwd',
+    \ 'yw': 'EmitRangerCwd'
+    \ }
 
 " Rust racer
 set hidden
@@ -126,9 +129,6 @@ nnoremap <leader><space> viW
 nnoremap U <c-R>
 nnoremap H ^
 nnoremap L $
-nnoremap <leader>r :Ranger<cr>
-nnoremap <leader>R :vsplit <bar> :Ranger<cr>
-nnoremap <leader>t :RangerNewTab<cr>
 
 " Visual Mode remaps
 vnoremap H ^

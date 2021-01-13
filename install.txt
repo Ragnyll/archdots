@@ -131,6 +131,7 @@ plasma
 postgresql
 powertop
 protonmail-bridge
+python-pynvim
 python-pywal
 ranger-git
 rtorrent

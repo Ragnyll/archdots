@@ -6,6 +6,7 @@ import os
 from os import getxattr, setxattr, listxattr, removexattr
 
 from ranger.api.commands import Command
+from gnupg import GPG
 
 
 def append_xattr_to_file(fname, xattr_val, xattr_key='user.tags'):
@@ -61,6 +62,44 @@ def remove_xattr_value_from_file(fname, xattr_val, xattr_key='user.tags'):
                 pass
 
         return
+
+
+class encrypt(Command):
+    """:encrypt
+
+    Encrypts a file or dir (as a tar.gz) with the default gpg key
+    """
+    def execute(self):
+        pass
+
+
+class decrypt(Command):
+    """:decrypts
+
+    Decrypts a file with gpg or a directory by extracting a tar file and decrypting it
+
+    passing true as the false flag will not delete the origin gpg file
+    """
+
+    def execute(self):
+        gpg = GPG(gnupghome=os.path.join(os.path.expanduser('~'), '.gnupg'))
+
+        paths = [os.path.basename(f.path) for f in self.fm.thistab.get_selection()]
+
+        for p in paths:
+            with open(p, 'rb') as enc:
+                dec_b = gpg.decrypt_file(enc)
+
+            out_fname = os.path.splitext(p)[0]
+            with open(out_fname, 'wb+') as dec_f:
+                dec_f.write(dec_b.data)
+
+            if not self.arg(1) == 'false':
+                os.remove(p)
+
+            if out_fname.ends('.tar.gz'):
+                # detar that boi and remove the tar.gz
+                pass
 
 
 class add_tag(Command):
