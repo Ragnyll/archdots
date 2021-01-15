@@ -13,6 +13,7 @@ docopt \
 filelock \
 filetype \
 fire \
+moviepy \
 pip \
 pipenv \
 python-xlib \
@@ -22,5 +23,6 @@ virtualenv \
 virtualenv-clone \
 pynvim \
 python-gnupg \
+youtube_dl \
 wheel
 

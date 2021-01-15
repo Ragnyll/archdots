@@ -62,3 +62,6 @@ bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 bspc config click_to_focus       true
+
+# keep installed packages in sync
+comm -23 <(yay -Qqett | sort) <(yay -Qqg -g base-devel | sort | uniq) >! ~/.dotfiles/install.txt

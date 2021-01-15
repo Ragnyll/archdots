@@ -95,7 +95,6 @@ lightdm-gtk-greeter
 lightdm-webkit-theme-litarvan
 light-locker
 linux-firmware
-lutris
 lxappearance
 lynx
 man-db
@@ -140,7 +139,6 @@ sc-im
 screen
 screenkey
 scrot
-signal-desktop
 simple-scan
 slack-desktop
 steghide
