@@ -15,7 +15,7 @@ function echoexit() {
 
 function menu() {
     # Menu command should read from stdin and write to stdout
-    dmenu -p "Select"
+    dmenu -p "lpass"
 }
 
 function usage() {

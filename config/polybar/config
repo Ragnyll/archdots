@@ -104,9 +104,9 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 
 [module/vpn]
 type = custom/script
-exec = ~/bin/dmenu-nordvpn -s 
+exec = ~/bin/nordvpn-dmenu -s 
 interval = 10
-click-left = ~/bin/dmenu-nordvpn
+click-left = ~/bin/nordvpn-dmenu
 
 
 [module/network]

@@ -27,7 +27,7 @@ whereis nordvpn > /dev/null || echoexit "'nordvpn' not found."
 function menu() {
     # Menu command, should read from stdin and write to stdout.
 
-    dmenu -p "Select"
+    dmenu -i -p "NordVpn"
 }
 
 function usage() {
