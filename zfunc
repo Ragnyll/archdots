@@ -1,0 +1,20 @@
+#!/bin/zsh
+
+function vidtogif() {
+    # converts a video to a gif of desired size (defualting to 1080)
+    # $1 : video's input path
+    # $2 : output gif path
+    # $3 : skip seconds. How many seconds to skip from the head of the video
+    # $4 : duration. How long the gif will last
+    # $5 optional scale flag
+    scale="1080"
+    [[ $# -ge 4 ]] && ffmpeg -ss $3 \
+        -t $4 \
+        -i $1 \
+        -vf "fps=10,scale=$scale:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" \
+        -loop 0 $2 || \
+    printf "vidtogif: converts videos to gif files
+
+Usage:
+  vidtogif input_file output_path skip_s duration [scale]\n"
+}

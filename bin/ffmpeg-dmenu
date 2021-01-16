@@ -45,7 +45,6 @@ function killrecording() {
 	# even after SIGTERM, ffmpeg may still run, so SIGKILL it.
 	sleep 3
 	kill -9 "$pid"
-	exit
 }
 
 function ffmpeg_video_silent() {
@@ -102,9 +101,12 @@ case $(init_menu) in
     0)
         [ -d $HOME/Videos/capture ] || mkdir -p $HOME/Videos/capture
         start_ffmpeg 0
+        notify-send --icon=$HOME/.config/icons/ffmpeg_logo.png -t 2500 "ffmpeg recording started"
         ;;
     "Kill")
-        killrecording
+        killrecording && \
+        notify-send --icon=$HOME/.config/icons/ffmpeg_logo.png -t 2500 "ffmpeg recording stopped" || \
+        notify-send --icon=$HOME/.config/icons/ffmpeg_logo.png -t 2500 "ffmpeg recording stopped"
         ;;
     *)
         ;;
