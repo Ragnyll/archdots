@@ -59,11 +59,11 @@ function conky_main()
                                          conky_window.height)
     cr = cairo_create(cs)
 
-    active_sound(cr)
+    -- active_sound(cr)
 	battery_and_brightness(cr)
 	cpu_and_memory(cr)
-	filesystem_gaugues(cr)
 	up_and_down_speed(cr)
+	filesystem_gaugues(cr)
 
     cairo_destroy(cr)
     cairo_surface_destroy(cs)
@@ -563,7 +563,14 @@ function home_fs_gaugue(cr, epicenter)
 end
 
 function part_2_gaugue(cr, epicenter)
-	partition_2_used_perc = math.floor(conky_parse("${fs_used_perc /home}") + conky_parse("${fs_used_perc /root}"))
+    home_dir_gb = string.gsub(conky_parse("${fs_size /home}"), "[a-zA-Z]+", "")
+    root_dir_gb = string.gsub(conky_parse("${fs_size /root}"), "[a-zA-Z]+", "")
+    total_space = tonumber(home_dir_gb) + tonumber(root_dir_gb)
+    home_dir_gb_used = string.gsub(conky_parse("${fs_used /home}"), "[a-zA-Z]+", "")
+    root_dir_gb_used = string.gsub(conky_parse("${fs_used /root}"), "[a-zA-Z]+", "")
+    total_space_used = tonumber(home_dir_gb_used) + tonumber(root_dir_gb_used)
+
+	partition_2_used_perc = string.format("%.2f", tostring(100 * total_space_used / total_space))
 	gaugue_props = {
 		gaugue_name = "/nvme0n1p2",
 		gaugue_value = partition_2_used_perc,
@@ -595,7 +602,7 @@ function part_2_gaugue(cr, epicenter)
 				y = 895,
 			},
 			desc_loc = {
-				x = 482,
+				x = 540,
 				y = 895,
 			},
 			text_loc = {
