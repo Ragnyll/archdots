@@ -9,6 +9,7 @@ Plug 'tmux-plugins/vim-tmux'
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
 Plug 'rhysd/vim-clang-format'
+Plug 'cespare/vim-toml'
 " markdown
 Plug 'gabrielelana/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}

@@ -7,8 +7,8 @@
 #                                                   |_|
 # mostly from
 # https://github.com/loiccoyle/rofi-nordvpn
-# but adapted to use dmenu (just change all rofi calls to dmenu
-
+# but adapted to use dmenu (just change all rofi calls to dmenu)
+DEFAULT_CITY="Saint_Louis"
 
 # any failure in piped commands aborts pipe
 set -o pipefail
@@ -116,7 +116,7 @@ case "$(init_menu)" in
     "connect")
         case $(connect) in
             "default")
-                nordvpn connect "Chicago"
+                nordvpn connect $DEFAULT_CITY
                 ;;
             "countries")
                 country="$(countries)"

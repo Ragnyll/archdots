@@ -35,7 +35,7 @@ font-2 = siji:pixelsize=10;1
 font-3 = FontAwesome 5 Free:size=11:style=Solid;2
 
 modules-left = bspwm
-modules-center = xwindow
+; modules-center = xwindow
 modules-right = vpn network pulseaudio battery date
 
 tray-position = right

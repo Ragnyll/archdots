@@ -1,15 +1,15 @@
 #!/bin/python
 # chooses and sets a random wal bg from bookmarked
-from os import listdir, path
+from os import path
 from random import choice
 from subprocess import run
 import sys
 user_home = path.expanduser('~')
 sys.path.append(path.join(user_home, 'bin'))
-import tag_utils
+import xattr_utils
 
 image_root_path = path.join(user_home, 'Pictures/wallpapers')
-bg_path = choice(tag_utils.get_files_with_metadata_tag(image_root_path, 'favorite'))
+bg_path = choice(xattr_utils.get_files_with_metadata_tag(image_root_path, 'favorite'))
 wal_setter_path = path.join(user_home, 'bin/wal_setter.sh')
 run([wal_setter_path, bg_path])
 

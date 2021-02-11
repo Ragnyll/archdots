@@ -14,6 +14,7 @@ filelock \
 filetype \
 fire \
 moviepy \
+python-magic \
 pip \
 pipenv \
 python-xlib \

@@ -7,7 +7,6 @@ from os import getxattr, setxattr, listxattr, removexattr
 
 from ranger.api.commands import Command
 
-
 def append_xattr_to_file(fname, xattr_val, xattr_key='user.tags'):
     """:append_xattr_to_file
     Appends an arbritary exif metadata tag to the specified attribute

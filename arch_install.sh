@@ -39,6 +39,9 @@ ln -sf ~/.dotfiles/gitignore_global ~/.gitignore_global
 ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
 ln -sf ~/.dotfiles/config ~/.config
 
+# install mutt
+git clone git@gitlab.com:Ragnyll/my_mutt.git && cd my_mutt && install.sh && cd ..
+
 # enable services
 systemctl --user enable --now headphones_hissing.service
 systemctl --user enable --now powertop.service

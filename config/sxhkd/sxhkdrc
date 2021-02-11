@@ -15,7 +15,7 @@ super + @space
 	~/bin/dmenu_run_history
 
 super + shift + p
-	~/bin/dmenu-lpass
+	~/bin/lpass-dmenu
 
 #
 # bspwm hotkeys

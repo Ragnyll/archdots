@@ -18,3 +18,8 @@ function vidtogif() {
 Usage:
   vidtogif input_file output_path skip_s duration [scale]\n"
 }
+
+function emptymailtrash() {
+    read confirm\?"Really delete all mail from Trash? "
+    [ $(echo $confirm | grep -i y | wc -l) -eq '1' ] && rm -rf ~/Mail/Trash/* || echo "Trash Purge aborted!"
+}
