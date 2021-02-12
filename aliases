@@ -22,6 +22,7 @@ alias pacman_installed='comm -23 <(pacman -Qqett | sort) <(pacman -Qqg -g base-d
 alias pythong='python'
 alias offlineimap='[ $(ps aux | grep protonmail-bridge | wc -l) -ge 3  ] && offlineimap || systemctl --user start bridge.service && sleep 6 && offlineimap'
 alias sqlite='sqlite3'
+alias ranger='~/bin/rangerq.sh'
 
 # I cant find this stupid fucking alias. Its somewhere in a zsh conf
 unalias rm
