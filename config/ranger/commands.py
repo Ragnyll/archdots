@@ -4,8 +4,10 @@ from __future__ import (absolute_import, division, print_function)
 
 import os
 from os import getxattr, setxattr, listxattr, removexattr
+from pathlib import Path
 
 from ranger.api.commands import Command
+
 
 def append_xattr_to_file(fname, xattr_val, xattr_key='user.tags'):
     """:append_xattr_to_file
@@ -15,7 +17,9 @@ def append_xattr_to_file(fname, xattr_val, xattr_key='user.tags'):
     :xattr_val (str): the value to append to the xattr_key
     :xattr_key (str): the
     """
-    if xattr_key in listxattr(fname):
+    # resolve to the actual path if a symlink
+    resolved_fname = Path(fname).resolve()
+    if xattr_key in listxattr(resolved_fname):
         xattrs = getxattr(fname, xattr_key).decode('utf-8').split(',')
         xattrs.append(xattr_val)
         setxattr(fname, xattr_key, bytes(','.join(set(xattrs)), 'utf-8'))
@@ -31,7 +35,9 @@ def remove_xattr_from_file(fname, xattr):
     :fname (str): the file to append the exif metadata to
     :xattr_key (str): the xattr to remove
     """
-    if xattr in listxattr(fname):
+    # resolve to the actual path if a symlink
+    resolved_fname = Path(fname).resolve()
+    if xattr in listxattr(resolved_fname):
         removexattr(fname, xattr)
 
 
@@ -43,7 +49,9 @@ def remove_xattr_value_from_file(fname, xattr_val, xattr_key='user.tags'):
     :xattr_val (str): the value to append to the xattr_key
     :xattr_key (str): the
     """
-    if xattr_key in listxattr(fname):
+    # resolve to the actual path if a symlink
+    resolved_fname = Path(fname).resolve()
+    if xattr_key in listxattr(resolved_fname):
         xattrs = getxattr(fname, xattr_key).decode('utf-8').split(',')
         try:
             xattrs.remove(xattr_val)
