@@ -1,9 +1,0 @@
-[user]
-	email = ragnyll@gallowzhumour.dev
-	name = ragnyll
-[diff]
-	tool = vimdiff
-[core]
-	excludesfile = /home/ragnyll/.gitignore_global
-[merge]
-	tool = vimdiff

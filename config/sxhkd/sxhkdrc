@@ -15,7 +15,7 @@ super + @space
 	~/bin/dmenu_run_history
 
 super + shift + p
-	~/bin/lpass-dmenu
+	~/bin/passmenu2
 
 #
 # bspwm hotkeys
@@ -165,4 +165,5 @@ super + alt + Left
 #
 # capture full screen on all displays
 super + F7
-	scrot -e 'mv $f ~/Pictures/screenshots/'
+	scrot --freeze --select --exec 'mv $f ~/Pictures/screenshots/'
+
