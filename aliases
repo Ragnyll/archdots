@@ -5,7 +5,6 @@ alias vranger='nvim .'
 alias conflicts='git diff --name-only --diff-filter=U'
 alias gti='git' # i suck at typing
 alias sl='ls'
-alias virus_scan='sudo freshclam && sudo clamscan -r --bell -i /'
 alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0'
 alias tor='~/Applications/tor-browser_en-US/Browser/start-tor-browser'
 alias mutt='neomutt'
