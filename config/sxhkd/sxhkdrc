@@ -14,7 +14,7 @@ super + Return
 super + @space
 	~/bin/dmenu_run_history
 
-super + shift + p
+super + p
 	~/bin/passmenu2
 
 #
