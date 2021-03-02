@@ -28,10 +28,10 @@ super + alt + r
 
 # quit/restart bspwm
 super + alt + q
-	[ "$(printf "No\\nYes" | dmenu -i -p "Realy logout?" -nb darkred -sb red -sf white -nf gray )" = "Yes" ] && bspc quit
+	[ "$(printf "No\\nYes" | dmenu -i -p "Really logout?" -nb darkred -sb red -sf white -nf gray )" = "Yes" ] && bspc quit
 
 super + shift + x
-	[ "$(printf "No\\nYes" | dmenu -i -p "Realy shutdown?" -nb darkred -sb red -sf white -nf gray )" = "Yes" ] && sudo shutdown now
+	[ "$(printf "No\\nYes" | dmenu -i -p "Really shutdown?" -nb darkred -sb red -sf white -nf gray )" = "Yes" ] && sudo shutdown now
 
 # Screen lock
 super +  ctrl + l

@@ -24,6 +24,7 @@ cups-pdf
 dhcpcd
 dirb
 discord
+dnstracer
 docker
 dolphin-emu-git
 dunst
@@ -61,6 +62,7 @@ lightdm-webkit-theme-litarvan
 light-locker
 linux-firmware
 lynx
+macchanger
 man-db
 metasploit
 moc
@@ -89,11 +91,13 @@ otf-ipafont
 pandoc
 pass-import
 pavucontrol
+picom
 postgresql
 powertop
 protonmail-bridge-nogui
 python-pynvim
 python-pywal
+qbittorrent
 ranger-git
 rtorrent
 sc-im
@@ -110,6 +114,7 @@ throttled
 tlp
 tmux
 tor-browser-en
+traceroute
 trezor-suite-appimage
 ttf-font-awesome
 ttf-symbola

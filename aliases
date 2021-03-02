@@ -24,6 +24,7 @@ alias sqlite='sqlite3'
 alias ranger='~/bin/rangerq.sh'
 # creates a new gitlab repo
 alias newgitlab='git push --set-upstream git@gitlab.com:Ragnyll/$(git rev-parse --show-toplevel | xargs basename).git $(git rev-parse --abbrev-ref HEAD)'
+alias mute='amixer -q -D pulse sset Master toggle'
 
 # I cant find this stupid fucking alias. Its somewhere in a zsh conf
 unalias rm
