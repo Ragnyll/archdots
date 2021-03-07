@@ -16,10 +16,10 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 " make it pretty
 Plug 'scrooloose/syntastic'
 Plug 'vim-airline/vim-airline'
-Plug 'Ragnyll/vim-colorschemes'
 Plug 'dylanaraps/wal.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'kovetskiy/sxhkd-vim'
+Plug 'pseewald/vim-anyfold'
 " file searching / exploring
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -162,3 +162,20 @@ set undodir=~/.vim/undo
 
 " Enable mouse mode
 set mouse=a
+
+autocmd FileType * AnyFoldActivate
+" activate anyfold by default
+augroup anyfold
+    autocmd!
+    autocmd Filetype * AnyFoldActivate
+augroup END
+
+" disable anyfold for large files
+let g:LargeFile = 1000000 " file is large if size greater than 1MB
+autocmd BufReadPre,BufRead * let f=getfsize(expand("<afile>")) | if f > g:LargeFile || f == -2 | call LargeFile() | endif
+function LargeFile()
+    augroup anyfold
+        autocmd! " remove AnyFoldActivate
+        autocmd Filetype <filetype> setlocal foldmethod=indent " fall back to indent folding
+    augroup END
+endfunction
