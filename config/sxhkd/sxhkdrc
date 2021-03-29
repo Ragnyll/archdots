@@ -15,7 +15,10 @@ super + @space
 	~/bin/dmenu_run_history
 
 super + p
-	~/bin/passmenu2
+	~/bin/passmenu2 clip_pass
+
+super + shift + p
+	~/bin/passmenu2 insert_pass
 
 #
 # bspwm hotkeys
