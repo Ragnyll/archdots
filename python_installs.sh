@@ -25,5 +25,6 @@ virtualenv-clone \
 pynvim \
 python-gnupg \
 youtube_dl \
+bpython \
 wheel
 

@@ -35,7 +35,7 @@ typeset -gU cdpath fpath mailpath path
 path=(
   /usr/local/{bin,sbin}
   /home/ragnyll/bin/
-  /home/ragnyll/dev/move_vid_builder/source/
+  /home/rangyll/.local/bin
   $path
 )
 

@@ -20,6 +20,6 @@ Usage:
 }
 
 function emptymailtrash() {
-    read confirm\?"Really delete all mail from Trash? "
+    read confirm\?"Really delete all mail from Trash (Y/N)? "
     [ $(echo $confirm | grep -i y | wc -l) -eq '1' ] && rm -rf ~/Mail/Trash/* || echo "Trash Purge aborted!"
 }

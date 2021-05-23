@@ -468,7 +468,7 @@ end
 function upspeed_gaugue(cr, epicenter)
 	gaugue_props = {
 		gaugue_value = conky_parse("${upspeedf wlp82s0}"),
-		gaugue_max = 51200, -- this is 50MiB. Use this on wifi
+		gaugue_max = 512, -- this is .50MiB. Use this on wifi
 		colors = {
 			free_color = colors.dark_grey,
 			used_color = colors.light_grey,
@@ -493,7 +493,7 @@ function downspeed_gaugue(cr, epicenter)
 	gaugue_props = {
 		gaugue_value = conky_parse("${downspeedf wlp82s0}"),
 		-- gaugue_max = 512000, -- this is 500MiB in KiB use this if im on ethernet
-		gaugue_max = 51200, -- this is 50MiB. Use this on wifi
+		gaugue_max = 512, -- .5MiB. Use this on wifi
 		colors = {
 			free_color = colors.dark_grey,
 			used_color = colors.light_grey,
