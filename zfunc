@@ -19,6 +19,12 @@ Usage:
   vidtogif input_file output_path skip_s duration [scale]\n"
 }
 
+function pbcopy {
+    # copies to clipboard like (the more egronomic) osx command but without the pipe
+    # $1 path to file
+    xclip -selection clipboard < $1
+}
+
 function emptymailtrash() {
     read confirm\?"Really delete all mail from Trash (Y/N)? "
     [ $(echo $confirm | grep -i y | wc -l) -eq '1' ] && rm -rf ~/Mail/Trash/* || echo "Trash Purge aborted!"
