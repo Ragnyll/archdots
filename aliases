@@ -13,6 +13,7 @@ alias newgitlab='git push --set-upstream git@gitlab.com:Ragnyll/$(git rev-parse 
 alias offlineimap='[ $(ps aux | grep protonmail-bridge | wc -l) -ge 3  ] && offlineimap || systemctl --user start bridge.service && sleep 6 && offlineimap'
 alias pacman='sudo pacman'
 alias pythong='python'
+alias python-ctags='ctags -R --fields=+l --languages=python --python-kinds=-iv -f ./tags $(python -c "import os, sys; print('"'"' '"'"'.join('"'"'{}'"'"'.format(d) for d in sys.path if os.path.isdir(d)))")'
 alias pacman_installed='comm -23 <(pacman -Qqett | sort) <(pacman -Qqg -g base-devel | sort | uniq)'
 alias ranger='~/bin/rangerq.sh'
 alias rust_build_watch='find . -type f -not -path "./target/**/*" -name "*.rs" | entr sh -c "cargo build"'
