@@ -1,0 +1,93 @@
+#!/bin/sh
+
+# any failure in piped commands aborts pipe
+set -o pipefail
+# exit when any command fails
+set -e
+
+function echoexit() {
+    # Print to stderr and exit
+    printf "$@" 1>&2
+    exit 1
+}
+
+# Checking dependencies:
+whereis netctl > /dev/null || echoexit "'netctl' not found."
+
+function menu() {
+    # Menu command, should read from stdin and write to stdout.
+
+    dmenu -i -p "netctl"
+}
+function usage() {
+    printf "Dynamic menu interface for netctl.
+
+Usage:
+  netctl-dmenu [-h] [-s LABEL]
+    -h                                 Display this help message.
+    -s                                 Display current network status, useful for status bars.
+      LABEL                            Prefix label for the status information."
+}
+
+function init_menu() {
+    # Initial menu.
+
+    local choices="connect\ndisconnect\nedit"
+    printf "$choices" | menu
+}
+
+function connect() {
+    local choices=$(netctl list)
+    printf "$choices" | menu
+}
+
+function disconnect() {
+    sudo netctl stop-all
+}
+
+function edit() {
+    local choices=$(netctl list)
+    local network_to_edit=$(printf "  new\n$choices" | menu)
+    echo $network_to_edit | grep "new" && \
+        echo "adding a new network not yet supported" ||
+        st -e sudo netctl edit $network_to_edit
+}
+
+function status() {
+    # if there is a "*" on netctl list it is connected
+    netctl list | grep "*" > /dev/null && \
+        echo "  $(netctl list | grep "*" | sed "s/.*wlp82s0-//")" || echo ""
+}
+
+while getopts ":hs" opt; do
+    case ${opt} in
+        h )
+            usage
+            exit 0
+            ;;
+        s )
+            STATUS_LABEL="$2"
+            status
+            exit 0
+            ;;
+        \? )
+            printf "Invalid Option: -$OPTARG" 1>&2
+            usage
+            exit 1
+            ;;
+    esac
+done
+
+case "$(init_menu)" in
+    "connect")
+        sudo netctl switch-to $(connect)
+        ;;
+    "disconnect")
+        disconnect
+        ;;
+    "edit")
+        edit
+        ;;
+    *)
+        ;;
+esac

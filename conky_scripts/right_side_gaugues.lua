@@ -339,7 +339,6 @@ function memory_gaugue(cr)
 			w = 8    -- the width of the stroke
 		}
 	}
-
 	ring_gaugue(cr, gaugue_props)
 end
 

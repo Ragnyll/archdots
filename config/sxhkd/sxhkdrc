@@ -8,7 +8,7 @@ super + Escape
 
 # terminal emulator
 super + Return
-	~/bin/st_start_tmux.sh
+	[ tmux ls | grep -qv attached ] && exec /usr/local/bin/st -e tmux attach || exec /usr/local/bin/st -e tmux
 
 # program launcher
 super + @space
@@ -150,6 +150,12 @@ super + F2
 
 super + F1
 	amixer -q -D pulse sset Master toggle
+
+#
+# Network
+# DOESNT WORK YET
+super + F8
+	~/bin/netctl-menu
 
 #
 # Music

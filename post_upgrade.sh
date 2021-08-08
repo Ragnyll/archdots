@@ -4,7 +4,9 @@
 # These are general fixes after runing `pacman -Syu`
 
 # rebuild python env
+echo "rebuilding python env"
 ~/.dotfiles/python_installs.sh
+echo "rebuilding python env"
 
 # re build other installs
 yay -R nvidia-settings && yay -S nvidia-settings
