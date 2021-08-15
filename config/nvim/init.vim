@@ -140,8 +140,10 @@ onoremap p i(
 
 " markdown utility
 let g:mkdp_auto_close = 0
-nnoremap <leader>m :MarkdownPreview<cr>
+nnoremap <leader>p :MarkdownPreviewToggle<cr>
 autocmd FileType markdown nnoremap <leader><tab> i&nbsp;&nbsp;&nbsp;&nbsp;<Esc>
+" preview markdown in surf (cuz its sexy without tabs)
+let g:mkdp_browser = 'surf'
 
 " remove all trailing whitespace on file on :w
 autocmd BufWritePre * %s/\s\+$//e

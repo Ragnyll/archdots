@@ -80,10 +80,15 @@ done
 
 case "$(init_menu)" in
     "connect")
-        sudo netctl switch-to $(connect)
+        local network_to_connect=$(connect)
+        sudo netctl switch-to $network_to_connect \
+            && notify-send --icon=$HOME/.config/icons/wifi.png -t 2500 "Connected to $network_to_connect" \
+            || notify-send --icon=$HOME/.config/icons/wifi.png -t 2500 "Unable to connect to $network_to_connect"
         ;;
     "disconnect")
-        disconnect
+        disconnect \
+            && notify-send --icon=$HOME/.config/icons/wifi.png -t 2500 "disconnected from network" \
+            || notify-send --icon=$HOME/.config/icons/wifi.png -t 2500 "unable to disconnect from network"
         ;;
     "edit")
         edit
