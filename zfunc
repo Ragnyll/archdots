@@ -1,5 +1,32 @@
 #!/bin/zsh
 
+function emptymailtrash() {
+    read confirm\?"Really delete all mail from Trash (Y/N)? "
+    [ $(echo $confirm | grep -i y | wc -l) -eq '1' ] && rm -rf ~/Mail/Trash/* || echo "Trash Purge aborted!"
+}
+
+function markdowntodocx() {
+    # $1 input markdown file name
+    # $2 output pad file name
+    [[ $1 == "-h" ]] \
+        && printf "USAGE\nmarkdowntodocx INPUTMARKDOWNFILE OUTPUTDOCXFILE\n" \
+        || pandoc -s -V geometry:margin=1in  -o $2 $1
+}
+
+function markdowntopdf() {
+    # $1 input markdown file name
+    # $2 output pad file name
+    [[ $1 == "-h" ]] \
+        && printf "USAGE\nmarkdowntopdf INPUTMARKDOWNFILE OUTPUTPDFFILE\n" \
+        || pandoc -s -V geometry:margin=1in  -o $2 $1
+}
+
+function pbcopy {
+    # copies to clipboard like (the more egronomic) osx command but without the pipe
+    # $1 path to file
+    xclip -selection clipboard < $1
+}
+
 function vidtogif() {
     # converts a video to a gif of desired size (defualting to 1080)
     # $1 : video's input path
@@ -17,15 +44,4 @@ function vidtogif() {
 
 Usage:
   vidtogif input_file output_path skip_s duration [scale]\n"
-}
-
-function pbcopy {
-    # copies to clipboard like (the more egronomic) osx command but without the pipe
-    # $1 path to file
-    xclip -selection clipboard < $1
-}
-
-function emptymailtrash() {
-    read confirm\?"Really delete all mail from Trash (Y/N)? "
-    [ $(echo $confirm | grep -i y | wc -l) -eq '1' ] && rm -rf ~/Mail/Trash/* || echo "Trash Purge aborted!"
 }

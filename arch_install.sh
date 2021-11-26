@@ -40,6 +40,7 @@ ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
 ln -sf ~/.dotfiles/config ~/.config
 ln -sf ~/.dotfiles/surf ~/.surf
 
+
 # install mutt
 git clone git@gitlab.com:Ragnyll/my_mutt.git && cd my_mutt && install.sh && cd ..
 

@@ -9,7 +9,7 @@
 export EDITOR='nvim'
 export VISUAL='nvim'
 export PAGER='less'
-export BROWSER='lynx'
+export BROWSER='surf'
 
 #
 # Language
@@ -34,8 +34,10 @@ typeset -gU cdpath fpath mailpath path
 # Set the list of directories that Zsh searches for programs.
 path=(
   /usr/local/{bin,sbin}
-  /home/ragnyll/bin/
-  /home/rangyll/.local/bin
+  $HOME/.cargo/bin:$PATH
+  $HOME/.local/bin
+  $HOME/.local/lib/python3.9/site-packages
+  $HOME/bin/
   $path
 )
 
@@ -60,4 +62,4 @@ fi
 #
 export _JAVA_AWT_WM_NONREPARENTING=1
 
-export PATH="$HOME/.cargo/bin:$PATH"
+fpath+=~/.zfunc

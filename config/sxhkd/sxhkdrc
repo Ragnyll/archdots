@@ -18,7 +18,7 @@ super + p
 	~/bin/passmenu2 clip_pass
 
 super + shift + p
-	~/bin/passmenu2 insert_pass
+	clipmenu
 
 #
 # bspwm hotkeys
@@ -153,21 +153,8 @@ super + F1
 
 #
 # Network
-# DOESNT WORK YET
 super + F8
 	~/bin/netctl-menu
-
-#
-# Music
-#
-super + alt + p
-	mocp --toggle-pause
-
-super + alt + o
-	mocp --next
-
-super + alt + Left
-	mocp --previous
 
 #
 # Screenshots

@@ -20,9 +20,6 @@ set -o vi
 # git configurations
 export LESS="-R" # fixes colouring on git graph
 
-# colorize less
-export LESS='-R'
-
 # enable fuzzyfind
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
@@ -32,7 +29,6 @@ export PATH="$PATH:$HOME/.rvm/bin"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 source $HOME/.aliases
-source $HOME/.zfunc
 
 # zoptions
 setopt rmstarsilent

@@ -1,20 +1,26 @@
 call plug#begin('~/.vim/plugged')
 
 " language support
+" supports rust coc-pyright
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'heavenshell/vim-pydocstring'
-Plug 'tell-k/vim-autopep8'
-Plug 'wsdjeg/vim-lua'
-Plug 'tmux-plugins/vim-tmux'
+" Rust
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
-Plug 'rhysd/vim-clang-format'
 Plug 'cespare/vim-toml'
+" Lua
+Plug 'wsdjeg/vim-lua'
+" python
+Plug 'tell-k/vim-autopep8'
+Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
+" c++
+Plug 'rhysd/vim-clang-format'
+" tmux
+Plug 'tmux-plugins/vim-tmux'
 " markdown
 Plug 'gabrielelana/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 " make it pretty
-Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
 Plug 'vim-airline/vim-airline'
 Plug 'dylanaraps/wal.vim'
 Plug 'airblade/vim-gitgutter'
@@ -25,15 +31,18 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 Plug 'kevinhwang91/rnvimr'
+Plug 'RobertAudi/git-blame.vim'
+Plug 'APZelos/blamer.nvim'
 " konvenient keybinds
 Plug 'scrooloose/nerdcommenter'
 
 call plug#end()
+set clipboard=unnamed
 
 " Standard remaps
 let mapleader=','
 let maplocalleader='//'
-nnoremap <leader>ev :vsplit ~/.config/nvim/init.vim <cr>
+nnoremap <leader>ev :tabedit ~/.config/nvim/init.vim <cr>
 
 " FZF
 nnoremap <leader>o :FZF<cr>
@@ -54,15 +63,11 @@ let g:NERDSpaceDelims = 1
 " Enable trimming of whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
-" syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_python_flake8_args='--ignore=E501'
+" Python Specific
+autocmd FileType python let b:coc_root_patterns = ['.git', '.env']
+let g:autopep8_disable_show_diff=1
+let g:pydocstring_doq_path = '~/.local/bin/doq'
+autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 
 " ranger (rnvimr)
 let g:rnvimr_enable_ex = 1
@@ -85,6 +90,10 @@ augroup Racer
     autocmd FileType rust nmap <buffer> gd         <Plug>(rust-def-tab)
     autocmd FileType rust nmap <buffer> <leader>gd <Plug>(rust-doc)
 augroup END
+
+" rust-gdb
+packadd termdebug
+autocmd FileType rust let termdebugger="rust-gdb"
 
 " ctags
 " basic commands
@@ -116,13 +125,17 @@ set shiftwidth=4
 set encoding=utf-8
 set relativenumber
 set number
-set clipboard=unnamed
 
 " searching
 set incsearch
 set hlsearch
 set ignorecase
 set smartcase
+
+" formatting
+" <F1> is annoying so make it useful
+autocmd FileType rust nnoremap <F1> :RustFmt<cr>
+autocmd FileType python nnoremap <buffer> <F1> :Autopep8<CR>
 
 " Normal Mode remaps
 nnoremap <space> viw
@@ -140,17 +153,14 @@ onoremap p i(
 
 " markdown utility
 let g:mkdp_auto_close = 0
-nnoremap <leader>p :MarkdownPreviewToggle<cr>
+autocmd FileType markdown nnoremap <leader>p :MarkdownPreviewToggle<cr>
+autocmd FileType markdown nnoremap Q gqq
 autocmd FileType markdown nnoremap <leader><tab> i&nbsp;&nbsp;&nbsp;&nbsp;<Esc>
 " preview markdown in surf (cuz its sexy without tabs)
 let g:mkdp_browser = 'surf'
 
 " remove all trailing whitespace on file on :w
 autocmd BufWritePre * %s/\s\+$//e
-
-" Python (SimpylFold) folding
-let g:SimpylFold_docstring_preview = 1
-set nofoldenable
 
 " Enable fzf keybindings in vim
 let g:fzf_action = {
@@ -165,19 +175,9 @@ set undodir=~/.vim/undo
 " Enable mouse mode
 set mouse=a
 
-autocmd FileType * AnyFoldActivate
-" activate anyfold by default
-augroup anyfold
-    autocmd!
-    autocmd Filetype * AnyFoldActivate
-augroup END
-
-" disable anyfold for large files
-let g:LargeFile = 1000000 " file is large if size greater than 1MB
-autocmd BufReadPre,BufRead * let f=getfsize(expand("<afile>")) | if f > g:LargeFile || f == -2 | call LargeFile() | endif
-function LargeFile()
-    augroup anyfold
-        autocmd! " remove AnyFoldActivate
-        autocmd Filetype <filetype> setlocal foldmethod=indent " fall back to indent folding
-    augroup END
-endfunction
+" quickly turn off numbers
+nnoremap <F2> :set number! norelativenumber!<cr>
+" function Permalink()
+    " let s:curline = getline('.')
+    " exec "!git-permalink ~/dev/rust-todo/src/cli/cli_parser.rs 80-90"
+" endfunction

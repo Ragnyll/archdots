@@ -6,6 +6,7 @@ alias decodeHexToTxt='echo $1 | xxd -r -p'
 alias g++='g++ -std=c++20'
 alias gifshuffle='~/dev/hacking_tools/gifshuffle/gifshuffle'
 alias gti='git' # i suck at typing
+alias jo='joshuto'
 alias mute='amixer -q -D pulse sset Master toggle'
 alias mutt='neomutt'
 alias mkdir='mkdir -p'
@@ -16,11 +17,14 @@ alias pythong='python'
 alias python-ctags='ctags -R --fields=+l --languages=python --python-kinds=-iv -f ./tags $(python -c "import os, sys; print('"'"' '"'"'.join('"'"'{}'"'"'.format(d) for d in sys.path if os.path.isdir(d)))")'
 alias pacman_installed='comm -23 <(pacman -Qqett | sort) <(pacman -Qqg -g base-devel | sort | uniq)'
 alias ranger='~/bin/rangerq.sh'
+alias rgdb='rust-gdb'
+alias rss='newsboat'
 alias rust_build_watch='find . -type f -not -path "./target/**/*" -name "*.rs" | entr sh -c "cargo build"'
 alias scim='sc-im'
 alias sl='ls'
 alias sqlite='sqlite3'
 alias stegosuite='/usr/lib/jvm/java-8-openjdk/bin/java -jar ~/Applications/stegosuite-0.7-linux_amd64.jar'
+alias systemctl='systemctl'
 alias tor='~/Applications/tor-browser_en-US/Browser/start-tor-browser'
 alias vim='nvim -O'
 alias vranger='nvim .'
@@ -28,3 +32,50 @@ alias yay_installed='comm -23 <(yay -Qqett | sort) <(yay -Qqg -g base-devel | so
 
 # I cant find this stupid fucking alias. Its somewhere in a zsh conf
 unalias rm
+#!/bin/zsh
+
+function emptymailtrash() {
+    read confirm\?"Really delete all mail from Trash (Y/N)? "
+    [ $(echo $confirm | grep -i y | wc -l) -eq '1' ] && rm -rf ~/Mail/Trash/* || echo "Trash Purge aborted!"
+}
+
+function markdowntodocx() {
+    # $1 input markdown file name
+    # $2 output pad file name
+    [[ $1 == "-h" ]] \
+        && printf "USAGE\nmarkdowntodocx INPUTMARKDOWNFILE OUTPUTDOCXFILE\n" \
+        || pandoc -s -V geometry:margin=1in  -o $2 $1
+}
+
+function markdowntopdf() {
+    # $1 input markdown file name
+    # $2 output pad file name
+    [[ $1 == "-h" ]] \
+        && printf "USAGE\nmarkdowntopdf INPUTMARKDOWNFILE OUTPUTPDFFILE\n" \
+        || pandoc -s -V geometry:margin=1in  -o $2 $1
+}
+
+function pbcopy {
+    # copies to clipboard like (the more egronomic) osx command but without the pipe
+    # $1 path to file
+    xclip -selection clipboard < $1
+}
+
+function vidtogif() {
+    # converts a video to a gif of desired size (defualting to 1080)
+    # $1 : video's input path
+    # $2 : output gif path
+    # $3 : skip seconds. How many seconds to skip from the head of the video
+    # $4 : duration. How long the gif will last
+    # $5 optional scale flag
+    scale="1080"
+    [[ $# -ge 4 ]] && ffmpeg -ss $3 \
+        -t $4 \
+        -i $1 \
+        -vf "fps=10,scale=$scale:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" \
+        -loop 0 $2 || \
+    printf "vidtogif: converts videos to gif files
+
+Usage:
+  vidtogif input_file output_path skip_s duration [scale]\n"
+}

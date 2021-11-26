@@ -105,15 +105,26 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 [module/vpn]
 type = custom/script
 exec = ~/bin/nordvpn-dmenu -s 
-interval = 60
+interval = 10
 click-left = ~/bin/nordvpn-dmenu
 
 
 [module/network]
-type = custom/script
-exec = ~/bin/netctl-menu -s 
-interval = 60
-click-left = ~/bin/netctl-menu
+type = internal/network
+interface = wlp82s0
+
+; sleep time betwen update
+interval = 4.0
+
+
+format-connected =  <label-connected>
+format-disconnected = 
+
+label-connected = %essid%
+label-connected-foreground = ${colors.foreground}
+
+label-disconnected = not connected
+label-disconnected-foreground = ${colors.foreground}
 
 [module/battery]
 type = internal/battery

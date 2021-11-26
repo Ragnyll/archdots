@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # num displays includes laptop display
 NUM_DISPLAYS="$(xrandr -q | grep " connected" | wc -l)"
 LAPTOP_DISPLAY="eDP-1"
@@ -9,6 +8,8 @@ RIGHT_DISPLAY="DP-0"
 
 function one_display() {
 	bspc monitor $LAPTOP_DISPLAY -d $LAPTOP_DISPLAY/1 $LAPTOP_DISPLAY/2 $LAPTOP_DISPLAY/3 $LAPTOP_DISPLAY/4 $LAPTOP_DISPLAY/5
+
+    bspc rule -a lightcord desktop='^3'
 }
 
 function two_displays() {
@@ -55,7 +56,7 @@ sxhkd &
 dunst &
 compton &
 ~/.config/polybar/launch.sh &
-conky -d
+# conky -d
 bspc config border_width         2
 bspc config window_gap          12
 bspc config split_ratio          0.52
@@ -64,3 +65,5 @@ bspc config gapless_monocle      true
 bspc config click_to_focus       true
 
 setxkbmap -option ctrl:swapcaps
+
+clipmenud &

@@ -10,6 +10,7 @@ attrs \
 certifi \
 distlib \
 docopt \
+doq \
 filelock \
 filetype \
 fire \

@@ -1,0 +1,52 @@
+#!/bin/sh
+
+# any failure in piped commands aborts pipe
+set -o pipefail
+# exit when any command fails
+set -e
+
+function echoexit() {
+    # Print to stderr and exit
+    printf "$@" 1>&2
+    exit 1
+}
+
+function menu() {
+    # Menu command, should read from stdin and write to stdout.
+
+    dmenu -i -p "wallpapers"
+}
+function usage() {
+    printf "Dynamic menu for wallpaper switching.
+
+Usage:
+  wallpapers [-h]
+    -h                                 Display this help message."
+}
+
+function init_menu() {
+    # Initial menu.
+
+    local choices="select\nrandom favorite"
+    printf "$choices" | menu
+}
+
+function connect() {
+    local choices=$(netctl list)
+    printf "$choices" | menu
+}
+
+function disconnect() {
+    sudo netctl stop-all
+}
+
+case "$(init_menu)" in
+    "select")
+        st -e ranger ~/Pictures/wallpapers/
+        ;;
+    "random favorite")
+        python3 ~/bin/random_bg.py
+        ;;
+    *)
+        ;;
+esac
