@@ -155,7 +155,7 @@ onoremap p i(
 let g:mkdp_auto_close = 0
 autocmd FileType markdown nnoremap <leader>p :MarkdownPreviewToggle<cr>
 autocmd FileType markdown nnoremap Q gqq
-autocmd FileType markdown nnoremap <leader><tab> i&nbsp;&nbsp;&nbsp;&nbsp;<Esc>
+autocmd FileType markdown iabbrev NBSP &nbsp;&nbsp;&nbsp;
 " preview markdown in surf (cuz its sexy without tabs)
 let g:mkdp_browser = 'surf'
 

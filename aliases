@@ -5,6 +5,7 @@ alias dvwa='sudo docker run --rm -it -p 80:80 vulnerables/web-dvwa'
 alias decodeHexToTxt='echo $1 | xxd -r -p'
 alias g++='g++ -std=c++20'
 alias gifshuffle='~/dev/hacking_tools/gifshuffle/gifshuffle'
+alias gpsu='git push --set-upstream origin $(git branch --show-current)'
 alias gti='git' # i suck at typing
 alias jo='joshuto'
 alias mute='amixer -q -D pulse sset Master toggle'
@@ -78,4 +79,18 @@ function vidtogif() {
 
 Usage:
   vidtogif input_file output_path skip_s duration [scale]\n"
+}
+
+
+function cpstat()
+{
+  local pid="${1:-$(pgrep -xn cp)}" src dst
+  [[ "$pid" ]] || return
+  while [[ -f "/proc/$pid/fd/3" ]]; do
+    read src dst < <(stat -L --printf '%s ' "/proc/$pid/fd/"{3,4})
+    (( src )) || break
+    printf 'cp %d%%\r' $((dst*100/src))
+    sleep 1
+  done
+  echo
 }
