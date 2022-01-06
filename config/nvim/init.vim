@@ -1,12 +1,14 @@
 call plug#begin('~/.vim/plugged')
 
 " language support
+Plug 'Shougo/unite.vim'
 " supports rust coc-pyright
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Rust
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
 Plug 'cespare/vim-toml'
+Plug 'rhysd/rust-doc.vim'
 " Lua
 Plug 'wsdjeg/vim-lua'
 " python
@@ -30,7 +32,7 @@ Plug 'pseewald/vim-anyfold'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
-Plug 'kevinhwang91/rnvimr'
+Plug 'kevinhwang91/rnvimr', { 'branch': 'main' }
 Plug 'RobertAudi/git-blame.vim'
 Plug 'APZelos/blamer.nvim'
 " konvenient keybinds

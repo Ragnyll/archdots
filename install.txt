@@ -16,6 +16,7 @@ bspwm
 ca-certificates-mozilla
 calcurse
 cava-git
+chromium
 clamav
 clipmenu
 cmake
@@ -31,6 +32,7 @@ dirb
 dnstracer
 docker
 dolphin-emu-git
+drawio-desktop-bin
 dunst
 efibootmgr
 entr
@@ -69,6 +71,7 @@ lxappearance
 lynx
 macchanger
 man-db
+mesa-utils
 moc
 moka-icon-theme
 mongodb-bin
@@ -113,6 +116,7 @@ screenkey
 scrot
 signal-desktop
 simple-scan
+sqlitebrowser
 surfraw
 sxhkd
 texlive-bibtexextra
@@ -152,4 +156,6 @@ yay
 youtube-dl
 yubikey-manager
 zathura-pdf-mupdf
+zola
+zoom
 zsh

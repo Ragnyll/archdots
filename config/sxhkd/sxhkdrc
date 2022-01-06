@@ -155,7 +155,10 @@ super + F1
 # Network
 super + F8
 	~/bin/netctl-menu
-
+#
+# System monitors
+super + F9
+	~/bin/conky_toggle.sh
 #
 # Screenshots
 #

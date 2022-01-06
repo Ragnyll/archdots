@@ -4,15 +4,15 @@ https://feeds.megaphone.fm/darknetdiaries podcasts security
 
 # Youtube subscriptions
 ## Rust
-https://www.youtube.com/feeds/videos.xml?channel_id=UCaYhcUwRBNscFNUKTjgPFiA youtube programming
+https://www.youtube.com/feeds/videos.xml?channel_id=UCaYhcUwRBNscFNUKTjgPFiA youtube programming rust
+## This week in rust
+https://this-week-in-rust.org/atom.xml programming rust jobs
 ## Videogamedunkey
 https://www.youtube.com/feeds/videos.xml?channel_id=UCsvn_Po0SmunchJYOWpOxMg youtube vlog
 ## BBoyNetwork
-https://www.youtube.com/feeds/videos.xml?channel_id=UCgL72kbkFqpaAqlxmS97szA youtube breaking
+https://www.youtube.com/feeds/videos.xml?channel_id=UCgL72kbkFqpaAqlxmS97szA youtube breaking cache
 ## TanTan
 https://www.youtube.com/feeds/videos.xml?channel_id=UChl_NKOs1qqh_x7yJfaDpDw youtube programming
-## Animenz
-https://www.youtube.com/feeds/videos.xml?channel_id=UCyW-leqPXUunrXXxFjpZ7VA youtube music
 ## BBoyNorth
 https://www.youtube.com/feeds/videos.xml?channel_id=UCCaphXnRWbSooLv-aRPQoag youtube breaking
 ## DunkTank
@@ -33,7 +33,12 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UCgiz3Pm3FBhDyy3g_fP5OVA you
 # Reddit
 ## r/unixporn
 https://www.reddit.com/r/unixporn.rss linux
-## r/arhlinux
+## r/archlinux
 https://www.reddit.com/r/archlinux.rss linux
 ## r/rust
-https://www.reddit.com/r/rust.rss programming
+https://www.reddit.com/r/rust.rss programming rust
+## r/rust
+https://www.reddit.com/r/bspwm.rss programming rust
+
+# News
+https://kerkour.com/feed.xml programming rust security
