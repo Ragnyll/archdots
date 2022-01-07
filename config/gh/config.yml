@@ -1,0 +1,7 @@
+git_protocol: ssh
+editor: nvim
+prompt: enabled
+pager: cat
+aliases:
+    co: pr checkout
+browser: firefox

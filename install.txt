@@ -45,6 +45,7 @@ flake8
 fping
 gdb
 gimp
+github-cli
 glava
 gobuster
 gparted
