@@ -32,7 +32,7 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UCgiz3Pm3FBhDyy3g_fP5OVA you
 
 # Reddit
 ## r/unixporn
-https://www.reddit.com/r/unixporn.rss linux cache
+https://www.reddit.com/r/unixporn.rss linux
 ## r/archlinux
 https://www.reddit.com/r/archlinux.rss linux
 ## r/rust
@@ -41,4 +41,6 @@ https://www.reddit.com/r/rust.rss programming rust
 https://www.reddit.com/r/bspwm.rss programming rust
 
 # News
-https://kerkour.com/feed.xml programming rust security
+https://kerkour.com/feed.xml programming rust security cache
+# Rust Blog
+https://blog.rust-lang.org/feed.xml rust

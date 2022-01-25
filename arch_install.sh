@@ -40,7 +40,6 @@ ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
 ln -sf ~/.dotfiles/config ~/.config
 ln -sf ~/.dotfiles/surf ~/.surf
 
-
 # install mutt
 git clone git@gitlab.com:Ragnyll/my_mutt.git && cd my_mutt && install.sh && cd ..
 
@@ -66,6 +65,10 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 curl -L get.rvm.io > rvm-install
 bash < ./rvm-install
+
+mkdir ~/.config/skim/
+curl https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh -o ~/.config/skim/completion.zsh
+curl https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh -o ~/.config/skim/key-bindings.zsh
 
 # change shell to zsh (might affect later calls)
 # (manual intervention say no to most thigns since most dotfile symlinks have happened)

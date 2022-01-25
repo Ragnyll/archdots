@@ -29,6 +29,8 @@ export PATH="$PATH:$HOME/.rvm/bin"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 source $HOME/.aliases
+source $HOME/.config/skim/completion.zsh
+source $HOME/.config/skim/key-bindings.zsh
 
 # zoptions
 setopt rmstarsilent

@@ -29,7 +29,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'kovetskiy/sxhkd-vim'
 Plug 'pseewald/vim-anyfold'
 " file searching / exploring
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 Plug 'kevinhwang91/rnvimr', { 'branch': 'main' }
@@ -158,6 +157,8 @@ let g:mkdp_auto_close = 0
 autocmd FileType markdown nnoremap <leader>p :MarkdownPreviewToggle<cr>
 autocmd FileType markdown nnoremap Q gqq
 autocmd FileType markdown iabbrev NBSP &nbsp;&nbsp;&nbsp;
+" correct spelling
+autocmd FileType markdown nnoremap <leader>s z=
 " preview markdown in surf (cuz its sexy without tabs)
 let g:mkdp_browser = 'surf'
 
