@@ -1,6 +1,6 @@
 max-items 20
 auto-reload yes
-browser "firefox --new-tab %u &"
+browser firefox
 
 include /usr/share/doc/newsboat/contrib/colorschemes/inkpot
 
@@ -22,8 +22,3 @@ bind-key N prev-unread
 bind-key D pb-download
 bind-key U show-urls
 bind-key x pb-delete
-
-# macros
-## this is a blocking operation
-macro y set browser "mpv %u" ; open-in-browser ; set browser "elinks %u"
-macro Y set browser "youtube-dl %u -R infinite --output ~/Videos/rss/" ; open-in-browser ; set browser "elinks %u"

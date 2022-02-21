@@ -17,7 +17,7 @@ super + @space
 super + p
 	~/bin/passmenu2 clip_pass
 
-super + shift + p
+super + shift + v
 	clipmenu
 
 #

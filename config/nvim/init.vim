@@ -101,7 +101,7 @@ autocmd FileType rust let termdebugger="rust-gdb"
 " ctrl + ] go to def
 " ctrl + T go back
 " ctrl + W ctrl + ] open in horizantal split
-" leader + ] to open def in new tag
+" leader + ] to open def in new tab
 " leader + \ to open def in new vertial split
 map <leader>] :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 map <leader>\ :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
