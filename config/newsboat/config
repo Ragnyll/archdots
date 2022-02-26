@@ -1,6 +1,6 @@
 max-items 20
 auto-reload yes
-browser firefox
+browser "newsdock open %u"
 
 include /usr/share/doc/newsboat/contrib/colorschemes/inkpot
 
