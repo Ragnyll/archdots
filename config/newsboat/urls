@@ -6,35 +6,25 @@ https://feeds.megaphone.fm/darknetdiaries podcasts security
 ## Rust
 https://www.youtube.com/feeds/videos.xml?channel_id=UCaYhcUwRBNscFNUKTjgPFiA youtube programming rust
 ## This week in rust
-https://this-week-in-rust.org/atom.xml programming rust jobs cache
+https://this-week-in-rust.org/atom.xml programming rust jobs
 ## Videogamedunkey
 https://www.youtube.com/feeds/videos.xml?channel_id=UCsvn_Po0SmunchJYOWpOxMg youtube vlog cache
 ## BBoyNetwork
-https://www.youtube.com/feeds/videos.xml?channel_id=UCgL72kbkFqpaAqlxmS97szA youtube breaking
+https://www.youtube.com/feeds/videos.xml?channel_id=UCgL72kbkFqpaAqlxmS97szA youtube breaking cache
 ## TanTan
-https://www.youtube.com/feeds/videos.xml?channel_id=UChl_NKOs1qqh_x7yJfaDpDw youtube programming
-## BBoyNorth
-https://www.youtube.com/feeds/videos.xml?channel_id=UCCaphXnRWbSooLv-aRPQoag youtube breaking
+https://www.youtube.com/feeds/videos.xml?channel_id=UChl_NKOs1qqh_x7yJfaDpDw youtube programming cache
 ## DunkTank
 https://www.youtube.com/feeds/videos.xml?channel_id=UCGiJeCKTVKIxtaYZOidh19g youtube vlog
-## Wolf
-https://www.youtube.com/feeds/videos.xml?channel_id=UChgd_HVktFNhwqaOuVKJV2Q youtube breaking
-## MadFootage
-https://www.youtube.com/feeds/videos.xml?channel_id=UCaHxkh_pLCyux6KS4MyKhSw youtube breaking
 ## Simone Giertz
-https://www.youtube.com/feeds/videos.xml?channel_id=UC3KEoMzNz8eYnwBC34RaKCQ youtube vlog
+https://www.youtube.com/feeds/videos.xml?channel_id=UC3KEoMzNz8eYnwBC34RaKCQ youtube vlog cache
 ## Stance
-https://www.youtube.com/feeds/videos.xml?channel_id=UCgiz3Pm3FBhDyy3g_fP5OVA youtube breaking
+https://www.youtube.com/feeds/videos.xml?channel_id=UCgiz3Pm3FBhDyy3g_fP5OVA youtube breaking cache
 
 # Reddit
-## r/unixporn
-https://www.reddit.com/r/unixporn.rss linux
-## r/archlinux
-https://www.reddit.com/r/archlinux.rss linux
 ## r/rust
 https://www.reddit.com/r/rust.rss programming rust
 
 # News
 https://kerkour.com/feed.xml programming rust security cache
 # Rust Blog
-https://blog.rust-lang.org/feed.xml rust
+https://blog.rust-lang.org/feed.xml rust cache

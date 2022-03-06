@@ -4,6 +4,10 @@ call plug#begin('~/.vim/plugged')
 Plug 'Shougo/unite.vim'
 " supports rust coc-pyright
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 " Rust
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
@@ -91,6 +95,11 @@ augroup Racer
     autocmd FileType rust nmap <buffer> gd         <Plug>(rust-def-tab)
     autocmd FileType rust nmap <buffer> <leader>gd <Plug>(rust-doc)
 augroup END
+
+let g:LanguageClient_serverCommands = {
+\ 'rust': ['rust-analyzer'],
+\ }
+
 
 " rust-gdb
 packadd termdebug
