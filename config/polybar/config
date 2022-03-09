@@ -102,6 +102,10 @@ bar-volume-fill-font = 2
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
 
+[module/cpu]
+type = internal/cpu
+interval = 15.0
+
 [module/vpn]
 type = custom/script
 exec = ~/bin/nordvpn-dmenu -s 
