@@ -36,7 +36,7 @@ font-3 = FontAwesome 5 Free:size=11:style=Solid;2
 
 modules-left = bspwm
 ; modules-center = xwindow
-modules-right = vpn network pulseaudio battery date
+modules-right = fs-root fs-home cpu vpn network pulseaudio backlight battery date
 
 tray-position = right
 tray-padding = 2
@@ -105,6 +105,18 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 [module/cpu]
 type = internal/cpu
 interval = 15.0
+; Available tags:
+;   <label> (default)
+;   <bar-load>
+;   <ramp-load>
+;   <ramp-coreload>
+format = <label>
+
+; Available tokens:
+;   %percentage% (default) - total cpu load
+;   %percentage-cores% - load percentage for each core
+;   %percentage-core[1-9]% - load percentage for specific core
+label =   %percentage%%
 
 [module/vpn]
 type = custom/script
@@ -150,6 +162,23 @@ ramp-capacity-3 = 
 ramp-capacity-4 = 
 ramp-capacity-foreground = ${colors.foreground}
 
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+use-actual-brightness = true
+format = <ramp> <label>
+
+; Available tokens:
+;   %percentage% (default)
+label = %percentage%%
+
+; Only applies if <ramp> is used
+ramp-0 = 🌕
+ramp-1 = 🌔
+ramp-2 = 🌓
+ramp-3 = 🌒
+ramp-4 = 🌑
+
 [module/date]
 type = internal/date
 interval = 5
@@ -164,5 +193,21 @@ format-prefix = 
 format-prefix-foreground = ${colors.foreground}
 
 label = %time% %date%
+
+[fs-base]
+type = internal/fs
+fixed-values = true
+label-mounted = %mountpoint%: %used%
+interval = 300
+
+[module/fs-root]
+inherit = fs-base
+mount-0 = /
+label-mounted =  %free%
+
+[module/fs-home]
+inherit = fs-base
+mount-0 = /home
+label-mounted =  %free%
 
 ; vim:ft=dosini
