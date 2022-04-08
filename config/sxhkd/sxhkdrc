@@ -14,6 +14,10 @@ super + Return
 super + @space
 	~/bin/dmenu_run_history
 
+super + shift + @space
+	printf | dmenu -p "Web Search" -sb purple | search_break search && search_break display-db | dmenu -p "Select Link" -sb purple| search_break select-item
+
+
 super + p
 	~/bin/passmenu2 clip_pass
 

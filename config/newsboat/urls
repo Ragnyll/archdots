@@ -4,7 +4,7 @@ https://feeds.megaphone.fm/darknetdiaries podcasts security
 
 # Youtube subscriptions
 ## Rust
-https://www.youtube.com/feeds/videos.xml?channel_id=UCaYhcUwRBNscFNUKTjgPFiA youtube programming rust
+https://www.youtube.com/feeds/videos.xml?channel_id=UCaYhcUwRBNscFNUKTjgPFiA cache youtube programming rust
 ## This week in rust
 https://this-week-in-rust.org/atom.xml programming rust jobs
 ## Videogamedunkey
@@ -19,6 +19,10 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UCGiJeCKTVKIxtaYZOidh19g you
 https://www.youtube.com/feeds/videos.xml?channel_id=UC3KEoMzNz8eYnwBC34RaKCQ youtube vlog cache
 ## Stance
 https://www.youtube.com/feeds/videos.xml?channel_id=UCgiz3Pm3FBhDyy3g_fP5OVA youtube breaking cache
+## Nakey Jakey
+https://www.youtube.com/feeds/videos.xml?channel_id=UCSdma21fnJzgmPodhC9SJ3g youtube vlog cache
+## Jon Gjengset
+https://www.youtube.com/feeds/videos.xml?channel_id=UC_iD0xppBwwsrM9DegC5cQQ youtube rust
 
 # Reddit
 ## r/rust
@@ -28,3 +32,7 @@ https://www.reddit.com/r/rust.rss programming rust
 https://kerkour.com/feed.xml programming rust security cache
 # Rust Blog
 https://blog.rust-lang.org/feed.xml rust cache
+
+# Friends blogs
+## Mikeos Blog
+https://pendemic.github.io/feed.xml

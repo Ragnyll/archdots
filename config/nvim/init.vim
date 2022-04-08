@@ -1,7 +1,6 @@
 call plug#begin('~/.vim/plugged')
 
 " language support
-Plug 'Shougo/unite.vim'
 " supports rust coc-pyright
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'autozimu/LanguageClient-neovim', {

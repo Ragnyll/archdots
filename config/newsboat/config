@@ -1,6 +1,6 @@
 max-items 20
 auto-reload yes
-browser "newsdock open %u"
+browser "newsdock open %u --video-streamer mpv"
 
 include /usr/share/doc/newsboat/contrib/colorschemes/inkpot
 

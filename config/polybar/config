@@ -36,7 +36,7 @@ font-3 = FontAwesome 5 Free:size=11:style=Solid;2
 
 modules-left = bspwm
 ; modules-center = xwindow
-modules-right = fs-root fs-home cpu vpn network pulseaudio backlight battery date
+modules-right = cpu fs-root fs-home vpn network pulseaudio backlight battery date
 
 tray-position = right
 tray-padding = 2
