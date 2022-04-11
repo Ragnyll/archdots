@@ -15,6 +15,8 @@ Plug 'ray-x/lsp_signature.nvim'
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
 Plug 'rhysd/rust-doc.vim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'saecki/crates.nvim', { 'tag': 'v0.1.0' }
 " Lua
 Plug 'wsdjeg/vim-lua'
 " python
@@ -48,6 +50,7 @@ set clipboard=unnamed
 " Standard remaps
 let mapleader=','
 let maplocalleader='//'
+nnoremap m %
 nnoremap <leader>w :w<cr>
 nnoremap <leader>ev :tabedit ~/.config/nvim/init.vim <cr>
 
@@ -168,6 +171,7 @@ nnoremap <F2> :set number! norelativenumber!<cr>
 "
 "" LSP configuration
 lua << END
+require('crates').setup()
 local cmp = require'cmp'
 
 local lspconfig = require'lspconfig'
@@ -187,6 +191,8 @@ cmp.setup({
     { name = 'nvim_lsp' },
   }, {
     { name = 'path' },
+  }, {
+      { name = 'crates' }
   }),
   experimental = {
     ghost_text = true,
