@@ -35,3 +35,6 @@ source $HOME/.config/skim/key-bindings.zsh
 # zoptions
 setopt rmstarsilent
 setopt histignoredups
+
+# key binds
+bindkey '^ ' autosuggest-accept
