@@ -3,13 +3,16 @@ call plug#begin('~/.vim/plugged')
 " language support
 " supports rust coc-pyright
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+Plug 'neovim/nvim-lspconfig'
+" Semantic language support
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp', {'branch': 'main'}
+Plug 'hrsh7th/cmp-buffer', {'branch': 'main'}
+Plug 'hrsh7th/cmp-path', {'branch': 'main'}
+Plug 'hrsh7th/nvim-cmp', {'branch': 'main'}
+Plug 'ray-x/lsp_signature.nvim'
 " Rust
 Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
 Plug 'cespare/vim-toml'
 Plug 'rhysd/rust-doc.vim'
 " Lua
@@ -17,28 +20,27 @@ Plug 'wsdjeg/vim-lua'
 " python
 Plug 'tell-k/vim-autopep8'
 Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
-" c++
-Plug 'rhysd/vim-clang-format'
 " tmux
 Plug 'tmux-plugins/vim-tmux'
 " markdown
-Plug 'gabrielelana/vim-markdown'
+Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 " make it pretty
-" Plug 'scrooloose/syntastic'
 Plug 'vim-airline/vim-airline'
 Plug 'dylanaraps/wal.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'kovetskiy/sxhkd-vim'
 Plug 'pseewald/vim-anyfold'
+Plug 'machakann/vim-highlightedyank'
 " file searching / exploring
+Plug 'airblade/vim-rooter'
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 Plug 'kevinhwang91/rnvimr', { 'branch': 'main' }
 Plug 'RobertAudi/git-blame.vim'
-Plug 'APZelos/blamer.nvim'
 " konvenient keybinds
 Plug 'scrooloose/nerdcommenter'
+Plug 'stephpy/vim-yaml'
 
 call plug#end()
 set clipboard=unnamed
@@ -46,6 +48,7 @@ set clipboard=unnamed
 " Standard remaps
 let mapleader=','
 let maplocalleader='//'
+nnoremap <leader>w :w<cr>
 nnoremap <leader>ev :tabedit ~/.config/nvim/init.vim <cr>
 
 " FZF
@@ -85,34 +88,9 @@ let g:rnvimr_action = {
     \ 'yw': 'EmitRangerCwd'
     \ }
 
-" Rust racer
-set hidden
-let g:racer_cmd = "/home/ragnyll/.cargo/bin/racer"
-let g:racer_experimental_completer = 1
-augroup Racer
-    autocmd!
-    autocmd FileType rust nmap <buffer> gd         <Plug>(rust-def-tab)
-    autocmd FileType rust nmap <buffer> <leader>gd <Plug>(rust-doc)
-augroup END
-
-let g:LanguageClient_serverCommands = {
-\ 'rust': ['rust-analyzer'],
-\ }
-
-
 " rust-gdb
 packadd termdebug
 autocmd FileType rust let termdebugger="rust-gdb"
-
-" ctags
-" basic commands
-" ctrl + ] go to def
-" ctrl + T go back
-" ctrl + W ctrl + ] open in horizantal split
-" leader + ] to open def in new tab
-" leader + \ to open def in new vertial split
-map <leader>] :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
-map <leader>\ :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
 " rusty-ctags
 " to tag everything up for the first time call `rusty-tags vi` in a project root dir
@@ -120,7 +98,6 @@ autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
 autocmd BufWritePost *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" | redraw!
 
 syntax on
-set background=dark
 colorscheme wal
 hi Normal ctermbg=none
 filetype plugin indent on
@@ -140,6 +117,9 @@ set incsearch
 set hlsearch
 set ignorecase
 set smartcase
+" Search results centered please
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
 
 " formatting
 " <F1> is annoying so make it useful
@@ -156,9 +136,6 @@ nnoremap L $
 " Visual Mode remaps
 vnoremap H ^
 vnoremap L $
-
-" Operator remaps
-onoremap p i(
 
 " markdown utility
 let g:mkdp_auto_close = 0
@@ -188,7 +165,102 @@ set mouse=a
 
 " quickly turn off numbers
 nnoremap <F2> :set number! norelativenumber!<cr>
-" function Permalink()
-    " let s:curline = getline('.')
-    " exec "!git-permalink ~/dev/rust-todo/src/cli/cli_parser.rs 80-90"
-" endfunction
+"
+"" LSP configuration
+lua << END
+local cmp = require'cmp'
+
+local lspconfig = require'lspconfig'
+cmp.setup({
+  snippet = {
+    -- REQUIRED by nvim-cmp. get rid of it once we can
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
+  mapping = {
+    -- Tab immediately completes. C-n/C-p to select.
+    ['<Tab>'] = cmp.mapping.confirm({ select = true })
+  },
+  sources = cmp.config.sources({
+    -- TODO: currently snippets from lsp end up getting prioritized -- stop that!
+    { name = 'nvim_lsp' },
+  }, {
+    { name = 'path' },
+  }),
+  experimental = {
+    ghost_text = true,
+  },
+})
+
+-- Enable completing paths in :
+cmp.setup.cmdline(':', {
+  sources = cmp.config.sources({
+    { name = 'path' }
+  })
+})
+
+-- Setup lspconfig.
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  --Enable completion triggered by <c-x><c-o>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<space>r', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<space>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+
+  -- Get signatures (and _only_ signatures) when in argument lists.
+  require "lsp_signature".on_attach({
+    doc_lines = 0,
+    handler_opts = {
+      border = "none"
+    },
+  })
+end
+
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+lspconfig.rust_analyzer.setup {
+  on_attach = on_attach,
+  flags = {
+    debounce_text_changes = 150,
+  },
+  settings = {
+    ["rust-analyzer"] = {
+      cargo = {
+        allFeatures = true,
+      },
+      completion = {
+	postfix = {
+	  enable = false,
+	},
+      },
+    },
+  },
+  capabilities = capabilities,
+}
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    virtual_text = true,
+    signs = true,
+    update_in_insert = true,
+  }
+)
+END
