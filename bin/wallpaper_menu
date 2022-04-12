@@ -42,7 +42,7 @@ function disconnect() {
 
 case "$(init_menu)" in
     "select")
-        st -e ranger ~/Pictures/wallpapers/
+        alacritty -e ranger ~/Pictures/wallpapers/
         ;;
     "random favorite")
         python3 ~/bin/random_bg.py
