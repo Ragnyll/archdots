@@ -130,8 +130,8 @@ autocmd FileType rust nnoremap <F1> :RustFmt<cr>
 autocmd FileType python nnoremap <buffer> <F1> :Autopep8<CR>
 
 " Normal Mode remaps
-nnoremap <space> viw
-nnoremap <leader><space> viW
+nnoremap <leader>w<space> viw
+nnoremap <leader>W viW
 nnoremap U <c-R>
 nnoremap H ^
 nnoremap L $
