@@ -8,7 +8,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # set the theme terminal theme correctly
-~/bin/wal_setter.sh $(head -n 2 ~/.config/wallpaper)
+# ~/bin/wal_setter.sh $(head -n 2 ~/.config/wallpaper)
 
 export EDITOR=nvim
 
@@ -36,3 +36,4 @@ setopt histignoredups
 
 # key binds
 bindkey '^ ' autosuggest-accept
+eval "$(oh-my-posh init zsh --config ~/.config/prompts/v_sitecorian.omp.json)"

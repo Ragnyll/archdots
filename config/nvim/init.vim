@@ -16,6 +16,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
 Plug 'rhysd/rust-doc.vim'
 Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'saecki/crates.nvim', { 'tag': 'v0.1.0' }
 " Lua
 Plug 'wsdjeg/vim-lua'
@@ -25,11 +26,12 @@ Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
 " tmux
 Plug 'tmux-plugins/vim-tmux'
 " markdown
-Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 " make it pretty
 Plug 'vim-airline/vim-airline'
-Plug 'dylanaraps/wal.vim'
+Plug 'ukyouz/onedark.vim'
+" Plug 'dylanaraps/wal.vim'
+Plug 'ukyouz/onedark.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'kovetskiy/sxhkd-vim'
 Plug 'pseewald/vim-anyfold'
@@ -42,7 +44,6 @@ Plug 'kevinhwang91/rnvimr', { 'branch': 'main' }
 Plug 'RobertAudi/git-blame.vim'
 " konvenient keybinds
 Plug 'scrooloose/nerdcommenter'
-Plug 'stephpy/vim-yaml'
 
 call plug#end()
 set clipboard=unnamed
@@ -101,7 +102,8 @@ autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
 autocmd BufWritePost *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" | redraw!
 
 syntax on
-colorscheme wal
+" colorscheme wal
+colorscheme onedark
 hi Normal ctermbg=none
 filetype plugin indent on
 set autoindent
@@ -171,6 +173,17 @@ nnoremap <F2> :set number! norelativenumber!<cr>
 "
 "" LSP configuration
 lua << END
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
+
 require('crates').setup()
 local cmp = require'cmp'
 

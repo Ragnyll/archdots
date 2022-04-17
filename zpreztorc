@@ -13,13 +13,7 @@ zstyle ':prezto:load' pmodule \
   'git' \
   'syntax-highlighting' \
   'history-substring-search' \
-  'autosuggestions' \
-  'prompt'
+  'autosuggestions'
 
 # Set the key mapping style to 'emacs' or 'vi'.
 zstyle ':prezto:module:editor' key-bindings 'vi'
-
-#
-# Prompt
-#
-zstyle ':prezto:module:prompt' theme 'paradox'
