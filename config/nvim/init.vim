@@ -29,6 +29,7 @@ Plug 'tmux-plugins/vim-tmux'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 " make it pretty
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'ukyouz/onedark.vim'
 " Plug 'dylanaraps/wal.vim'
 Plug 'ukyouz/onedark.vim'
@@ -64,6 +65,21 @@ let g:fzf_action = {
 
 " Ack
 nnoremap <leader>f :Ag<cr>
+
+
+let g:airline_theme='murmur'
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.dirty='⚡'
 
 " Supertab
 let g:SupertabDefaultCompletionType='<c-n>'

@@ -8,7 +8,8 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # set the theme terminal theme correctly
-# ~/bin/wal_setter.sh $(head -n 2 ~/.config/wallpaper)
+# needed to see command hinting against background
+~/bin/wal_setter.sh $(head -n 2 ~/.config/wallpaper)
 
 export EDITOR=nvim
 
