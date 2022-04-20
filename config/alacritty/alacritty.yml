@@ -1,0 +1,12 @@
+scrolling:
+  history: 0
+font:
+  size: 7
+  normal:
+    family: "FiraCode Nerd Font"
+
+import:
+  - ~/.cache/wal/colors-alacritty.yml
+
+window:
+  opacity: .875
