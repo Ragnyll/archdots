@@ -67,7 +67,7 @@ let g:fzf_action = {
 nnoremap <leader>f :Ag<cr>
 
 
-let g:airline_theme='murmur'
+let g:airline_theme='deus'
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
