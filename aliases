@@ -6,6 +6,7 @@ alias dvwa='sudo docker run --rm -it -p 80:80 vulnerables/web-dvwa'
 alias decodeHexToTxt='echo $1 | xxd -r -p'
 alias g++='g++ -std=c++20'
 alias gifshuffle='~/dev/hacking_tools/gifshuffle/gifshuffle'
+alias gp='git push'
 alias gpsu='git push --set-upstream origin $(git branch --show-current)'
 alias gti='git' # i suck at typing
 alias jo='joshuto'
@@ -40,8 +41,6 @@ alias im='nvim'
 alias whiteboard='lorien'
 alias yay_installed='comm -23 <(yay -Qqett | sort) <(yay -Qqg -g base-devel | sort | uniq)'
 
-# I cant find this stupid fucking alias. Its somewhere in a zsh conf
-unalias rm
 #!/bin/zsh
 
 function emptymailtrash() {
