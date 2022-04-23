@@ -38,6 +38,7 @@ path=(
   $HOME/.local/bin
   $HOME/.local/lib/python3.9/site-packages
   $HOME/bin/
+  $HOME/.zfunc
   $path
 )
 
@@ -61,5 +62,3 @@ fi
 # Stop java gui applications from being screwy
 #
 export _JAVA_AWT_WM_NONREPARENTING=1
-
-fpath+=~/.zfunc
