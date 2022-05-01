@@ -53,6 +53,7 @@ set clipboard=unnamed
 let mapleader=','
 let maplocalleader='//'
 nnoremap m %
+vnoremap m %
 nnoremap <leader>w :w<cr>
 nnoremap <leader>ev :tabedit ~/.config/nvim/init.vim <cr>
 
@@ -111,11 +112,6 @@ let g:rnvimr_action = {
 " rust-gdb
 packadd termdebug
 autocmd FileType rust let termdebugger="rust-gdb"
-
-" rusty-ctags
-" to tag everything up for the first time call `rusty-tags vi` in a project root dir
-autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
-autocmd BufWritePost *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&" | redraw!
 
 syntax on
 " colorscheme wal

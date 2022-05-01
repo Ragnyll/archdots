@@ -36,5 +36,5 @@ setopt rmstarsilent
 setopt histignoredups
 
 # key binds
-bindkey '^ ' autosuggest-accept
+bindkey '^n' autosuggest-accept
 eval "$(oh-my-posh init zsh --config ~/.config/prompts/v_sitecorian.omp.json)"
