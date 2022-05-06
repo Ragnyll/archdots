@@ -178,7 +178,8 @@ set undofile
 set undodir=~/.vim/undo
 
 " Enable mouse mode
-set mouse=a
+" mouse mode is disabled. Fuck mice
+" set mouse=a
 
 " quickly turn off numbers
 nnoremap <F2> :set number! norelativenumber!<cr>
