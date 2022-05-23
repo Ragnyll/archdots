@@ -23,6 +23,7 @@ alias pacman='sudo pacman'
 alias python='bpython'
 alias pythong='bpython'
 alias pacman_installed='comm -23 <(pacman -Qqett | sort) <(pacman -Qqg -g base-devel | sort | uniq)'
+alias q='exit'
 alias rgdb='rust-gdb'
 alias rman='rusty-man'
 alias rss='newsboat'
@@ -38,6 +39,7 @@ alias vim='nvim'
 alias im='nvim'
 alias whiteboard='lorien'
 alias yay_installed='comm -23 <(yay -Qqett | sort) <(yay -Qqg -g base-devel | sort | uniq)'
+alias ytmusic='ytui-music run'
 
 #!/bin/zsh
 
