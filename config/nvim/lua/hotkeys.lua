@@ -1,7 +1,7 @@
 require('function/mapping')
 require('function/global_vars')
 
-nnoremap('<leader>ev', '<cmd>tabedit ' .. HOME .. '/.config/nvim/init.vim<cr>')
+nnoremap('<leader>ev', '<cmd>tabedit ' .. HOME .. '/.config/nvim/<cr>')
 
 nnoremap('m', '%')
 vnoremap('m', '%')

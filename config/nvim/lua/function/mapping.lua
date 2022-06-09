@@ -13,5 +13,5 @@ function inoremap(shortcut, command)
 end
 
 function vnoremap(shortcut, command)
-  map('n', shortcut, command)
+  map('v', shortcut, command)
 end

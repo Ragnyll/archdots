@@ -39,7 +39,8 @@ alias vim='nvim'
 alias im='nvim'
 alias whiteboard='lorien'
 alias yay_installed='comm -23 <(yay -Qqett | sort) <(yay -Qqg -g base-devel | sort | uniq)'
-alias ytmusic='ytui-music run'
+alias ytdlp='yt-dlp'
+
 
 #!/bin/zsh
 
