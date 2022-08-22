@@ -17,7 +17,7 @@ Plug 'cespare/vim-toml'
 Plug 'rhysd/rust-doc.vim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'saecki/crates.nvim', { 'tag': 'v0.1.0' }
+Plug 'saecki/crates.nvim'
 " Lua
 Plug 'wsdjeg/vim-lua'
 " python
@@ -52,8 +52,8 @@ set clipboard=unnamed
 " Standard remaps
 let mapleader=','
 let maplocalleader='//'
-nnoremap m %
-vnoremap m %
+nnoremap M %
+vnoremap M %
 nnoremap <leader>w :w<cr>
 nnoremap <leader>ev :tabedit ~/.config/nvim/init.vim <cr>
 
@@ -161,6 +161,7 @@ autocmd FileType markdown nnoremap Q gqq
 autocmd FileType markdown iabbrev NBSP &nbsp;&nbsp;&nbsp;
 " correct spelling
 autocmd FileType markdown nnoremap <leader>s z=
+autocmd Filetype markdown set spell spelllang=en_us
 " preview markdown in surf (cuz its sexy without tabs)
 let g:mkdp_browser = 'surf'
 

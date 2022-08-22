@@ -38,6 +38,7 @@ alias todo='gh issue --repo ragnyll/TODO'
 alias vim='nvim'
 alias im='nvim'
 alias whiteboard='lorien'
+alias yay='paru'
 alias yay_installed='comm -23 <(yay -Qqett | sort) <(yay -Qqg -g base-devel | sort | uniq)'
 alias ytdlp='yt-dlp'
 
