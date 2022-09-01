@@ -41,6 +41,7 @@ ln -sf ~/.dotfiles/config ~/.config
 ln -sf ~/.dotfiles/surf ~/.surf
 ln -sf ~/.dotfiles/config/prompts/ ~/.config
 ln -sf ~/.dotfiles/config/alacritty/ ~/.config
+ln -s ~/.dotfiles/config/leftwm ~/.config/
 
 # install mutt
 git clone git@gitlab.com:Ragnyll/my_mutt.git && cd my_mutt && install.sh && cd ..

@@ -1,2 +1,3 @@
 # ignore rust ctags
 rusty-tags.vi
+.vimspector.json

@@ -1,0 +1,46 @@
+return require('packer').startup(function()
+    use 'williamboman/mason.nvim'
+    use 'williamboman/mason-lspconfig.nvim'
+
+    use 'neovim/nvim-lspconfig'
+    use 'simrat39/rust-tools.nvim'
+
+    -- Completion framework:
+    use 'hrsh7th/nvim-cmp'
+
+    -- LSP completion source:
+    use 'hrsh7th/cmp-nvim-lsp'
+
+    -- Useful completion sources:
+    use 'hrsh7th/cmp-nvim-lua'
+    use 'hrsh7th/cmp-nvim-lsp-signature-help'
+    use 'hrsh7th/cmp-path'
+    use 'hrsh7th/cmp-vsnip'
+    use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/vim-vsnip'
+
+    -- Parsing libraries
+    use 'nvim-treesitter/nvim-treesitter'
+
+    -- Debugging
+    use 'puremourning/vimspector'
+
+    -- navigation
+    use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { {'nvim-lua/plenary.nvim'} } }
+    use { 'nvim-telescope/telescope-file-browser.nvim' }
+    use { 'kyazdani42/nvim-web-devicons' }
+    use { 'phaazon/hop.nvim', branch = 'v2'}
+
+    -- cool stuff
+    use 'vim-airline/vim-airline'
+    use 'vim-airline/vim-airline-themes'
+    use 'ukyouz/onedark.vim'
+    use 'airblade/vim-gitgutter'
+    use 'machakann/vim-highlightedyank'
+    use 'scrooloose/nerdcommenter'
+    use { 'saecki/crates.nvim', tag = 'v0.2.1', requires = { 'nvim-lua/plenary.nvim' }, }
+    -- TODO: Setup
+    use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
+    use 'airblade/vim-rooter'
+    use "lukas-reineke/indent-blankline.nvim"
+end)
