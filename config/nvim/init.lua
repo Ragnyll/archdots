@@ -1,4 +1,5 @@
 require 'plug'
+require('impatient')
 require 'opts'
 require 'vars'
 require 'keys'
@@ -132,11 +133,35 @@ require('nvim-treesitter.configs').setup {
   }
 }
 
-require 'hop'.setup {
+require('hop').setup {
     multi_windows = true,
     keys = 'etovxqpdygfblzhckisuran',
 }
 
-require 'indent_blankline'.setup {
+require('indent_blankline').setup {
     show_current_context = true,
+}
+
+require('nvim-autopairs').setup { }
+
+require('todo-comments').setup { }
+
+require('telescope').setup {
+    defaults = {
+        mappings = {
+            i = {
+                ["<C-h>"] = 'which_key',
+                ['<C-n>'] = 'move_selection_previous',
+                ['<C-p>'] = 'move_selection_next'
+            }
+        }
+    }
+}
+
+require('telescope').load_extension 'file_browser'
+
+require('lualine').setup {
+    options = {
+        theme = 'onedark'
+    }
 }

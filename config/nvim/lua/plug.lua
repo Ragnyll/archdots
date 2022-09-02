@@ -1,4 +1,6 @@
 return require('packer').startup(function()
+    -- go faster
+    use 'lewis6991/impatient.nvim'
     use 'williamboman/mason.nvim'
     use 'williamboman/mason-lspconfig.nvim'
 
@@ -18,6 +20,7 @@ return require('packer').startup(function()
     use 'hrsh7th/cmp-vsnip'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/vim-vsnip'
+    use 'windwp/nvim-autopairs'
 
     -- Parsing libraries
     use 'nvim-treesitter/nvim-treesitter'
@@ -30,10 +33,10 @@ return require('packer').startup(function()
     use { 'nvim-telescope/telescope-file-browser.nvim' }
     use { 'kyazdani42/nvim-web-devicons' }
     use { 'phaazon/hop.nvim', branch = 'v2'}
+    use { 'folke/todo-comments.nvim', requires = 'nvim-lua/plenary.nvim' }
 
     -- cool stuff
-    use 'vim-airline/vim-airline'
-    use 'vim-airline/vim-airline-themes'
+    use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
     use 'ukyouz/onedark.vim'
     use 'airblade/vim-gitgutter'
     use 'machakann/vim-highlightedyank'
@@ -42,5 +45,5 @@ return require('packer').startup(function()
     -- TODO: Setup
     use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
     use 'airblade/vim-rooter'
-    use "lukas-reineke/indent-blankline.nvim"
+    use 'lukas-reineke/indent-blankline.nvim'
 end)

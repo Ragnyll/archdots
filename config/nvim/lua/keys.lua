@@ -3,7 +3,6 @@ function map(mode, shortcut, command)
     vim.api.nvim_set_keymap(mode, shortcut, command, {noremap = true, silent = true})
 end
 
-
 vim.g.mapleader = ','
 vim.g.maplocalleader = '//'
 
@@ -34,5 +33,6 @@ map('n', '<leader>f', ':Telescope live_grep<cr>')
 map('n', '<leader>b', ':Telescope buffers<cr>')
 map('n', '<leader>h', ':Telescope help_tags<cr>')
 map('n', '<leader>r', ':Telescope file_browser<cr>')
+map('n', '<leader>td', ':TodoTelescope<cr>')
 map('n', 'f', ':HopWord<cr>')
 map('n', 'F', ':HopAnywhere<cr>')
