@@ -44,8 +44,8 @@ vim.opt.expandtab = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.encoding = 'utf-8'
-vim.opt.relativenumber = true
-vim.opt.number = true
+
+--vim.opt.relativenumber = true
 
 -- searching
 vim.opt.incsearch = true
@@ -69,4 +69,5 @@ autocmd FileType markdown nnoremap <leader>s z=
 autocmd Filetype markdown set spell spelllang=en_us
 " preview markdown in surf (cuz its sexy without tabs)
 let g:mkdp_browser = 'surf'
+let g:rnvimr_enable_ex = 1
 ]])

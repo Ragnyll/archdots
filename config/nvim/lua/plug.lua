@@ -30,10 +30,10 @@ return require('packer').startup(function()
 
     -- navigation
     use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { {'nvim-lua/plenary.nvim'} } }
-    use { 'nvim-telescope/telescope-file-browser.nvim' }
     use { 'kyazdani42/nvim-web-devicons' }
     use { 'phaazon/hop.nvim', branch = 'v2'}
     use { 'folke/todo-comments.nvim', requires = 'nvim-lua/plenary.nvim' }
+    use 'kevinhwang91/rnvimr'
 
     -- cool stuff
     use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
@@ -42,8 +42,7 @@ return require('packer').startup(function()
     use 'machakann/vim-highlightedyank'
     use 'scrooloose/nerdcommenter'
     use { 'saecki/crates.nvim', tag = 'v0.2.1', requires = { 'nvim-lua/plenary.nvim' }, }
-    -- TODO: Setup
-    use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
+    use({ "iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end, })
     use 'airblade/vim-rooter'
     use 'lukas-reineke/indent-blankline.nvim'
 end)

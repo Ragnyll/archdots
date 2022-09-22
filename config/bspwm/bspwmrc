@@ -66,4 +66,3 @@ bspc config click_to_focus       true
 
 setxkbmap -option ctrl:swapcaps
 clipmenud &
-newsdock update &

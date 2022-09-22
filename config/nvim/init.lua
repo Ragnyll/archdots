@@ -14,8 +14,6 @@ local rt = {
             -- Code action groups
             vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
 
-            -- TODO: Jump to definitions
-            require 'illuminate'.on_attach(client)
             end,
             ["rust-analyzer"] = {
                 checkOnSave = {
@@ -171,7 +169,6 @@ require('lspconfig')['rust_analyzer'].setup{
       ["rust-analyzer"] = {}
     }
 }
-
 -- Treesitter Plugin Setup
 require('nvim-treesitter.configs').setup {
   ensure_installed = { "lua", "rust", "toml" },
@@ -212,8 +209,6 @@ require('telescope').setup {
         }
     }
 }
-
-require('telescope').load_extension 'file_browser'
 
 require('lualine').setup {
     options = {
