@@ -1,7 +1,10 @@
+#shell:
+  #program: /bin
+
 scrolling:
   history: 0
 font:
-  size: 7
+  size: 10
   normal:
     family: "FiraCode Nerd Font"
 

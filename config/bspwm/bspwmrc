@@ -3,7 +3,7 @@
 # num displays includes laptop display
 NUM_DISPLAYS="$(xrandr -q | grep " connected" | wc -l)"
 LAPTOP_DISPLAY="eDP-1"
-CENTER_DISPLAY="DP-1"
+CENTER_DISPLAY="HDMI-0"
 RIGHT_DISPLAY="DP-0"
 
 function one_display() {

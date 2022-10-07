@@ -186,7 +186,6 @@ require('nvim-treesitter.configs').setup {
 }
 
 require('hop').setup {
-    multi_windows = true,
     keys = 'etovxqpdygfblzhckisuran',
 }
 

@@ -2,6 +2,7 @@
 alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0'
 alias c='clear'
 alias conflicts='git diff --name-only --diff-filter=U'
+alias compress-vid='ffmpeg -i $1 -vcodec libx265 -crf 28 $2'
 alias dvwa='sudo docker run --rm -it -p 80:80 vulnerables/web-dvwa'
 alias decodeHexToTxt='echo $1 | xxd -r -p'
 alias g++='g++ -std=c++20'
