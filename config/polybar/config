@@ -15,6 +15,7 @@ pseudo-transparency = false
 monitor = ${env:MONITOR:}
 
 width = 100%
+;height = 35
 height = 55
 fixed-center = false
 
@@ -29,6 +30,14 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
+; uncomment if using laptop only
+;font-0 = fixed:pixelsize=10;1
+;font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+;font-2 = siji:pixelsize=10;1
+;font-3 = FontAwesome 5 Free:size=11:style=Solid;2
+
+
+; uncommment when connected to desktop
 font-0 = fixed:pixelsize=13;1
 font-1 = unifont:fontformat=truetype:size=11:antialias=false;0
 font-2 = siji:pixelsize=13;1

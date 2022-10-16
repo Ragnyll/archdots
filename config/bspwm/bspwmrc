@@ -3,8 +3,13 @@
 # num displays includes laptop display
 NUM_DISPLAYS="$(xrandr -q | grep " connected" | wc -l)"
 LAPTOP_DISPLAY="eDP-1"
-CENTER_DISPLAY="HDMI-0"
-RIGHT_DISPLAY="DP-0"
+# for some reason the graphics mode changes the name of the displays
+# on nvidia grpahics it is called HDMI-1
+# on hybrid graphics it is called HDMI-1-0
+# by default i boot into hybrid graphics so 1-0 is generally appropriate
+CENTER_DISPLAY="HDMI-1-0"
+# I never use 3 displays, but i have a feeling this will have to change if i do
+RIGHT_DISPLAY="DP-1-0"
 
 function one_display() {
 	bspc monitor $LAPTOP_DISPLAY -d $LAPTOP_DISPLAY/1 $LAPTOP_DISPLAY/2 $LAPTOP_DISPLAY/3 $LAPTOP_DISPLAY/4 $LAPTOP_DISPLAY/5
@@ -17,7 +22,7 @@ function two_displays() {
 	xrandr --output $CENTER_DISPLAY --auto --right-of $LAPTOP_DISPLAY
 
 	bspc monitor $CENTER_DISPLAY -d $CENTER_DISPLAY/1 $CENTER_DISPLAY/2 $CENTER_DISPLAY/3 $CENTER_DISPLAY/4 $CENTER_DISPLAY/5
-	bspc monitor $LAPTOP_DISPLAY -d $LAPTOP_DISPLAY/6 $LAPTOP_DISPLAY/7 $LAPTOP_DISPLAY/8 $LAPTOP_DISPLAY/9 $CENTER_DISPLAY/10
+	bspc monitor $LAPTOP_DISPLAY -d $LAPTOP_DISPLAY/6 $LAPTOP_DISPLAY/7 $LAPTOP_DISPLAY/8 $LAPTOP_DISPLAY/9 $LAPTOP_DISPLAY/10
 }
 
 function three_displays() {
@@ -28,13 +33,6 @@ function three_displays() {
 	bspc monitor $LAPTOP_DISPLAY -d $LAPTOP_DISPLAY/5 $LAPTOP_DISPLAY/6 $LAPTOP_DISPLAY/7 $LAPTOP_DISPLAY/8
 	bspc monitor $RIGHT_DISPLAY -d $RIGHT_DISPLAY/9 $RIGHT_DISPLAY/10
 }
-
-# the external display only works when the nvidia graphics card is turned on.
-# when nvidia graphics is on the LAPTOP_DISPLAY NAME changes
-# if the intel card is in use then i should be saving battery. start powertop
-[ $(optimus-manager --status | grep 'Current GPU mode : nvidia' | wc -l )  -eq '1' ] \
-    && LAPTOP_DISPLAY="eDP-1-1" \
-    || sudo powertop --auto-tune
 
 case $NUM_DISPLAYS in
 # laptop display left - horizantal monitor center
@@ -48,6 +46,7 @@ case $NUM_DISPLAYS in
     *)
         # if the NUM_DISPLAYS is undetermined default to 1
         one_display
+        sudo powertop --auto-tune
         ;;
 esac
 
@@ -55,6 +54,7 @@ sxhkd &
 ~/bin/wal_setter.sh $(head -n 1 ~/.config/wallpaper)
 dunst &
 compton &
+unclutter &
 ~/.config/polybar/launch.sh &
 
 bspc config border_width         2
