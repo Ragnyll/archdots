@@ -21,7 +21,6 @@ export LESS="-R" # fixes colouring on git graph
 
 # enable fuzzyfind
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
 source $HOME/.aliases
 source $HOME/.config/skim/completion.zsh
@@ -33,4 +32,4 @@ setopt histignoredups
 
 # key binds
 bindkey '^n' autosuggest-accept
-eval "$(oh-my-posh init zsh --config ~/.config/prompts/v_sitecorian.omp.json)"
+eval "$(oh-my-posh init zsh --config ~/.config/prompts/blue-owl.omp.json)"

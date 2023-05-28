@@ -134,14 +134,6 @@
           "style": "powerline",
           "template": "\uf0e7 ",
           "type": "root"
-        },
-        {
-          "background": "#DC291E",
-          "foreground": "#ffffff",
-          "powerline_symbol": "\ue0b0",
-          "style": "powerline",
-          "template": " {{ .UserName }} ",
-          "type": "session"
         }
       ],
       "type": "prompt"

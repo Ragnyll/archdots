@@ -53,7 +53,7 @@ esac
 sxhkd &
 ~/bin/wal_setter.sh $(head -n 1 ~/.config/wallpaper)
 dunst &
-compton &
+picom --animations &
 unclutter &
 ~/.config/polybar/launch.sh &
 

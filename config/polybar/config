@@ -11,6 +11,39 @@ alert = #bd2c40
 screenchange-reload = true
 pseudo-transparency = false
 
+[bar/laptop_ragbar]
+monitor = ${env:MONITOR:}
+
+width = 100%
+height = 35
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+
+padding-left = 2
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = fixed:pixelsize=10;1
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = siji:pixelsize=10;1
+font-3 = FontAwesome 5 Free:size=11:style=Solid;2
+
+modules-left = bspwm
+; modules-center = xwindow
+modules-right = cpu fs-root fs-home vpn network pulseaudio backlight battery date
+
+tray-position = right
+tray-padding = 2
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
 [bar/ragbar]
 monitor = ${env:MONITOR:}
 
@@ -30,21 +63,12 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-; uncomment if using laptop only
-;font-0 = fixed:pixelsize=10;1
-;font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-;font-2 = siji:pixelsize=10;1
-;font-3 = FontAwesome 5 Free:size=11:style=Solid;2
-
-
-; uncommment when connected to desktop
 font-0 = fixed:pixelsize=13;1
 font-1 = unifont:fontformat=truetype:size=11:antialias=false;0
 font-2 = siji:pixelsize=13;1
 font-3 = FontAwesome 5 Free:size=14:style=Solid;2
 
 modules-left = bspwm
-; modules-center = xwindow
 modules-right = cpu fs-root fs-home vpn network pulseaudio backlight battery date
 
 tray-position = right

@@ -8,7 +8,7 @@
 
 export EDITOR='nvim'
 export VISUAL='nvim'
-export PAGER='less'
+export PAGER='bat'
 export BROWSER='firefox'
 
 #
@@ -36,7 +36,7 @@ path=(
   /usr/local/{bin,sbin}
   $HOME/.cargo/bin:$PATH
   $HOME/.local/bin
-  $HOME/.local/lib/python3.9/site-packages
+  $HOME/.local/lib/python3.9/site-packages # this doesnt seem right
   $HOME/bin/
   $HOME/.zfunc
   $path
