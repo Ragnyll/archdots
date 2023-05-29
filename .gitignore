@@ -1,5 +1,5 @@
-bin/__pycache__/
 config/ranger/plugins/*
 gitconfig
 config/rtodo
 config/mpv/watch_later/*
+**/__pycache__/

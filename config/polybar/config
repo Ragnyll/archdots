@@ -1,246 +1,133 @@
-[colors]
-background = #5a000000
-foreground = #eee
-background-alt = #444
-foreground-alt = #555
-primary = #ffb52a
-secondary = #e60053
-alert = #bd2c40
+; ____       _       _
+;|  _ \ ___ | |_   _| |__   __ _ _ __    z0mbi3
+;| |_) / _ \| | | | | '_ \ / _` | '__|   https://github.com/gh0stzk/dotfiles
+;|  __/ (_) | | |_| | |_) | (_| | |      z0mbi3.zk@protonmail.com
+;|_|   \___/|_|\__, |_.__/ \__,_|_|
+;               |___/         by z0mbi3
 
-[settings]
-screenchange-reload = true
-pseudo-transparency = false
+[cristina]
+bg = #212323
+bg-alt = #001f1d29
+fg = #eaeaea
 
-[bar/laptop_ragbar]
-monitor = ${env:MONITOR:}
+trans = #00000000
+white = #FFFFFF
+black = #000000
 
-width = 100%
-height = 35
-fixed-center = false
+red = #ea6f91
+pink = #d3869b
+purple = #c3a5e6
+blue = #34738e
+cyan = #eabbb9
+teal = #00B19F
+green = #9bced7
+lime = #8ec07c
+yellow = #f1ca93
+amber = #fac33b
+orange = #f08641
+brown = #AC8476
+grey = #384148
+indigo = #6C77BB
+blue-gray = #6D8895
 
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-line-size = 3
-
-padding-left = 2
-padding-right = 2
-
-module-margin-left = 1
-module-margin-right = 2
-
-font-0 = fixed:pixelsize=10;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
-font-3 = FontAwesome 5 Free:size=11:style=Solid;2
-
-modules-left = bspwm
-; modules-center = xwindow
-modules-right = cpu fs-root fs-home vpn network pulseaudio backlight battery date
-
-tray-position = right
-tray-padding = 2
-
-cursor-click = pointer
-cursor-scroll = ns-resize
-
-[bar/ragbar]
-monitor = ${env:MONITOR:}
-
-width = 100%
-;height = 35
-height = 55
-fixed-center = false
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-line-size = 3
-
-padding-left = 2
-padding-right = 2
-
-module-margin-left = 1
-module-margin-right = 2
-
-font-0 = fixed:pixelsize=13;1
-font-1 = unifont:fontformat=truetype:size=11:antialias=false;0
-font-2 = siji:pixelsize=13;1
-font-3 = FontAwesome 5 Free:size=14:style=Solid;2
-
-modules-left = bspwm
-modules-right = cpu fs-root fs-home vpn network pulseaudio backlight battery date
-
-tray-position = right
-tray-padding = 2
-
-cursor-click = pointer
-cursor-scroll = ns-resize
 
 [global/wm]
-margin-top = 5
-margin-bottom = 5
 
-[module/xwindow]
-type = internal/xwindow
-format = <label>
-format-padding = 4
-label = %title%
-label-maxlen = 50
+margin-bottom = 0
+margin-top = 0
 
-[module/bspwm]
-type = internal/bspwm
+include-file = $HOME/.config/polybar/modules.ini
 
-label-focused = %index%
-label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.foreground}
-label-focused-padding = 2
+[system]
+sys_adapter = AC
+sys_battery = BAT0
+sys_graphics_card = intel_backlight
+sys_network_interface = wlp82s0
 
-label-occupied = %index%
-label-occupied-padding = 2
+[bar/cristina-bar]
+monitor-fallback =
+monitor-strict = false
 
-label-urgent = %index%!
-label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
+override-redirect = false
+bottom = false
+fixed-center = false
 
-label-empty = %index%
-label-empty-foreground = ${colors.foreground-alt}
-label-empty-padding = 2
+width = 95%
+height = 20
 
-[module/pulseaudio]
-type = internal/pulseaudio
+offset-x = 2.5%
+offset-y = 10
 
-format-volume = <ramp-volume> <label-volume>
-label-volume =  %percentage%%
-label-volume-foreground = ${root.foreground}
+background = ${cristina.bg}
+foreground = ${cristina.fg}
 
-ramp-volume-0 = 
-ramp-volume-1 = 
-ramp-volume-2 = 
+radius =
 
-label-muted =  mute
-label-muted-foreground = #666
+line-size = 3
+line-color = ${cristina.blue}
 
-bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
-bar-volume-indicator-font = 2
-bar-volume-fill-font = 2
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
+border-size = 14
+border-color = ${cristina.bg}
 
-[module/cpu]
-type = internal/cpu
-interval = 15.0
-; Available tags:
-;   <label> (default)
-;   <bar-load>
-;   <ramp-load>
-;   <ramp-coreload>
-format = <label>
+padding-left = 2
+padding-right = 2
 
-; Available tokens:
-;   %percentage% (default) - total cpu load
-;   %percentage-cores% - load percentage for each core
-;   %percentage-core[1-9]% - load percentage for specific core
-label =   %percentage%%
-
-[module/vpn]
-type = custom/script
-exec = ~/bin/nordvpn-dmenu -s 
-interval = 10
-click-left = ~/bin/nordvpn-dmenu
+module-margin-left = 0
+module-margin-right = 0
 
 
-[module/network]
-type = internal/network
-interface = wlp82s0
+;Modules availables but not active:
+; brightness
+modules-left = launcher sep2 bspwm
+modules-center =
+modules-right = bgi fs-home bgd bri fs-root brd byi cpu_bar byd bbi pulseaudio bbd boi network bod bii date bid brightness battery
 
-; sleep time betwen update
-interval = 4.0
+separator =
+dim-value = 1.0
+;locale = es_MX.UTF-8
 
+tray-position = right
+tray-detached = false
+tray-maxsize = 16
+tray-background = ${cristina.bg}
+tray-offset-x = 0
+tray-offset-y = 0
+tray-padding = 0
+tray-scale = 1.0
 
-format-connected =  <label-connected>
-format-disconnected = 
+wm-restack = bspwm
+enable-ipc = true
 
-label-connected = %essid%
-label-connected-foreground = ${colors.foreground}
+cursor-click = pointer
+cursor-scroll =
 
-label-disconnected = not connected
-label-disconnected-foreground = ${colors.foreground}
+[settings]
 
-[module/battery]
-type = internal/battery
-battery = BAT0
-adapter = AC
-full-at = 100
+screenchange-reload = false
 
-format-full =  100%
-format-charging = <ramp-capacity> <label-charging>
-format-discharging = <ramp-capacity> <label-discharging>
+compositing-background = source
+compositing-foreground = over
+compositing-overline = over
+compositing-underline = over
+compositing-border = over
 
-format-full-prefix = " "
-format-full-prefix-foreground = ${colors.foreground-alt}
+pseudo-transparency = false
 
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-3 = 
-ramp-capacity-4 = 
-ramp-capacity-foreground = ${colors.foreground}
+[bar/cristina-bar-connected]
+monitor = HDMI-1-0
+inherit = bar/cristina-bar
 
-[module/backlight]
-type = internal/backlight
-card = intel_backlight
-use-actual-brightness = true
-format = <ramp> <label>
+font-0 = "FiraCodeNerdFont:style=Bold:pixelsize=20;2"
+font-1 = "Material Design Icons Desktop:size=18;3"
+font-2 = "Font Awesome 6 Free Solid:size=10;3"
+font-3 = "MesloLGS NF:style=Regular:size=13;3"
 
-; Available tokens:
-;   %percentage% (default)
-label = %percentage%%
+height = 28
 
-; Only applies if <ramp> is used
-ramp-0 = 🌕
-ramp-1 = 🌔
-ramp-2 = 🌓
-ramp-3 = 🌒
-ramp-4 = 🌑
-
-[module/date]
-type = internal/date
-interval = 5
-
-date = %m-%d
-date-alt = " %Y-%m-%d"
-
-time = %H:%M
-time-alt = %H:%M:%S
-
-format-prefix = 
-format-prefix-foreground = ${colors.foreground}
-
-label = %time% %date%
-
-[fs-base]
-type = internal/fs
-fixed-values = true
-label-mounted = %mountpoint%: %used%
-interval = 300
-
-[module/fs-root]
-inherit = fs-base
-mount-0 = /
-label-mounted =  %free%
-
-[module/fs-home]
-inherit = fs-base
-mount-0 = /home
-label-mounted =  %free%
-
-; vim:ft=dosini
+[bar/cristina-bar-laptop]
+font-0 = "FiraCodeNerdFont:style=Bold:pixelsize=11;2"
+font-1 = "Material Design Icons Desktop:size=18;3"
+font-2 = "Font Awesome 6 Free Solid:size=10;3"
+font-3 = "MesloLGS NF:style=Regular:size=13;3"
+monitor = eDP-1
+inherit = bar/cristina-bar

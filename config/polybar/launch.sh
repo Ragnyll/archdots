@@ -1,11 +1,3 @@
 #!/bin/bash
 killall polybar
-
-if type "xrandr"; then
-  for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-    MONITOR=$m polybar --reload ragbar &
-  done
-else
-  polybar --reload ragbar &
-fi
-
+$(polybar --list-monitors | grep HDMI-1-0 && polybar --reload cristina-bar-connected || polybar --reload cristina-bar-laptop) &
