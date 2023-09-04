@@ -154,6 +154,25 @@ local lsp_flags = {
   debounce_text_changes = 150,
 }
 
+require('lspconfig')['elixirls'].setup{
+    cmd = { "/home/ragnyll/.local/share/nvim/mason/bin/elixir-ls" },
+    on_attach = on_attach,
+    flags = lsp_flags,
+    capabilities = capabilities,
+    settings = {
+        elixirLS = {
+          -- I choose to disable dialyzer for personal reasons, but
+          -- I would suggest you also disable it unless you are well
+          -- aquainted with dialzyer and know how to use it.
+          dialyzerEnabled = false,
+          -- I also choose to turn off the auto dep fetching feature.
+          -- It often get's into a weird state that requires deleting
+          -- the .elixir_ls directory and restarting your editor.
+          fetchDeps = false
+        }
+    }
+}
+
 require('lspconfig')['tsserver'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
@@ -175,7 +194,7 @@ require('lspconfig')['rust_analyzer'].setup{
 
 -- Treesitter Plugin Setup
 require('nvim-treesitter.configs').setup {
-  ensure_installed = { "lua", "rust", "toml", "typescript" },
+  ensure_installed = { "lua", "rust", "toml", "typescript", "elixir" },
   auto_install = true,
   highlight = {
     enable = true,

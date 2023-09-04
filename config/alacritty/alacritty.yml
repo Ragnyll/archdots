@@ -5,8 +5,8 @@
 scrolling:
   history: 0
 font:
-  #size: 8 # laptop size
-  size: 12
+  size: 8 # laptop size
+  #size: 12 # desktop size
   normal:
     family: "FiraCode Nerd Font"
 
