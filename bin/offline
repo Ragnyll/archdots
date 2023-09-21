@@ -1,5 +1,0 @@
-#!/bin/sh
-# Go into an offline mode where all network system daemons are disabled
-
-sudo netctl stop-all
-sudo systemctl stop netctl@wlp82s0-Rag-Home.service

@@ -1,7 +1,3 @@
-#shell:
-  #program: /bin
-
-# use tmux to scroll you fkn idiot
 scrolling:
   history: 0
 font:
