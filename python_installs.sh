@@ -1,5 +1,5 @@
 #!/bin/bash
-# Generic installs for pip and pythong
+# Generic installs for pip and python
 
 curl -sSL https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python get-pip.py --user

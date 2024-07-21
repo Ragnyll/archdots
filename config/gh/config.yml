@@ -5,3 +5,4 @@ pager: delta
 aliases:
     co: pr checkout
 browser: firefox
+version: "1"

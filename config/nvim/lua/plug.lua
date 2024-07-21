@@ -38,6 +38,11 @@ return require('packer').startup(function()
     -- cool stuff
     use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
     use 'ukyouz/onedark.vim'
+    vim.cmd.highlight({ "Normal", "guibg=none" })
+    vim.cmd.highlight({ "NonText", "guibg=none" })
+    vim.cmd.highlight({ "Normal", "ctermbg=none" })
+    vim.cmd.highlight({ "NonText", "ctermbg=none" })
+
     use 'airblade/vim-gitgutter'
     use 'machakann/vim-highlightedyank'
     use 'scrooloose/nerdcommenter'

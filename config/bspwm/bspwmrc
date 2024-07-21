@@ -3,6 +3,8 @@
 # num displays includes laptop display
 NUM_DISPLAYS="$(xrandr -q | grep " connected" | wc -l)"
 LAPTOP_DISPLAY="eDP-1"
+# its eDP-1-1 for nvidia graphics
+#LAPTOP_DISPLAY="eDP-1-1"
 # for some reason the graphics mode changes the name of the displays
 # on nvidia grpahics it is called HDMI-1
 # on hybrid graphics it is called HDMI-1-0
@@ -51,6 +53,7 @@ case $NUM_DISPLAYS in
 esac
 
 sxhkd &
+setxkbmap -option ctrl:swapcaps
 ~/bin/wal_setter.sh $(head -n 1 ~/.config/wallpaper)
 dunst &
 picom --animations &
@@ -64,5 +67,4 @@ bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 bspc config click_to_focus       true
 
-setxkbmap -option ctrl:swapcaps
 clipmenud &
