@@ -154,34 +154,6 @@ local lsp_flags = {
   debounce_text_changes = 150,
 }
 
-require('lspconfig')['elixirls'].setup{
-    cmd = { "/home/ragnyll/.local/share/nvim/mason/bin/elixir-ls" },
-    on_attach = on_attach,
-    flags = lsp_flags,
-    capabilities = capabilities,
-    settings = {
-        elixirLS = {
-          -- I choose to disable dialyzer for personal reasons, but
-          -- I would suggest you also disable it unless you are well
-          -- aquainted with dialzyer and know how to use it.
-          dialyzerEnabled = false,
-          -- I also choose to turn off the auto dep fetching feature.
-          -- It often get's into a weird state that requires deleting
-          -- the .elixir_ls directory and restarting your editor.
-          fetchDeps = false
-        }
-    }
-}
-
-require('lspconfig')['tsserver'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
-}
-
-require('lspconfig')['html'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
-}
 
 require('lspconfig')['rust_analyzer'].setup{
     on_attach = on_attach,
@@ -192,14 +164,17 @@ require('lspconfig')['rust_analyzer'].setup{
     }
 }
 
+require'lspconfig'.html.setup {}
+
 -- Treesitter Plugin Setup
 require('nvim-treesitter.configs').setup {
-  ensure_installed = { "lua", "rust", "toml", "typescript", "elixir" },
+  ensure_installed = { "lua", "rust", "toml", "html", "css", "javascript" },
   auto_install = true,
   highlight = {
     enable = true,
     additional_vim_regex_highlighting=false,
   },
+  indent = { enable = true },
   ident = { enable = true },
   rainbow = {
     enable = true,
@@ -208,13 +183,15 @@ require('nvim-treesitter.configs').setup {
   }
 }
 
+require('lspconfig')['lua_ls'].setup {}
+
+require('lspconfig')['tsserver'].setup {}
+
 require('hop').setup {
     keys = 'etovxqpdygfblzhckisuran',
 }
 
-require('indent_blankline').setup {
-    show_current_context = true,
-}
+require('ibl').setup()
 
 require('nvim-autopairs').setup { }
 
@@ -234,6 +211,19 @@ require('telescope').setup {
 
 require('lualine').setup {
     options = {
-        theme = 'onedark'
-    }
+        theme = 'auto'
+    },
+    italics = true,
 }
+
+require('bluloco').setup({
+    style = "dark", -- "auto" | "dark" | "light"
+    transparent = true,
+})
+
+require('nvim-ts-autotag').setup {
+
+}
+
+vim.opt.termguicolors = true
+vim.cmd('colorscheme bluloco')

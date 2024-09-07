@@ -23,7 +23,7 @@ return require('packer').startup(function()
     use 'windwp/nvim-autopairs'
 
     -- Parsing libraries
-    use 'nvim-treesitter/nvim-treesitter'
+    use {'nvim-treesitter/nvim-treesitter', branch = 'master' }
 
     -- Debugging
     use 'puremourning/vimspector'
@@ -37,11 +37,7 @@ return require('packer').startup(function()
 
     -- cool stuff
     use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
-    use 'ukyouz/onedark.vim'
-    vim.cmd.highlight({ "Normal", "guibg=none" })
-    vim.cmd.highlight({ "NonText", "guibg=none" })
-    vim.cmd.highlight({ "Normal", "ctermbg=none" })
-    vim.cmd.highlight({ "NonText", "ctermbg=none" })
+    use { 'uloco/bluloco.nvim', requires = { 'rktjmp/lush.nvim' } }
 
     use 'airblade/vim-gitgutter'
     use 'machakann/vim-highlightedyank'
@@ -50,4 +46,8 @@ return require('packer').startup(function()
     use({ "iamcco/markdown-preview.nvim", run = function() vim.fn["mkdp#util#install"]() end, })
     use 'airblade/vim-rooter'
     use 'lukas-reineke/indent-blankline.nvim'
+
+    -- Language specifc stuff
+    -- Html
+    use { 'windwp/nvim-ts-autotag'}
 end)

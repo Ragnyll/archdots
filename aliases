@@ -1,53 +1,33 @@
 # vim: filetype=bash
 alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0'
 alias cls='clear'
-alias exs='elixir'
 alias conflicts='git diff --name-only --diff-filter=U'
 alias compress-vid='ffmpeg -i $1 -vcodec libx265 -crf 28 $2'
-alias dvwa='sudo docker run --rm -it -p 80:80 vulnerables/web-dvwa'
-alias decodeHexToTxt='echo $1 | xxd -r -p'
 alias g++='g++ -std=c++20'
-alias gifshuffle='~/dev/hacking_tools/gifshuffle/gifshuffle'
 alias gp='git push'
 alias gpsu='git push --set-upstream origin $(git branch --show-current)'
 alias gti='git' # i suck at typing
-alias jo='joshuto'
 alias l='lsd'
 alias ls='lsd'
 alias ll='lsd -l'
 alias lll='lsd -la'
 alias music='termusic'
 alias mute='amixer -q -D pulse sset Master toggle'
-alias mutt='neomutt'
 alias mkdir='mkdir -p'
-alias newgitlab='git push --set-upstream git@gitlab.com:Ragnyll/$(git rev-parse --show-toplevel | xargs basename).git $(git rev-parse --abbrev-ref HEAD)'
 alias pacman='sudo pacman'
 alias pacman_installed='comm -23 <(pacman -Qqett | sort) <(pacman -Qqg -g base-devel | sort | uniq)'
 alias q='exit'
-alias rgdb='rust-gdb'
-alias rman='rusty-man'
-alias rss='newsboat'
-alias rust_build_watch='find . -type f -not -path "./target/**/*" -name "*.rs" | entr sh -c "cargo build"'
 alias scim='sc-im'
 alias sl='ls'
 alias sqlite='sqlite3'
-alias stegosuite='/usr/lib/jvm/java-8-openjdk/bin/java -jar ~/Applications/stegosuite-0.7-linux_amd64.jar'
-alias systemctl='systemctl'
 alias tor='~/Applications/tor-browser_en-US/Browser/start-tor-browser'
-alias todo='gh issue --repo ragnyll/TODO'
 alias vim='nvim'
 alias im='nvim'
 alias whiteboard='lorien'
 alias yay_installed='comm -23 <(yay -Qqett | sort) <(yay -Qqg -g base-devel | sort | uniq)'
 alias ytdlp='yt-dlp'
 
-
 #!/bin/zsh
-
-function emptymailtrash() {
-    read confirm\?"Really delete all mail from Trash (Y/N)? "
-    [ $(echo $confirm | grep -i y | wc -l) -eq '1' ] && rm -rf ~/Mail/Trash/* || echo "Trash Purge aborted!"
-}
 
 function markdowntodocx() {
     # $1 input markdown file name
@@ -88,18 +68,4 @@ function vidtogif() {
 
 Usage:
   vidtogif input_file output_path skip_s duration [scale]\n"
-}
-
-
-function cpstat()
-{
-  local pid="${1:-$(pgrep -xn cp)}" src dst
-  [[ "$pid" ]] || return
-  while [[ -f "/proc/$pid/fd/3" ]]; do
-    read src dst < <(stat -L --printf '%s ' "/proc/$pid/fd/"{3,4})
-    (( src )) || break
-    printf 'cp %d%%\r' $((dst*100/src))
-    sleep 1
-  done
-  echo
 }

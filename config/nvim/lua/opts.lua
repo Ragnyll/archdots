@@ -28,11 +28,6 @@ let g:vimspector_bottombar_height = 15
 let g:vimspector_terminal_maxwidth = 70
 ]])
 
-vim.cmd([[
-colorscheme onedark
-hi Normal ctermbg=none
-]])
-
 vim.opt.undofile = true
 vim.opt.undodir = HOME .. '/.vim/undo'
 vim.opt.clipboard = unnamed
