@@ -1,3 +1,4 @@
+[general]
 import = ["/home/ragnyll/.cache/wal/colors-alacritty.toml"]
 #import = ["/home/ragnyll/.config/alacritty/themes/github_light.toml"]
 
@@ -5,7 +6,7 @@ import = ["/home/ragnyll/.cache/wal/colors-alacritty.toml"]
 history = 0
 
 [font]
-size = 12
+size = 10
 
 [font.normal]
 family = "FiraCode Nerd Font"

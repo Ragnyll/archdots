@@ -6,7 +6,7 @@ return {
     {
         "kevinhwang91/rnvimr",
         config = function()
-            map('n', '<leader>r', ':RnvimrToggle<cr>')
+            map('n', '<leader>t', ':RnvimrToggle<cr>')
             vim.g.rnvimr_enable_ex = 1
         end
     }
