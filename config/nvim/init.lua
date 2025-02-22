@@ -5,5 +5,3 @@ require("config.lazy")
 require("config.color")
 require("config.keys")
 require("config.opts")
-
-
