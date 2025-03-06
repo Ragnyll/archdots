@@ -32,7 +32,7 @@ setopt histignoredups
 
 # key binds
 bindkey '^n' autosuggest-accept
-eval "$(oh-my-posh init zsh --config ~/.config/prompts/blue-owl.omp.json)"
+eval "$(oh-my-posh init zsh --config ~/.config/prompts/bubblesextra.omp.json)"
 
 # pnpm
 export PNPM_HOME="/home/ragnyll/.local/share/pnpm"
