@@ -9,7 +9,7 @@ fi
 
 # set the theme terminal theme correctly
 # needed to see command hinting against background
-~/bin/wal_setter.sh $(head -n 2 ~/.config/wallpaper)
+#~/bin/wal_setter.sh $(head -n 2 ~/.config/wallpaper)
 
 export EDITOR=nvim
 
@@ -23,8 +23,6 @@ export LESS="-R" # fixes colouring on git graph
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 source $HOME/.aliases
-source $HOME/.config/skim/completion.zsh
-source $HOME/.config/skim/key-bindings.zsh
 
 # zoptions
 setopt rmstarsilent

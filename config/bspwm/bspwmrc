@@ -58,7 +58,7 @@ setxkbmap -option ctrl:swapcaps
 dunst &
 picom --animations &
 unclutter &
-~/.config/polybar/launch.sh &
+polybar -c ~/.config/polybar/config.ini example &
 
 bspc config border_width         2
 bspc config window_gap           12
