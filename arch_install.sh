@@ -40,7 +40,6 @@ ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
 ln -sf ~/.dotfiles/config ~/.config
 ln -sf ~/.dotfiles/surf ~/.surf
 ln -sf ~/.dotfiles/config/prompts/ ~/.config
-ln -sf ~/.dotfiles/config/alacritty/ ~/.config
 ln -s ~/.dotfiles/config/leftwm ~/.config/
 
 # install mutt

@@ -1,6 +1,5 @@
 abook
 acpi
-alacritty
 alsa-utils
 avr-gcc
 base

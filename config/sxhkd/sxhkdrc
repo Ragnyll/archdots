@@ -8,7 +8,7 @@ super + Escape
 
 # terminal emulator
 super + Return
-	[ tmux ls | grep -qv attached ] && exec /usr/bin/alacritty -e tmux attach || exec /usr/bin/alacritty -e tmux
+	[ tmux ls | grep -qv attached ] && exec /usr/bin/ghostty -e tmux attach || exec /usr/bin/ghostty -e tmux
 
 # program launcher
 super + @space
