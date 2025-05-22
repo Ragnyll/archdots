@@ -30,6 +30,7 @@ setopt histignoredups
 
 # key binds
 bindkey '^n' autosuggest-accept
+bindkey '^R' history-incremental-search-backward
 eval "$(oh-my-posh init zsh --config ~/.config/prompts/bubblesextra.omp.json)"
 
 # pnpm

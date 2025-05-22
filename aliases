@@ -32,8 +32,9 @@ alias cg='cargo'
 alias mbsync='mbsync -c ~/.config/mbsync/mbsyncrc'
 alias mutt='neomutt -F ~/.config/neomutt/neomuttrc'
 alias jo='joshuto'
-alias neofetch='fastfetch'
-alias fetch='fastfetch'
+alias nf='macchina'
+alias neofetch='macchina'
+alias fetch='macchina'
 
 #!/bin/zsh
 

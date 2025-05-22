@@ -1,0 +1,15 @@
+[general]
+#import = ["/home/ragnyll/.cache/wal/colors-alacritty.toml"]
+import = ["~/.config/alacritty/themes/themes/pencil_dark.toml"]
+
+[scrolling]
+history = 0
+
+[font]
+size = 12
+
+[font.normal]
+family = "FiraCode Nerd Font"
+
+[window]
+opacity = 0.85
