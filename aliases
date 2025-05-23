@@ -36,6 +36,7 @@ alias nf='macchina'
 alias neofetch='macchina'
 alias fetch='macchina'
 alias caw='macchina'
+alias dots='cd ~/.dotfiles'
 
 #!/bin/zsh
 
@@ -53,12 +54,6 @@ function markdowntopdf() {
     [[ $1 == "-h" ]] \
         && printf "USAGE\nmarkdowntopdf INPUTMARKDOWNFILE OUTPUTPDFFILE\n" \
         || pandoc -s -V geometry:margin=1in  -o $2 $1
-}
-
-function pbcopy {
-    # copies to clipboard like (the more egronomic) osx command but without the pipe
-    # $1 path to file
-    xclip -selection clipboard < $1
 }
 
 function vidtogif() {

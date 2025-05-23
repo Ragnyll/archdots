@@ -24,3 +24,8 @@
 - [ ] Dynamic color changes base on theme (dark/light) or background
 - [ ] Cooler grub launch
 - [ ] Better light dm theme
+- [ ] Fix screen tearing on videos
+- [ ] Make a sick firefox theme
+- [ ] glava for sound
+- [ ] dunst theme
+- [ ] night mode (screen yellowing)
