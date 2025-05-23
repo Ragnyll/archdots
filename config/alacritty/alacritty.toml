@@ -1,6 +1,6 @@
 [general]
 #import = ["/home/ragnyll/.cache/wal/colors-alacritty.toml"]
-import = ["~/.config/alacritty/themes/themes/pencil_dark.toml"]
+import = ["~/.config/alacritty/themes/themes/breeze.toml"]
 
 [scrolling]
 history = 0
@@ -12,4 +12,4 @@ size = 12
 family = "FiraCode Nerd Font"
 
 [window]
-opacity = 0.85
+opacity = 1
