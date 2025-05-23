@@ -35,6 +35,7 @@ alias jo='joshuto'
 alias nf='macchina'
 alias neofetch='macchina'
 alias fetch='macchina'
+alias caw='macchina'
 
 #!/bin/zsh
 
