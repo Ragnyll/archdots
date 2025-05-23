@@ -39,26 +39,30 @@ button:hover {
     background-color: #931E06
 }
 
-#clock,
-#battery,
+#custom-monitors,
+#network,
+#pulseaudio,
 #cpu,
 #memory,
 #backlight,
-#network,
-#pulseaudio {
+#battery,
+#clock,
+#custom-power {
     padding: 0 10px;
     color: #ffffff;
     border: 2px solid #931E06;
     border-radius: 20px;
 }
 
-#clock:hover,
-#battery:hover,
+#custom-monitors:hover,
+#network:hover,
+#pulseaudio:hover,
 #cpu:hover,
 #memory:hover,
 #backlight:hover,
-#network:hover,
-#pulseaudio:hover {
+#battery:hover,
+#clock:hover,
+#custom-power:hover {
     background-color: #931E06
 }
 

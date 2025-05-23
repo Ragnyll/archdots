@@ -5,6 +5,7 @@
      "width": 1920, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
     "modules-left": [
+        "custom/monitors",
         "hyprland/workspaces"
     ],
     "modules-right": [
@@ -15,6 +16,7 @@
         "backlight",
         "battery",
         "clock",
+        "custom/power",
     ],
     "clock": {
         "format": " {:%H:%M}",
@@ -44,9 +46,6 @@
         "format-alt": "{time} {icon}",
         "format-icons": ["", "", "", "", ""]
     },
-    "battery#bat2": {
-        "bat": "BAT2"
-    },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "",
@@ -75,4 +74,10 @@
         },
         "on-click": "pavucontrol"
     },
+    "custom/monitors": {
+        "format": " " // This is actually a monitor i dunny why it shows up like this.
+    },
+    "custom/power": {
+        "format": " "
+    }
 }
