@@ -1,15 +1,10 @@
 ###
 # Arch Linux zshrc conf
 ###
-# Source Prezto.
 
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
-
-# set the theme terminal theme correctly
-# needed to see command hinting against background
-#~/bin/wal_setter.sh $(head -n 2 ~/.config/wallpaper)
 
 export EDITOR=nvim
 

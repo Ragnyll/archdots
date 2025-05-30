@@ -17,4 +17,7 @@ config/systemd/user/sockets.target.wants/
 config/wallpaper
 config/user-dirs.dirs
 config/user-dirs.locale
+config/LanguageTool/
+config/Signal/
+config/libreoffice/
 

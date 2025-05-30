@@ -78,6 +78,16 @@
         "format": " " // This is actually a monitor i dunny why it shows up like this.
     },
     "custom/power": {
-        "format": " "
+        "format": " ",
+        "tooltip": false,
+        "menu": "on-click",
+        "menu-file": "$HOME/.config/waybar/power_menu.xml",
+        "menu-actions": {
+            "shutdown": "shutdown",
+            "reboot": "reboot",
+            "suspend": "systemctl suspend",
+            "hibernate": "systemctl hibernate"
+        }
+
     }
 }

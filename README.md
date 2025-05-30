@@ -29,3 +29,4 @@
 - [ ] glava for sound
 - [ ] dunst theme
 - [ ] night mode (screen yellowing)
+- [ ] fix gtk app themes (nautilus, powermenu, pavu, etc)

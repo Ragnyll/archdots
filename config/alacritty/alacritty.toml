@@ -1,6 +1,8 @@
 [general]
-#import = ["/home/ragnyll/.cache/wal/colors-alacritty.toml"]
+# dark theme
 import = ["~/.config/alacritty/themes/themes/breeze.toml"]
+# light theme
+#import  = ["~/.config/alacritty/themes/themes/dayfox.toml"]
 
 [scrolling]
 history = 0
