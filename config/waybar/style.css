@@ -5,6 +5,10 @@
     min-height: 0;
 }
 
+*:hover {
+    font-size: 18px;
+}
+
 window#waybar {
     background-color: transparent;
 }
@@ -36,7 +40,7 @@ button:hover {
 }
 
 #workspaces button:hover {
-    background-color: #931E06
+    background-color: #931E06;
 }
 
 #custom-monitors,

@@ -75,7 +75,8 @@
         "on-click": "pavucontrol"
     },
     "custom/monitors": {
-        "format": " " // This is actually a monitor i dunny why it shows up like this.
+        "format": " ", // This is actually a monitor i dunny why it shows up like this.
+        "on-click": "rofi -show drun"
     },
     "custom/power": {
         "format": " ",

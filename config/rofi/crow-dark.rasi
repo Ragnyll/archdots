@@ -1,16 +1,16 @@
-//background:                  rgba ( 147, 30, 6, 100 % );
 * {
     background:                  rgba ( 37, 34, 34, 100 % );
-    lightbg:                     rgba ( 238, 232, 213, 100 % );
+    lightbg:                     rgba ( 37, 34, 34, 100 % );
+    seperator:                   rgba ( 132, 31, 11, 100 %);
     red:                         rgba ( 220, 50, 47, 100 % );
     lightfg:                     rgba ( 88, 104, 117, 100 % );
     blue:                        rgba ( 38, 139, 210, 100 % );
     foreground:                  rgba ( 147, 30, 6, 100 % );
-    text:                        rgba ( 255, 255, 255, 100 %);
+    text:                        rgba ( 255, 255, 255, 85 %);
     spacing:                     2;
     background-color:            transparent;
     selected-active-foreground:  var(background);
-    separatorcolor:              var(foreground);
+    separatorcolor:              var(seperator);
     urgent-foreground:           var(red);
     alternate-urgent-background: var(lightbg);
     border-color:                var(foreground);
@@ -88,7 +88,9 @@ element-icon {
 window {
     padding:          5;
     background-color: var(background);
-    border:           1;
+    border:           2;
+    width:            450px;
+    height:           300px;
 }
 mainbox {
     padding: 0;
@@ -158,7 +160,6 @@ entry {
     cursor:            text;
     spacing:           0;
     placeholder-color: var(normal-text);
-    placeholder:       "Type to filter";
 }
 prompt {
     spacing:    0;
