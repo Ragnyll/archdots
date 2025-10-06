@@ -94,6 +94,7 @@ return {
             -- after the language server attaches to the current buffer
 
             require('lspconfig')['rust_analyzer'].setup({ on_attach = on_attach })
+            require('lspconfig')['gopls'].setup({ on_attach = on_attach })
             diagnostics_setup()
             completion_keymap_setup()
         end

@@ -8,11 +8,11 @@ super + Escape
 
 # terminal emulator
 super + Return
-	[ tmux ls | grep -qv attached ] && exec /usr/bin/ghostty -e tmux attach || exec /usr/bin/ghostty -e tmux
+	[ tmux ls | grep -qv attached ] && exec /usr/bin/alacritty -e tmux attach || exec /usr/bin/alacritty -e tmux
 
 # program launcher
 super + @space
-	~/bin/dmenu_run_history
+	rofi -show drun
 
 super + shift + @space
 	printf | dmenu -p "Web Search" -sb purple | search_break search && search_break display-db | dmenu -p "Select Link" -sb purple| search_break select-item
@@ -138,10 +138,10 @@ super + {Left,Down,Up,Right}
 # Brightness and Sound
 #
 super + F5
-	brightnessctl set 2%-
+	brightnessctl -e4 -n set 2%-
 
 super + F6
-	brightnessctl set +2%
+	brightnessctl -e4 -n set 2%+
 
 super + F11
 	~/bin/keyboard_backlight.sh

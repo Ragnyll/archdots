@@ -21,3 +21,4 @@ config/LanguageTool/
 config/Signal/
 config/libreoffice/
 config/termusic/
+config/chromium/

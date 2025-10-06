@@ -56,7 +56,7 @@ sxhkd &
 setxkbmap -option ctrl:swapcaps
 ~/bin/wal_setter.sh $(head -n 1 ~/.config/wallpaper)
 dunst &
-picom --animations &
+picom --config ~/.config/picom/picom.conf &
 unclutter &
 polybar -c ~/.config/polybar/config.ini example &
 
