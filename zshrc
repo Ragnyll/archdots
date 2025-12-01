@@ -36,3 +36,11 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+HISTFILE=~/.zhistory
+HISTSIZE=10000
+SAVEHIST=10000
+
+# Share history in every terminal session
+setopt SHARE_HISTORY
+

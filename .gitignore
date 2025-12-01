@@ -22,3 +22,17 @@ config/Signal/
 config/libreoffice/
 config/termusic/
 config/chromium/
+config/.gsd-keyboard.settings-ported
+config/IJHack/
+config/QtProject.conf
+config/autostart/
+config/evolution/
+config/fragments/
+config/gh/hosts.yml
+config/godot/
+config/gtk-3.0/
+config/ibus/
+config/kritadisplayrc
+config/kritarc
+config/pupgui/
+

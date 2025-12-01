@@ -1,36 +1,38 @@
 function diagnostics_setup()
-    -- LSP Diagnostics Options Setup
-    local sign = function(opts)
-      vim.fn.sign_define(opts.name, {
-        texthl = opts.name,
-        text = opts.text,
-        numhl = ''
-      })
-    end
+  -- Modern diagnostic sign config — no sign_define() needed
+  vim.diagnostic.config({
+    virtual_text = false,
 
-    sign({name = 'DiagnosticSignError', text = ''})
-    sign({name = 'DiagnosticSignWarn', text = ''})
-    sign({name = 'DiagnosticSignHint', text = ''})
-    sign({name = 'DiagnosticSignInfo', text = ''})
+    signs = {
+      text = {
+        [vim.diagnostic.severity.ERROR] = "",
+        [vim.diagnostic.severity.WARN]  = "",
+        [vim.diagnostic.severity.HINT]  = "",
+        [vim.diagnostic.severity.INFO]  = "",
+      },
+    },
 
-    vim.diagnostic.config({
-        virtual_text = false,
-        signs = true,
-        update_in_insert = true,
-        underline = true,
-        severity_sort = false,
-        float = {
-            border = 'rounded',
-            source = 'always',
-            header = '',
-            prefix = '',
-        },
-    })
+    update_in_insert = true,
+    underline = true,
+    severity_sort = false,
 
-    vim.cmd([[
-    set signcolumn=yes
-    autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
-    ]])
+    float = {
+      border = "rounded",
+      source = "always",
+      header = "",
+      prefix = "",
+    },
+  })
+
+  -- Always show the sign column
+  vim.opt.signcolumn = "yes"
+
+  -- Show diagnostics on cursor hold
+  vim.api.nvim_create_autocmd("CursorHold", {
+    callback = function()
+      vim.diagnostic.open_float(nil, { focusable = false })
+    end,
+  })
 end
 
 function completion_keymap_setup()
@@ -65,36 +67,60 @@ return {
             end
         },
         config = function()
-            local on_attach = function(_, bufnr)
-              -- Enable completion triggered by <c-x><c-o>
-              vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+            vim.api.nvim_create_autocmd('LspAttach', {
+				group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+				callback = function(ev)
+					-- Enable completion triggered by <c-x><c-o>
+					vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-              -- Mappings.
-              -- See `:help vim.lsp.*` for documentation on any of the below functions
-              local bufopts = { noremap=true, silent=true, buffer=bufnr }
-              vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-              vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-              vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-              vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-              vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-              vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-              vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-              vim.keymap.set('n', '<space>wl', function()
-                print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-              end, bufopts)
-              vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-              vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-              vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-              vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-              vim.keymap.set('n', '<space>f', vim.lsp.buf.format, bufopts)
-            end
-            require('lspconfig')['lua_ls'].setup({ on_attach = on_attach})
-            require('lspconfig')['ts_ls'].setup({ on_attach = on_attach})
-            -- Use an on_attach function to only map the following keys
-            -- after the language server attaches to the current buffer
+					-- Buffer local mappings.
+					-- See `:help vim.lsp.*` for documentation on any of the below functions
+					local opts = { buffer = ev.buf }
+                    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+                    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+                    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+                    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+                    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+                    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+                    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+                    vim.keymap.set('n', '<space>wl', function()
+                      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+                    end, bufopts)
+                    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+                    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+                    vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+                    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+                    vim.keymap.set('n', '<space>f', vim.lsp.buf.format, bufopts)
 
-            require('lspconfig')['rust_analyzer'].setup({ on_attach = on_attach })
-            require('lspconfig')['gopls'].setup({ on_attach = on_attach })
+					local client = vim.lsp.get_client_by_id(ev.data.client_id)
+
+					-- TODO: find some way to make this only apply to the current line.
+					if client.server_capabilities.inlayHintProvider then
+					    vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
+					end
+
+					-- None of this semantics tokens business.
+					-- https://www.reddit.com/r/neovim/comments/143efmd/is_it_possible_to_disable_treesitter_completely/
+					client.server_capabilities.semanticTokensProvider = nil
+
+					-- format on save for Rust
+					if client.server_capabilities.documentFormattingProvider then
+						vim.api.nvim_create_autocmd("BufWritePre", {
+							group = vim.api.nvim_create_augroup("RustFormat", { clear = true }),
+							buffer = bufnr,
+							callback = function()
+								vim.lsp.buf.format({ bufnr = bufnr })
+							end,
+						})
+					end
+				end,
+			})
+
+            vim.lsp.enable('lua_ls')
+            vim.lsp.enable('ts_ls')
+            vim.lsp.enable('qmlls')
+            vim.lsp.enable('rust_analyzer')
+            vim.lsp.enable('gopls')
             diagnostics_setup()
             completion_keymap_setup()
         end
