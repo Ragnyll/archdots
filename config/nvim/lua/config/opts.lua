@@ -15,7 +15,6 @@ autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 autocmd BufWritePre * %s/\s\+$//e
 ]])
 
-
 vim.opt.undofile = true
 vim.opt.undodir = HOME .. '/.vim/undo'
 vim.opt.clipboard = unnamed
@@ -36,11 +35,10 @@ vim.opt.ignorecase = true
 
 -- Markdown
 vim.cmd([[
-autocmd FileType markdown nnoremap <leader>p :MarkdownPreviewToggle<cr>
-autocmd FileType markdown nnoremap Q gqq
-autocmd FileType markdown iabbrev NBSP &nbsp;&nbsp;&nbsp;
-autocmd Filetype markdown set spell spelllang=en_us
-let g:mkdp_browser = 'firefox'
-let g:rnvimr_enable_ex = 1
+    autocmd FileType markdown nnoremap <leader>p :MarkdownPreviewToggle<cr>
+    autocmd FileType markdown nnoremap Q gqq
+    autocmd FileType markdown iabbrev NBSP &nbsp;&nbsp;&nbsp;
+    autocmd Filetype markdown set spell spelllang=en_us
+    let g:mkdp_browser = 'firefox'
 ]])
 

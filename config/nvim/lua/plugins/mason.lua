@@ -94,7 +94,6 @@ return {
 
 					local client = vim.lsp.get_client_by_id(ev.data.client_id)
 
-					-- TODO: find some way to make this only apply to the current line.
 					if client.server_capabilities.inlayHintProvider then
 					    vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
 					end
